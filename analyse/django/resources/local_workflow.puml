@@ -1,0 +1,54 @@
+@startuml lokale_tools_zusammenspiel
+!theme plain
+top to bottom direction
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundcorner 8
+
+skinparam rectangle {
+  BorderColor #90A4AE
+}
+
+skinparam card {
+  BorderColor #78909C
+  BackgroundColor #FFFFFF
+}
+
+title Django - Local Workflow
+
+rectangle "Phase 1 - Write Code" as phase1 #E3F2FD {
+  card "**Dev writes code**" as dev #BBDEFB
+  card "**.editorconfig**\n<color:#607D8B><i><size:10>Editor formats automatically</size></i></color>" as editorconfig #BBDEFB
+
+  dev -down-> editorconfig
+}
+
+rectangle "Phase 2 - git commit + Pre-Commit Hooks" as phase2 #D6E4F0 {
+  card "**black**\n<color:#607D8B><i><size:10>Formatting</size></i></color>" as black #E8EFF5
+  card "**isort**\n<color:#607D8B><i><size:10>Import sorting</size></i></color>" as isort #E8EFF5
+  card "**flake8**\n<color:#607D8B><i><size:10>Python linting</size></i></color>" as flake8 #E8EFF5
+  card "**biome**\n<color:#607D8B><i><size:10>JS/CSS</size></i></color>" as biome #E8EFF5
+  card "**zizmor**\n<color:#607D8B><i><size:10>CI security</size></i></color>" as zizmor #E8EFF5
+}
+
+rectangle "Phase 3 - Result" as phase3 #C5D5E4 {
+  card "**All checks passed?**" as decision #DCE8F1
+  card "**Commit created**" as ok #DCE8F1
+  card "**Commit rejected**\n<color:#607D8B><i><size:10>Developer fixes issues</size></i></color>" as fail #DCE8F1
+
+  decision -down-> ok : "  Yes  "
+  decision -right-> fail : "  No  "
+}
+
+rectangle "Phase 4 - git push" as phase4 #B3C7D6 {
+  card "**GitHub Actions**\n<color:#607D8B><i><size:10>see Workflows Analysis</size></i></color>" as github #D0DEE8
+}
+
+phase1 -down-> phase2
+phase2 -down-> phase3
+fail -up-> phase1 : "  fix & retry  "
+ok -down-> phase4
+
+@enduml

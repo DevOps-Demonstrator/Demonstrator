@@ -1,0 +1,66 @@
+@startuml devops_workflow
+!theme plain
+top to bottom direction
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundcorner 8
+
+skinparam rectangle {
+  BackgroundColor #F5F5F5
+  BorderColor #90A4AE
+}
+
+skinparam card {
+  BorderColor #78909C
+  BackgroundColor #FFFFFF
+}
+
+title Django - DevOps Workflow
+
+rectangle "Developer Machine" as local #E3F2FD {
+  card "**.editorconfig**\n<color:#607D8B><i><size:10>Consistent formatting</size></i></color>" as editor #BBDEFB
+  card "**pre-commit hooks**\n<color:#607D8B><i><size:10>black, isort, flake8</size></i></color>" as precommit #BBDEFB
+  card "**tox**\n<color:#607D8B><i><size:10>Local tests + linting</size></i></color>" as tox #BBDEFB
+
+  editor -down-> precommit
+  precommit -down-> tox
+}
+
+rectangle "Push / Pull Request" as push_pr #D6E4F0 {
+  card "**tests.yml**\n<color:#607D8B><i><size:10>Unit tests (multi-OS)</size></i></color>" as tests #E8EFF5
+  card "**linters.yml**\n<color:#607D8B><i><size:10>flake8, black, isort, biome</size></i></color>" as linters #E8EFF5
+  card "**docs.yml**\n<color:#607D8B><i><size:10>Sphinx + spell check</size></i></color>" as docs #E8EFF5
+  card "**check-migrations.yml**\n<color:#607D8B><i><size:10>DB migration check</size></i></color>" as migrations #E8EFF5
+  card "**check_commit_msgs.yml**\n<color:#607D8B><i><size:10>Commit conventions</size></i></color>" as commits #E8EFF5
+  card "**check_pr_quality.yml**\n<color:#607D8B><i><size:10>PR quality check</size></i></color>" as prquality #E8EFF5
+}
+
+rectangle "On-Demand (per Label)" as ondemand #C5D5E4 {
+  card "**python_matrix.yml**\n<color:#607D8B><i><size:10>Multi-Python test</size></i></color>" as matrix #DCE8F1
+  card "**selenium.yml**\n<color:#607D8B><i><size:10>Browser tests</size></i></color>" as selenium #DCE8F1
+  card "**screenshots.yml**\n<color:#607D8B><i><size:10>Visual regression</size></i></color>" as screenshots #DCE8F1
+  card "**coverage_tests.yml**\n<color:#607D8B><i><size:10>Code coverage</size></i></color>" as coverage #DCE8F1
+  card "**benchmark.yml**\n<color:#607D8B><i><size:10>Performance tests</size></i></color>" as benchmark #DCE8F1
+  card "**postgis.yml**\n<color:#607D8B><i><size:10>Geo-DB tests</size></i></color>" as postgis #DCE8F1
+}
+
+rectangle "Nightly (Cron)" as nightly #B3C7D6 {
+  card "**schedules.yml**\n<color:#607D8B><i><size:10>Trigger</size></i></color>" as schedules #D0DEE8
+  card "**schedule_tests.yml**\n<color:#607D8B><i><size:10>Full matrix</size></i></color>" as schedule_tests #D0DEE8
+
+  schedules -right-> schedule_tests
+}
+
+rectangle "Deployment" as deploy #A2B9C9 {
+  card "**.readthedocs.yml**\n<color:#607D8B><i><size:10>Build + deploy docs</size></i></color>" as rtd #C4D4DF
+  card "**coverage_comment.yml**\n<color:#607D8B><i><size:10>Post coverage to PR</size></i></color>" as cov_comment #C4D4DF
+}
+
+tox -down-> push_pr : "  push / PR  "
+push_pr -down-> ondemand : "  label set  "
+push_pr -down-> nightly
+nightly -down-> deploy : "  merge  "
+
+@enduml

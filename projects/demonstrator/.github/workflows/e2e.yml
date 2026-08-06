@@ -1,0 +1,77 @@
+name: E2E Tests
+
+# --- Konzept: On-Demand-Testing (wie Djangos selenium.yml) ---
+# Django führt Selenium-Browsertests nur aus, wenn das Label "selenium"
+# auf den PR gesetzt wird -- zu teuer für jeden PR.
+# Der Demonstrator nutzt dasselbe Pattern mit Playwright.
+on:
+  pull_request:
+    types: [labeled, synchronize, opened, reopened]
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    # --- Konzept: Label-gated (wie bei Django) ---
+    # Job läuft nur wenn das Label "e2e" gesetzt ist.
+    # Django nutzt: if: contains(github.event.pull_request.labels.*.name, 'selenium')
+    if: contains(github.event.pull_request.labels.*.name, 'e2e')
+    name: Playwright (Chromium)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # --- Backend starten ---
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install backend
+        run: uv sync --frozen --group dev
+
+      - name: Start API server
+        run: uv run uvicorn app.main:app --port 8000 &
+        env:
+          DATABASE_URL: "sqlite:///./test_e2e.db"
+
+      # --- Frontend starten ---
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "frontend/package-lock.json"
+
+      - name: Install frontend
+        working-directory: frontend
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: frontend
+        run: npx playwright install chromium --with-deps
+
+      # --- E2E-Tests ausführen ---
+      # Django: python runtests.py --selenium=chrome --headless
+      # Demonstrator: npx playwright test (Chromium Headless)
+      - name: Run E2E tests
+        working-directory: frontend
+        run: npm run test:e2e
+
+      # --- Konzept: Artefakte bei Fehler (wie Djangos screenshots.yml) ---
+      # Django lädt Screenshots als Artefakte hoch (actions/upload-artifact).
+      # Playwright macht das automatisch bei fehlgeschlagenen Tests.
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ github.event.pull_request.head.sha }}
+          path: frontend/test-results/
+          retention-days: 7

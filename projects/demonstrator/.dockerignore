@@ -1,0 +1,27 @@
+# Git
+.git
+.github
+
+# Frontend (eigener Dockerfile-Kontext in frontend/)
+frontend/
+
+# Tests
+tests/
+
+# Dev-Dateien
+.pre-commit-config.yaml
+.editorconfig
+.env
+.env.example
+Makefile
+CONTRIBUTING.md
+README.md
+docker-compose*.yml
+
+# Python-Artefakte
+__pycache__
+*.pyc
+*.db
+.coverage
+.ruff_cache
+.pytest_cache

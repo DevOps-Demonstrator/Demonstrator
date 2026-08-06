@@ -1,0 +1,60 @@
+site_name: "Studienarbeit - CI/CT/CD-Demonstrator"
+site_url: ""
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: de
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Dark Mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Light Mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.path
+    - content.code.copy
+    - toc.follow
+
+nav:
+  - Übersicht: index.md
+  - Django Analyse:
+      - Übersicht: django/übersicht.md
+      - Lokaler Workflow: django/lokale-tools.md
+      - GitHub Workflow: django/workflows.md
+  - Demonstrator:
+      - Übersicht: demonstrator/übersicht.md
+      - Lokale Tools: demonstrator/lokale-tools.md
+      - CI/CD-Pipeline: demonstrator/pipeline.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 2
+  - tables
+  - fenced_code
+  - codehilite
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+validation:
+  links:
+    not_found: info
+    unrecognized_links: info

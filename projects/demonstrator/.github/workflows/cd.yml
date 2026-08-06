@@ -1,0 +1,137 @@
+name: CD
+
+# --- Konzept: CD-Trigger ---
+# Nur bei Pushes auf main (nicht bei PRs).
+# Branch Protection Rules stellen sicher, dass main nur Code enthält,
+# der alle CI-Checks (Linters, Tests, Security) bestanden hat.
+# Dies ist der GitHub-native Ansatz - kein explizites Auflisten von
+# Workflow-Namen nötig, neue Checks werden automatisch enforced.
+on:
+  push:
+    branches: [main]
+
+# --- Konzept: Least Privilege ---
+# Schreibrechte nur auf Packages (Container Registry), nicht auf Code.
+permissions:
+  contents: read
+  packages: write
+
+# --- Konzept: Concurrency Control ---
+# cancel-in-progress: false - laufende Deployments nicht abbrechen,
+# da ein halb-gepushtes Image problematisch wäre.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # --- API-Image (FastAPI + Python) ---
+  build-api:
+    name: Build & Push API Image
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # --- Konzept: Reproduzierbare Builds ---
+      # Jedes Image bekommt zwei Tags:
+      # - latest: Immer die aktuellste Version auf main.
+      # - <sha>: Eindeutige, unveränderliche Referenz auf genau diesen Build.
+      - name: Build and push API
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+  # --- Frontend-Image (React + nginx) ---
+  build-frontend:
+    name: Build & Push Frontend Image
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}-frontend:latest
+            ghcr.io/${{ github.repository }}-frontend:${{ github.sha }}
+
+  # --- Deployment via SSH + Docker Swarm ---
+  # needs: wartet bis BEIDE Images erfolgreich gebaut und gepusht sind.
+  # Schlägt ein Build fehl, wird nicht deployt.
+  deploy:
+    name: Deploy to Swarm
+    needs: [build-api, build-frontend]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # --- Konzept: Deployment via SSH ---
+      # Der Workflow verbindet sich per SSH mit dem Swarm Manager und
+      # führt "docker stack deploy" aus. Das Compose-File wird per
+      # scp auf den Server kopiert.
+      #
+      # Benötigte GitHub Secrets:
+      #   DEPLOY_HOST     - IP/Hostname des Swarm Managers
+      #   DEPLOY_USER     - SSH-Benutzer
+      #   DEPLOY_SSH_KEY  - Privater SSH-Key
+      - name: Copy compose file to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          source: "docker-compose.prod.yml"
+          target: "~/todo-api/"
+
+      - name: Deploy stack via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd ~/todo-api
+
+            # GHCR-Image-Referenzen setzen
+            export API_IMAGE="ghcr.io/${{ github.repository }}:${{ github.sha }}"
+            export FRONTEND_IMAGE="ghcr.io/${{ github.repository }}-frontend:${{ github.sha }}"
+
+            # Neue Images pullen
+            docker pull "$API_IMAGE"
+            docker pull "$FRONTEND_IMAGE"
+
+            # Stack deployen (Swarm führt Rolling Update durch)
+            docker stack deploy -c docker-compose.prod.yml todo-api
+
+            # Warten bis die Services gesund sind
+            echo "Waiting for services to become healthy..."
+            sleep 15
+            docker service ls
