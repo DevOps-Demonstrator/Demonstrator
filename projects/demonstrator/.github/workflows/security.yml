@@ -1,20 +1,16 @@
 name: Security
 
 # --- Konzept: Supply-Chain-Security ---
-# Django scannt seine CI-Workflows mit zizmor auf Sicherheitslücken.
-# Der Demonstrator wendet dasselbe Prinzip auf Abhängigkeiten an:
-# pip-audit prüft alle installierten Pakete gegen bekannte Schwachstellen
-# (CVE-Datenbanken wie PyPI Advisory Database und OSV).
+# Abhängigkeiten auf Sicherheitslücken scannen: pip-audit prüft alle installierten Pakete gegen bekannte Schwachstellen (CVE-Datenbanken wie PyPI Advisory Database und OSV).
 on:
   push:
     branches: [main]
   pull_request:
-  # --- Konzept: Geplante Ausführung (wie Djangos schedules.yml) ---
-  # Wöchentlicher Scan für neu entdeckte Schwachstellen in bestehenden
-  # Abhängigkeiten -- auch ohne Code-Änderungen.
+  # --- Konzept: Geplante Ausführung ---
+  # Wöchentlicher Scan für neu entdeckte Schwachstellen in bestehenden Abhängigkeiten.
   schedule:
     - cron: "0 8 * * 1"  # Jeden Montag um 08:00 UTC
-  # Manuell auslösbar (wie bei Djangos schedule_tests.yml)
+  # Auch manuell auslösbar 
   workflow_dispatch:
 
 permissions:

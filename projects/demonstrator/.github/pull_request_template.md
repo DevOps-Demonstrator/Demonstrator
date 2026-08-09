@@ -5,7 +5,7 @@
 Closes #XXXX
 
 #### Beschreibung
-<!-- Was ändert dieser PR und warum? (mind. 5 Wörter -- wird vom PR-Check geprüft) -->
+<!-- Was ändert dieser PR und warum? (mind. 5 Wörter (wird vom PR-Check geprüft!)) -->
 
 
 

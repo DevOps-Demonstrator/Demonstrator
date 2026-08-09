@@ -1,7 +1,7 @@
 // --- E2E-Tests (wie Djangos Selenium-Tests) ---
 // Testen die App durch einen echten Browser (Chromium Headless).
 // Django nutzt Selenium + Chrome Headless für die Admin-UI.
-// Der Demonstrator nutzt Playwright -- gleiches Konzept, modernere API.
+// Der Demonstrator nutzt Playwright.
 
 import { expect, test } from "@playwright/test";
 

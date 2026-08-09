@@ -1,13 +1,7 @@
 name: PR Checks
 
 # --- Konzept: Prozessqualität (aus Djangos Community-Workflows) ---
-# Django prüft mit 3 Workflows die Qualität von PRs und Commits:
-#   - labels.yml:                Auto-Label wenn Trac-Ticket fehlt
-#   - check_pr_quality.yml:      PR-Beschreibung, Checkliste, Ticket-Status
-#   - check_commit_messages.yml: Commit-Message-Konventionen
-#
-# Der Demonstrator kombiniert die für Studenten-Projekte relevanten Checks
-# in einem einzigen Workflow, angepasst auf GitHub Issues statt Trac.
+# Qualität von PRs (GitHub Issues) prüfen.
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
@@ -21,9 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # --- Konzept: Ticket-Referenz prüfen (aus Djangos labels.yml) ---
-  # Django prüft, ob der PR-Titel eine Trac-Ticketnummer enthält.
-  # Der Demonstrator prüft auf GitHub-Issue-Referenzen (#123).
+  # --- Konzept: Ticket-Referenz prüfen ---
+  # Auf GitHub-Issue-Referenzen (#123) prüfen.
   ticket-reference:
     name: Issue Reference
     runs-on: ubuntu-latest
@@ -61,9 +54,8 @@ jobs:
               );
             }
 
-  # --- Konzept: PR-Beschreibung prüfen (aus Djangos check_pr_quality.yml) ---
-  # Django prüft u.a. ob eine aussagekräftige Beschreibung vorhanden ist
-  # (mind. 5 Wörter). Der Demonstrator übernimmt das vereinfacht.
+  # --- Konzept: PR-Beschreibung prüfen ---
+  # Prüfen, ob eine aussagekräftige Beschreibung vorhanden ist (mind. 5 Wörter).
   pr-description:
     name: PR Description
     runs-on: ubuntu-latest

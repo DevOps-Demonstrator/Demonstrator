@@ -1,8 +1,7 @@
 name: Tests
 
 # --- Konzept: Trigger ---
-# Läuft bei jedem Push auf main und bei jedem Pull Request.
-# Analog zu Djangos tests.yml -- eigenständiger Workflow nur für Tests.
+# Test-Workflow: Läuft bei jedem Push auf main und bei jedem Pull Request.
 on:
   push:
     branches: [main]
@@ -24,8 +23,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # --- Job 1: Schnelle Tests mit SQLite (wie Djangos tests.yml) ---
-  # Läuft bei jedem PR -- schnelles Feedback mit In-Memory-DB.
+  # --- Job 1: Schnelle Tests mit SQLite ---
+  # Läuft bei jedem PR (schnelles Feedback mit In-Memory-DB SQLite).
   test-sqlite:
     name: Tests (SQLite)
     runs-on: ubuntu-latest
@@ -52,16 +51,14 @@ jobs:
           uv run coverage report >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
 
-  # --- Job 2: Tests gegen PostgreSQL (wie Djangos coverage_tests.yml) ---
+  # --- Job 2: Tests gegen PostgreSQL ---
   # Stellt sicher, dass die App auch mit der Produktionsdatenbank funktioniert.
-  # Django nutzt PostgreSQL Service-Container in check-migrations.yml,
-  # coverage_tests.yml und schedule_tests.yml -- dasselbe Muster hier.
   test-postgres:
     name: Tests (PostgreSQL)
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
-    # --- Konzept: Service-Container (wie bei Django) ---
+    # --- Konzept: Service-Container ---
     # GitHub Actions startet einen PostgreSQL-Container als Sidecar.
     # Der Health-Check stellt sicher, dass die DB bereit ist, bevor Tests laufen.
     services:
@@ -94,7 +91,7 @@ jobs:
           DATABASE_URL: "postgresql+psycopg://todo:todo@localhost:5432/todo_test"
         run: uv run pytest -v
 
-  # --- Job 3: Frontend-Tests (wie Djangos javascript-tests Job) ---
+  # --- Job 3: Frontend-Tests ---
   # Django führt JavaScript-Tests als eigenen parallelen Job in tests.yml aus
   # (QUnit + Grunt + Puppeteer). Der Demonstrator nutzt Vitest + Testing Library.
   test-frontend:

@@ -1,9 +1,7 @@
 name: E2E Tests
 
-# --- Konzept: On-Demand-Testing (wie Djangos selenium.yml) ---
-# Django führt Selenium-Browsertests nur aus, wenn das Label "selenium"
-# auf den PR gesetzt wird -- zu teuer für jeden PR.
-# Der Demonstrator nutzt dasselbe Pattern mit Playwright.
+# --- Konzept: On-Demand-Testing ---
+# Playwright-Browsertests.
 on:
   pull_request:
     types: [labeled, synchronize, opened, reopened]
@@ -22,7 +20,6 @@ jobs:
   e2e:
     # --- Konzept: Label-gated (wie bei Django) ---
     # Job läuft nur wenn das Label "e2e" gesetzt ist.
-    # Django nutzt: if: contains(github.event.pull_request.labels.*.name, 'selenium')
     if: contains(github.event.pull_request.labels.*.name, 'e2e')
     name: Playwright (Chromium)
     runs-on: ubuntu-latest
@@ -59,15 +56,12 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       # --- E2E-Tests ausführen ---
-      # Django: python runtests.py --selenium=chrome --headless
-      # Demonstrator: npx playwright test (Chromium Headless)
       - name: Run E2E tests
         working-directory: frontend
         run: npm run test:e2e
 
       # --- Konzept: Artefakte bei Fehler (wie Djangos screenshots.yml) ---
-      # Django lädt Screenshots als Artefakte hoch (actions/upload-artifact).
-      # Playwright macht das automatisch bei fehlgeschlagenen Tests.
+      # Playwright lädt Screenshots hoch bei fehlgeschlagenen Tests.
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v4

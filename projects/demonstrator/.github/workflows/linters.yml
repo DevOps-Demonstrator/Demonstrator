@@ -2,7 +2,6 @@ name: Linters
 
 # --- Konzept: Trigger ---
 # Läuft bei jedem Push auf main und bei jedem Pull Request.
-# Analog zu Djangos linters.yml -- eigenständiger Workflow nur für Code-Qualität.
 on:
   push:
     branches: [main]
@@ -26,8 +25,7 @@ concurrency:
 jobs:
   # --- Konzept: "Trust but verify" ---
   # Dieselben Prüfungen wie lokal (Pre-Commit), aber als Sicherheitsnetz in der CI.
-  # Django führt hier 5 parallele Jobs aus (flake8, isort, black, biome, zizmor).
-  # Der Demonstrator nutzt 4 parallele Jobs: Black, Ruff, oxlint (Frontend), zizmor.
+  # 4 parallele Jobs: Black, Ruff, oxlint (Frontend), zizmor.
   black:
     name: Black (Formatting)
     runs-on: ubuntu-latest
@@ -56,9 +54,8 @@ jobs:
       - name: Check linting + imports
         run: uvx ruff check --output-format=github .
 
-  # --- Konzept: Frontend-Linting (wie Djangos biome-Job) ---
-  # Django nutzt Biome für JavaScript/CSS-Linting.
-  # Der Demonstrator nutzt oxlint (von Vite als Standard eingerichtet).
+  # --- Konzept: Frontend-Linting ---
+  # oxlint (Vite-Standard)
   frontend:
     name: Frontend (Lint + Build)
     runs-on: ubuntu-latest
@@ -87,9 +84,7 @@ jobs:
         run: npm run build
 
   # --- Konzept: Supply-Chain-Security ---
-  # zizmor scannt die GitHub Actions Workflow-Dateien selbst auf Sicherheitsprobleme:
-  # unpinned Actions, dangerous Triggers, excessive Permissions, etc.
-  # Django nutzt zizmor identisch als parallelen Job in linters.yml.
+  # zizmor scannt die GitHub Actions Workflow-Dateien selbst auf Sicherheitsprobleme: unpinned Actions, dangerous Triggers, excessive Permissions, etc.
   zizmor:
     name: zizmor (Workflow Security)
     runs-on: ubuntu-latest

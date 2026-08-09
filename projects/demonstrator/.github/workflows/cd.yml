@@ -2,10 +2,8 @@ name: CD
 
 # --- Konzept: CD-Trigger ---
 # Nur bei Pushes auf main (nicht bei PRs).
-# Branch Protection Rules stellen sicher, dass main nur Code enthält,
-# der alle CI-Checks (Linters, Tests, Security) bestanden hat.
-# Dies ist der GitHub-native Ansatz - kein explizites Auflisten von
-# Workflow-Namen nötig, neue Checks werden automatisch enforced.
+# GH Branch Protection Rules stellen sicher, dass main nur Code enthält, der alle CI-Checks (Linters, Tests, Security) bestanden hat.
+
 on:
   push:
     branches: [main]
@@ -17,8 +15,7 @@ permissions:
   packages: write
 
 # --- Konzept: Concurrency Control ---
-# cancel-in-progress: false - laufende Deployments nicht abbrechen,
-# da ein halb-gepushtes Image problematisch wäre.
+# cancel-in-progress: false - laufende Deployments nicht abbrechen, da ein halb-gepushtes Image problematisch wäre.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
@@ -44,7 +41,7 @@ jobs:
       # --- Konzept: Reproduzierbare Builds ---
       # Jedes Image bekommt zwei Tags:
       # - latest: Immer die aktuellste Version auf main.
-      # - <sha>: Eindeutige, unveränderliche Referenz auf genau diesen Build.
+      # - <sha>: Eindeutige, unveränderliche Referenz (Hash) auf genau diesen Build.
       - name: Build and push API
         uses: docker/build-push-action@v6
         with:
@@ -94,9 +91,8 @@ jobs:
           persist-credentials: false
 
       # --- Konzept: Deployment via SSH ---
-      # Der Workflow verbindet sich per SSH mit dem Swarm Manager und
-      # führt "docker stack deploy" aus. Das Compose-File wird per
-      # scp auf den Server kopiert.
+      # Der Workflow verbindet sich per SSH mit dem Swarm Manager und führt "docker stack deploy" aus. 
+      # Das Compose-File wird per scp auf den Server kopiert.
       #
       # Benötigte GitHub Secrets:
       #   DEPLOY_HOST     - IP/Hostname des Swarm Managers
