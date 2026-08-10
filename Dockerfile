@@ -3,7 +3,7 @@
 # Stage 2: Schlankes Runtime-Image (nur fertige Pakete, ohne uv/pip/Build-Tools)
 
 # Stage 1: Dependencies
-FROM python:3.12-slim AS builder
+FROM python:3.14-slim AS builder
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
@@ -12,7 +12,7 @@ COPY pyproject.toml uv.lock* ./
 RUN uv pip install --system --prefix=/install ".[postgres]"
 
 # Stage 2: Runtime
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 
