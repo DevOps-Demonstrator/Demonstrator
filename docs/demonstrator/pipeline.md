@@ -124,7 +124,7 @@ Eine vollständige Übersicht aller Variablen findet sich in der
 
 ## 1. Linters (`linters.yml`)
 
-**Konfigurationsdatei:** [`linters.yml`](../../projects/demonstrator/.github/workflows/linters.yml)
+**Konfigurationsdatei:** [`linters.yml`](../../.github/workflows/linters.yml)
 
 **Trigger:** Push auf `main`, Pull Requests
 
@@ -211,7 +211,7 @@ zizmor scannt alle GitHub Actions Workflows auf Sicherheitsprobleme: ungepinnte 
 
 ## 2. Tests (`tests.yml`)
 
-**Konfigurationsdatei:** [`tests.yml`](../../projects/demonstrator/.github/workflows/tests.yml)
+**Konfigurationsdatei:** [`tests.yml`](../../.github/workflows/tests.yml)
 
 **Trigger:** Push auf `main`, Pull Requests
 
@@ -394,7 +394,7 @@ Die Tests prüfen:
 
 ## 3. E2E Tests (`e2e.yml`)
 
-**Konfigurationsdatei:** [`e2e.yml`](../../projects/demonstrator/.github/workflows/e2e.yml)
+**Konfigurationsdatei:** [`e2e.yml`](../../.github/workflows/e2e.yml)
 
 **Trigger:** Pull Requests mit Label `e2e` (On-Demand)
 
@@ -463,7 +463,7 @@ Während die Unit-Tests (Vitest) bei jedem PR laufen, werden E2E-Tests nur bei B
 
 ## 4. Security (`security.yml`)
 
-**Konfigurationsdatei:** [`security.yml`](../../projects/demonstrator/.github/workflows/security.yml)
+**Konfigurationsdatei:** [`security.yml`](../../.github/workflows/security.yml)
 
 **Trigger:** Push auf `main`, Pull Requests, **wöchentlicher Cron** (Montags 08:00 UTC), manuell auslösbar
 
@@ -514,19 +514,19 @@ Neue Schwachstellen können jederzeit in bestehenden Paketen entdeckt werden, de
 
 ## 5. PR Checks (`pr_checks.yml`)
 
-**Konfigurationsdatei:** [`pr_checks.yml`](../../projects/demonstrator/.github/workflows/pr_checks.yml)
+**Konfigurationsdatei:** [`pr_checks.yml`](../../.github/workflows/pr_checks.yml)
 
 **Trigger:** Pull Requests (opened, edited, synchronize, reopened)
 
 Django nutzt drei separate Workflows, um die Prozessqualität von Pull Requests sicherzustellen: `labels.yml`, `check_pr_quality.yml` und `check_commit_messages.yml`.
-Ergänzend dazu definiert Djangos [`pull_request_template.md`](../../projects/django/.github/pull_request_template.md) ein PR-Template, das Entwicklern die erwarteten Felder vorgibt: Ticketnummer, Beschreibung, Checkliste.
+Ergänzend dazu definiert Djangos [`pull_request_template.md`](https://github.com/django/django/blob/main/.github/pull_request_template.md) ein PR-Template, das Entwicklern die erwarteten Felder vorgibt: Ticketnummer, Beschreibung, Checkliste.
 
 Der Demonstrator übernimmt dieses Zusammenspiel: 
 Das **PR-Template** leitet den Entwickler an, der **Workflow** prüft automatisch, ob die Vorgaben eingehalten wurden.
 
 ### PR-Template (`pull_request_template.md`)
 
-**Konfigurationsdatei:** [`pull_request_template.md`](../../projects/demonstrator/.github/pull_request_template.md)
+**Konfigurationsdatei:** [`pull_request_template.md`](../../.github/pull_request_template.md)
 
 Wird automatisch als Vorlage geladen, wenn ein neuer PR auf GitHub erstellt wird:
 
@@ -602,7 +602,7 @@ Das erzwingt, dass Teammitglieder dokumentieren, **was** und **warum** sie ände
 
 ## 6. Deployment: CD (`cd.yml`)
 
-**Konfigurationsdatei:** [`cd.yml`](../../projects/demonstrator/.github/workflows/cd.yml)
+**Konfigurationsdatei:** [`cd.yml`](../../.github/workflows/cd.yml)
 
 **Trigger:** Push auf `main`
 
@@ -757,7 +757,7 @@ Es gibt kein zusätzliches Tool zu lernen oder zu betreiben.
 
 ### Produktions-Compose (`docker-compose.prod.yml`)
 
-Die Produktionsdatei [`docker-compose.prod.yml`](../../projects/demonstrator/docker-compose.prod.yml) unterscheidet sich von der Entwicklungsdatei in vier Punkten:
+Die Produktionsdatei [`docker-compose.prod.yml`](../../docker-compose.prod.yml) unterscheidet sich von der Entwicklungsdatei in vier Punkten:
 
 | Aspekt | `docker-compose.yml` (Dev) | `docker-compose.prod.yml` (Prod) |
 |---|---|---|
@@ -797,7 +797,7 @@ docker login ghcr.io -u <github-user> -p <personal-access-token>
 
 ## 7. Smoke-Test (`smoke-test.yml`)
 
-**Konfigurationsdatei:** [`smoke-test.yml`](../../projects/demonstrator/.github/workflows/smoke-test.yml)
+**Konfigurationsdatei:** [`smoke-test.yml`](../../.github/workflows/smoke-test.yml)
 
 **Trigger:** Push auf `main`, Pull Requests die Infrastruktur-Dateien ändern (`Dockerfile`, `frontend/Dockerfile`, `frontend/nginx/**`, `docker-compose.yml`, `pyproject.toml`, `app/**`)
 
@@ -856,7 +856,7 @@ Neben den Workflows gehören weitere Dateien und Praktiken zur DevOps-Infrastruk
 
 ### Dependabot (`dependabot.yml`)
 
-**Konfigurationsdatei:** [`dependabot.yml`](../../projects/demonstrator/.github/dependabot.yml)
+**Konfigurationsdatei:** [`dependabot.yml`](../../.github/dependabot.yml)
 
 GitHub Dependabot erstellt automatisch Pull Requests, wenn Abhängigkeiten veraltet sind.
 Während `pip-audit` in `security.yml` bekannte **Schwachstellen** findet, sorgt Dependabot für **proaktive Updates** - auch bei Versionen ohne Sicherheitsprobleme.
@@ -874,7 +874,7 @@ Alle vier laufen wöchentlich (Montags) und erstellen PRs mit automatischen Labe
 
 ### Makefile
 
-**Konfigurationsdatei:** [`Makefile`](../../projects/demonstrator/Makefile)
+**Konfigurationsdatei:** [`Makefile`](../../Makefile)
 
 Das Makefile standardisiert häufige Befehle. 
 Statt sich Befehle wie `python -m pytest --cov-report=term-missing` zu merken, reicht `make test`.

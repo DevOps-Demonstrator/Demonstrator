@@ -29,7 +29,7 @@ Zusätzlich wird die Python-Tool-Konfiguration (Black, Ruff, pytest, Coverage) i
 
 Dieses Konzept wird **genauso übernommen**, da es ohne großen Aufwand in jedem Projekt unabhängig der Größe sinnvoll ist.
 
-**Konfigurationsdatei:** [`.editorconfig`](../../projects/demonstrator/.editorconfig)
+**Konfigurationsdatei:** [`.editorconfig`](../../.editorconfig)
 
 ```ini
 root = true                        
@@ -84,7 +84,7 @@ Dieselben Prüfungen laufen nochmal in der CI als Sicherheitsnetz ("Trust but ve
 
 ### 2.1 Pre-Commit Hooks
 
-**Konfigurationsdatei:** [`.pre-commit-config.yaml`](../../projects/demonstrator/.pre-commit-config.yaml)
+**Konfigurationsdatei:** [`.pre-commit-config.yaml`](../../.pre-commit-config.yaml)
 
 ```yaml
 repos:
@@ -165,7 +165,7 @@ Das ist bei einem Projekt mit vielen Tools und historisch gewachsener Konfigurat
 
 Der Demonstrator konfiguriert **alle Tools in einer einzigen Datei**: `pyproject.toml`.
 
-**Konfigurationsdatei:** [`pyproject.toml`](../../projects/demonstrator/pyproject.toml)
+**Konfigurationsdatei:** [`pyproject.toml`](../../pyproject.toml)
 
 ### Projekt-Metadaten + Abhängigkeiten
 

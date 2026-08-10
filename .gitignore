@@ -1,22 +1,26 @@
-site/
-projects/demonstrator/
-projects/django/
-
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.egg-info/
+.venv/
+*.db
+.coverage
+dist/
 
 # Tools / Caches
 .ruff_cache/
 .pytest_cache/
-.coverage
-*.db
+.mypy_cache/
 
-# Environments
-.venv/
+# Environment
 .env
 
-# Node
-node_modules/
+# Frontend
+frontend/dist/
+frontend/node_modules/
+frontend/test-results/
+frontend/playwright-report/
+
+# MkDocs
+site/

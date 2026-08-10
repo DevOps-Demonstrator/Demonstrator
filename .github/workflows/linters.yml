@@ -1,0 +1,101 @@
+name: Linters
+
+# --- Konzept: Trigger ---
+# Läuft bei jedem Push auf main und bei jedem Pull Request.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+  pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+
+# --- Konzept: Least Privilege ---
+permissions:
+  contents: read
+
+# --- Konzept: Concurrency Control ---
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # --- Konzept: "Trust but verify" ---
+  # Dieselben Prüfungen wie lokal (Pre-Commit), aber als Sicherheitsnetz in der CI.
+  # 4 parallele Jobs: Black, Ruff, oxlint (Frontend), zizmor.
+  black:
+    name: Black (Formatting)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Check formatting
+        run: uvx black --check --diff .
+
+  ruff:
+    name: Ruff (Linting)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Check linting + imports
+        run: uvx ruff check --output-format=github .
+
+  # --- Konzept: Frontend-Linting ---
+  # oxlint (Vite-Standard)
+  frontend:
+    name: Frontend (Lint + Build)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "frontend/package-lock.json"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  # --- Konzept: Supply-Chain-Security ---
+  # zizmor scannt die GitHub Actions Workflow-Dateien selbst auf Sicherheitsprobleme: unpinned Actions, dangerous Triggers, excessive Permissions, etc.
+  zizmor:
+    name: zizmor (Workflow Security)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@e639db99335bc9038abc0e066dfcd72e23d26fb4 # v0.3.0
+        with:
+          advanced-security: false
+          annotations: true

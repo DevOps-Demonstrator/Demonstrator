@@ -24,21 +24,21 @@ Nach einem Merge werden abschließend die Dokumentation deployt und Coverage-Erg
 
 | Datei | Typ | Beschreibung |
 |--|--|--|
-| [`.pre-commit-config.yaml`](../../projects/django/.pre-commit-config.yaml) | Lokales Tooling | Pre-Commit Hooks (black, isort, flake8, biome, zizmor) |
-| [`tox.ini`](../../projects/django/tox.ini) | Lokales Tooling | Lokale Test- und Lint-Umgebung |
-| [`.editorconfig`](../../projects/django/.editorconfig) | Lokales Tooling | Editor-übergreifende Formatierungsregeln |
-| [`.flake8`](../../projects/django/.flake8) | Konfiguration | Flake8-Linter-Einstellungen |
-| [`pyproject.toml`](../../projects/django/pyproject.toml) | Konfiguration | Build-Config + Black/isort-Settings |
-| [`biome.json`](../../projects/django/biome.json) | Konfiguration | JavaScript/CSS Linter + Formatter |
-| [`zizmor.yml`](../../projects/django/zizmor.yml) | Konfiguration | Sicherheitsscanner für CI-Workflows |
-| [`.readthedocs.yml`](../../projects/django/.readthedocs.yml) | Deployment | Read the Docs Konfiguration |
-| [`.github/workflows/`](../../projects/django/.github/workflows/) | CI/CD | 17 GitHub Actions Workflows |
-| [`.github/pull_request_template.md`](../../projects/django/.github/pull_request_template.md) | Prozess | Standardisierte PR-Checkliste |
+| [`.pre-commit-config.yaml`](https://github.com/django/django/blob/main/.pre-commit-config.yaml) | Lokales Tooling | Pre-Commit Hooks (black, isort, flake8, biome, zizmor) |
+| [`tox.ini`](https://github.com/django/django/blob/main/tox.ini) | Lokales Tooling | Lokale Test- und Lint-Umgebung |
+| [`.editorconfig`](https://github.com/django/django/blob/main/.editorconfig) | Lokales Tooling | Editor-übergreifende Formatierungsregeln |
+| [`.flake8`](https://github.com/django/django/blob/main/.flake8) | Konfiguration | Flake8-Linter-Einstellungen |
+| [`pyproject.toml`](https://github.com/django/django/blob/main/pyproject.toml) | Konfiguration | Build-Config + Black/isort-Settings |
+| [`biome.json`](https://github.com/django/django/blob/main/biome.json) | Konfiguration | JavaScript/CSS Linter + Formatter |
+| [`zizmor.yml`](https://github.com/django/django/blob/main/zizmor.yml) | Konfiguration | Sicherheitsscanner für CI-Workflows |
+| [`.readthedocs.yml`](https://github.com/django/django/blob/main/.readthedocs.yml) | Deployment | Read the Docs Konfiguration |
+| [`.github/workflows/`](https://github.com/django/django/blob/main/.github/workflows/) | CI/CD | 17 GitHub Actions Workflows |
+| [`.github/pull_request_template.md`](https://github.com/django/django/blob/main/.github/pull_request_template.md) | Prozess | Standardisierte PR-Checkliste |
 
 ## Detailanalysen
 
-- **[Lokale Tools](analyse_django_lokale_tools.md)** - Pre-Commit, Tox, EditorConfig, Linter-Konfigurationen
-- **[GitHub Workflows](analyse_django_workflows.md)** - Alle 17 GitHub Actions Workflows im Detail
+- **[Lokale Tools](lokale-tools.md)** - Pre-Commit, Tox, EditorConfig, Linter-Konfigurationen
+- **[GitHub Workflows](workflows.md)** - Alle 17 GitHub Actions Workflows im Detail
 
 ## Prinzipien
 

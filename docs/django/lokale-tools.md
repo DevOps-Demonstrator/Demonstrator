@@ -48,7 +48,7 @@ Dies betrifft das Thema **Supply-Chain-Security** - die Absicherung der Build- u
 Eine editorübergreifende Konfiguration, die sicherstellt, dass **alle Entwickler** dieselben Grundeinstellungen nutzen - unabhängig von ihrer Entwicklungsumgebung (z.B. VS Code, Vim, PyCharm, ...). 
 EditorConfig ist die **erste "Verteidigungslinie"**, die präventiv Formatierungsprobleme verhindert. 
 
-**Konfigurationsdatei:** [`.editorconfig`](../../projects/django/.editorconfig)
+**Konfigurationsdatei:** [`.editorconfig`](https://github.com/django/django/blob/main/.editorconfig)
 
 **Beispiel-Snippet:**
 
@@ -91,7 +91,7 @@ Statt manuell Shell-Skripte in `.git/hooks/` zu pflegen, werden die Prüfungen d
 Ein `pre-commit`-Hook wird **vor dem Abschluss eines Commits** auf Dateiänderungen ausgeführt: Gibt das Skript einen Fehlercode zurück, wird der Commit abgebrochen.
 
 
-**Konfigurationsdatei:** [`.pre-commit-config.yaml`](../../projects/django/.pre-commit-config.yaml)
+**Konfigurationsdatei:** [`.pre-commit-config.yaml`](https://github.com/django/django/blob/main/.pre-commit-config.yaml)
 
 **Installation ([Quick Start](https://pre-commit.com/#quick-start)):**
 ```bash
@@ -253,7 +253,7 @@ Hier ermöglicht Tox den Entwicklern, die **Teile der Pipeline lokal zu reproduz
 Jeder Entwickler bekommt dabei dieselbe Testumgebung mit den gleichen Dependencies (der jeweiligen Umgebung entsprechend). 
 Insbesondere der Python-Code lässt sich lokal so auch gegen verschiedene Versionen testen.
 
-**Konfigurationsdatei:** [`tox.ini`](../../projects/django/tox.ini)
+**Konfigurationsdatei:** [`tox.ini`](https://github.com/django/django/blob/main/tox.ini)
 
 **Umgebungen:**
 

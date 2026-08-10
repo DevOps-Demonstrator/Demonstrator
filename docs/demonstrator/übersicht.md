@@ -170,10 +170,10 @@ demonstrator/
 
 | Datei | Zweck | Django-Äquivalent |
 |---|---|---|
-| [`README.md`](../../projects/demonstrator/README.md) | Quick Start, Projektstruktur, CI/CD-Übersicht | `README.rst` |
-| [`CONTRIBUTING.md`](../../projects/demonstrator/CONTRIBUTING.md) | Einrichtung, Entwicklungsworkflow, Konventionen, Befehle | `CONTRIBUTING.rst` + `docs/internals/contributing/` |
-| [`pull_request_template.md`](../../projects/demonstrator/.github/pull_request_template.md) | PR-Vorlage: Issue-Referenz, Beschreibung, Checkliste (wird automatisch geladen) | [`.github/pull_request_template.md`](../../projects/django/.github/pull_request_template.md) |
-| [`.env.example`](../../projects/demonstrator/.env.example) | Dokumentiert benötigte Umgebungsvariablen mit Beispielwerten | - |
+| [`README.md`](../../README.md) | Quick Start, Projektstruktur, CI/CD-Übersicht | `README.rst` |
+| [`CONTRIBUTING.md`](../../CONTRIBUTING.md) | Einrichtung, Entwicklungsworkflow, Konventionen, Befehle | `CONTRIBUTING.rst` + `docs/internals/contributing/` |
+| [`pull_request_template.md`](../../.github/pull_request_template.md) | PR-Vorlage: Issue-Referenz, Beschreibung, Checkliste (wird automatisch geladen) | [`.github/pull_request_template.md`](https://github.com/django/django/blob/main/.github/pull_request_template.md) |
+| [`.env.example`](../../.env.example) | Dokumentiert benötigte Umgebungsvariablen mit Beispielwerten | - |
 
 ---
 
@@ -197,8 +197,8 @@ Der Workflow im Demonstrator folgt diesem Ablauf:
 Django nutzt dafür ein externes Ticketsystem und prüft per Workflow (`labels.yml`), ob PRs eine Ticketnummer enthalten.
 Der Demonstrator nutzt stattdessen **GitHub Issues**, die direkt in die Plattform integriert sind:
 
-- Das [**PR-Template**](../../projects/demonstrator/.github/pull_request_template.md) fordert `Closes #XXXX` als Issue-Referenz.
-- Der Workflow [`pr_checks.yml`](../../projects/demonstrator/.github/workflows/pr_checks.yml) prüft automatisch, ob eine `#123`-Referenz vorhanden ist.
+- Das [**PR-Template**](../../.github/pull_request_template.md) fordert `Closes #XXXX` als Issue-Referenz.
+- Der Workflow [`pr_checks.yml`](../../.github/workflows/pr_checks.yml) prüft automatisch, ob eine `#123`-Referenz vorhanden ist.
 - Das Schlüsselwort `Closes` bewirkt, dass GitHub das referenzierte Issue **automatisch schließt**, wenn der PR gemergt wird.
 
 So entsteht eine lückenlose Verbindung zwischen Anforderung (Issue), Umsetzung (PR) und Auslieferung (CD) (ohne manuellen Aufwand).
@@ -251,7 +251,7 @@ Diese Variablen konfigurieren die Container-Infrastruktur in `docker-compose.yml
 | `API_IMAGE` | `ghcr.io/OWNER/REPO:latest` | Docker-Image für die API (nur `docker-compose.prod.yml`) |
 | `FRONTEND_IMAGE` | `ghcr.io/OWNER/REPO-frontend:latest` | Docker-Image für das Frontend (nur `docker-compose.prod.yml`) |
 
-Die Datei [`.env.example`](../../projects/demonstrator/.env.example) dokumentiert alle Variablen mit Beispielwerten.
+Die Datei [`.env.example`](../../.env.example) dokumentiert alle Variablen mit Beispielwerten.
 
 ---
 

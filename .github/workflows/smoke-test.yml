@@ -1,0 +1,67 @@
+name: Smoke-Test
+
+# --- Konzept: Integrations-/Smoke-Test der Deployment-Konfiguration ---
+# Prüft, ob der Multi-Container-Stack (API + PostgreSQL) tatsächlich zusammen startet und funktioniert.
+# Hier wird die reale Deployment-Konfiguration (Dockerfile, docker-compose.yml, Umgebungsvariablen, Health-Checks, Container-Networking) verifiziert.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - "Dockerfile"
+      - "frontend/Dockerfile"
+      - "frontend/nginx/**"
+      - "docker-compose.yml"
+      - "pyproject.toml"
+      - "app/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compose-test:
+    name: Docker Compose Smoke Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      
+      # Hinweis: Im Gegensatz zu jobs laufen die nachfolgenden steps (eines Jobs) sequenziell ab.
+      # --- Stack hochfahren ---
+      # --wait wartet, bis alle Health-Checks bestanden sind (DB + API).
+      - name: Build and start containers
+        run: docker compose up --build --wait -d
+
+      - name: Show container status
+        run: docker compose ps
+
+      # --- Smoke-Tests gegen die laufende API ---
+      # Prüft ob die Container miteinander kommunizieren und die API korrekt auf PostgreSQL zugreift.
+      - name: Health check
+        run: |
+          curl --fail --silent http://localhost:8000/health | grep '"ok"'
+
+      - name: API smoke test
+        run: |
+          # Todo erstellen
+          curl --fail --silent -X POST http://localhost:8000/todos \
+            -H "Content-Type: application/json" \
+            -d '{"title": "Smoke Test", "priority": "high"}' | grep '"Smoke Test"'
+
+          # Todo abrufen
+          curl --fail --silent http://localhost:8000/todos | grep '"Smoke Test"'
+
+      # --- Aufräumen ---
+      - name: Container logs (on failure)
+        if: failure()
+        run: docker compose logs
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v

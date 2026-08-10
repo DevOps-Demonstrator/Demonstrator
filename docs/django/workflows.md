@@ -121,7 +121,7 @@ Schützt vor endlos laufenden Tests, die Ressourcen blockieren.
 
 ### `tests.yml` - Haupttests
 
-**Konfigurationsdatei:** [`tests.yml`](../../projects/django/.github/workflows/tests.yml)
+**Konfigurationsdatei:** [`tests.yml`](https://github.com/django/django/blob/main/.github/workflows/tests.yml)
 
 **Trigger:** Push auf `main`, Pull Requests (außer reine Docs-Änderungen)
 
@@ -145,7 +145,7 @@ Schützt vor endlos laufenden Tests, die Ressourcen blockieren.
 
 ### `python_matrix.yml` - Multi-Version-Tests
 
-**Konfigurationsdatei:** [`python_matrix.yml`](../../projects/django/.github/workflows/python_matrix.yml)
+**Konfigurationsdatei:** [`python_matrix.yml`](https://github.com/django/django/blob/main/.github/workflows/python_matrix.yml)
 
 **Trigger:** PRs mit Label `python-matrix` oder manuell
 
@@ -164,7 +164,7 @@ Schützt vor endlos laufenden Tests, die Ressourcen blockieren.
 
 ### `schedule_tests.yml` - Vollständige Testmatrix
 
-**Konfigurationsdatei:** [`schedule_tests.yml`](../../projects/django/.github/workflows/schedule_tests.yml)
+**Konfigurationsdatei:** [`schedule_tests.yml`](https://github.com/django/django/blob/main/.github/workflows/schedule_tests.yml)
 
 **Trigger:** Wird von `schedules.yml` nächtlich ausgelöst
 
@@ -193,7 +193,7 @@ Er stellt sicher, dass Django auch in Produktionsumgebungen funktioniert, in den
 
 ### `schedules.yml` - Nächtlicher Trigger
 
-**Konfigurationsdatei:** [`schedules.yml`](../../projects/django/.github/workflows/schedules.yml)
+**Konfigurationsdatei:** [`schedules.yml`](https://github.com/django/django/blob/main/.github/workflows/schedules.yml)
 
 **Trigger:** Cron-Job täglich um 02:42 UTC
 
@@ -212,7 +212,7 @@ schedule:
 
 ### `linters.yml` - Statische Analyse
 
-**Konfigurationsdatei:** [`linters.yml`](../../projects/django/.github/workflows/linters.yml)
+**Konfigurationsdatei:** [`linters.yml`](https://github.com/django/django/blob/main/.github/workflows/linters.yml)
 
 **Trigger:** Push auf `main`, Pull Requests
 
@@ -245,7 +245,7 @@ Selbst wenn das Repository der Action kompromittiert wird, ändert sich der ausg
 
 ### `check-migrations.yml` - Datenbank-Integrität
 
-**Konfigurationsdatei:** [`check-migrations.yml`](../../projects/django/.github/workflows/check-migrations.yml)
+**Konfigurationsdatei:** [`check-migrations.yml`](https://github.com/django/django/blob/main/.github/workflows/check-migrations.yml)
 
 **Trigger:** Änderungen an `models.py` oder Migrations-Dateien (Workflow läuft nur wenn sich relevante Dateien geändert haben)
 
@@ -275,7 +275,7 @@ services:
 
 ### `check_commit_messages.yml` - Konventionen prüfen
 
-**Konfigurationsdatei:** [`check_commit_messages.yml`](../../projects/django/.github/workflows/check_commit_messages.yml)
+**Konfigurationsdatei:** [`check_commit_messages.yml`](https://github.com/django/django/blob/main/.github/workflows/check_commit_messages.yml)
 
 **Trigger:** Pull Requests (edited, opened, synchronize, reopened)
  
@@ -301,7 +301,7 @@ Zwei Prüfungen:
 
 ### `docs.yml` - Dokumentations-Build
 
-**Konfigurationsdatei:** [`docs.yml`](../../projects/django/.github/workflows/docs.yml)
+**Konfigurationsdatei:** [`docs.yml`](https://github.com/django/django/blob/main/.github/workflows/docs.yml)
 
 **Trigger:** Änderungen im `docs/`-Verzeichnis
 
@@ -326,7 +326,7 @@ Das spart Ressourcen und gibt Maintainern Kontrolle.
 
 ### `selenium.yml` - Browser-Tests
 
-**Konfigurationsdatei:** [`selenium.yml`](../../projects/django/.github/workflows/selenium.yml)
+**Konfigurationsdatei:** [`selenium.yml`](https://github.com/django/django/blob/main/.github/workflows/selenium.yml)
 
 **Label:** `selenium`
 
@@ -340,7 +340,7 @@ run: python -Wall runtests.py --selenium=chrome --headless --parallel 1
 
 ### `screenshots.yml` - Visual Regression Tests
 
-**Konfigurationsdatei:** [`screenshots.yml`](../../projects/django/.github/workflows/screenshots.yml)
+**Konfigurationsdatei:** [`screenshots.yml`](https://github.com/django/django/blob/main/.github/workflows/screenshots.yml)
 
 **Label:** `screenshots`
 
@@ -361,7 +361,7 @@ So können Reviewer UI-Änderungen visuell vergleichen.
 
 ### `coverage_tests.yml` + `coverage_comment.yml` - Code Coverage
 
-**Konfigurationsdateien:** [`coverage_tests.yml`](../../projects/django/.github/workflows/coverage_tests.yml), [`coverage_comment.yml`](../../projects/django/.github/workflows/coverage_comment.yml)
+**Konfigurationsdateien:** [`coverage_tests.yml`](https://github.com/django/django/blob/main/.github/workflows/coverage_tests.yml), [`coverage_comment.yml`](https://github.com/django/django/blob/main/.github/workflows/coverage_comment.yml)
 
 **Label:** `coverage`
 
@@ -394,7 +394,7 @@ Durch `workflow_run` läuft der Kommentar-Workflow im Kontext des Basis-Repos, n
 
 ### `benchmark.yml` - Performance-Tests
 
-**Konfigurationsdatei:** [`benchmark.yml`](../../projects/django/.github/workflows/benchmark.yml)
+**Konfigurationsdatei:** [`benchmark.yml`](https://github.com/django/django/blob/main/.github/workflows/benchmark.yml)
 
 **Label:** `benchmark`
 
@@ -439,7 +439,7 @@ class QueryFilter:
 
 ### `postgis.yml` - GeoDjango-Tests
 
-**Konfigurationsdatei:** [`postgis.yml`](../../projects/django/.github/workflows/postgis.yml)
+**Konfigurationsdatei:** [`postgis.yml`](https://github.com/django/django/blob/main/.github/workflows/postgis.yml)
 
 **Label:** `geodjango`
 
@@ -462,7 +462,7 @@ So sieht man alle Probleme auf einmal.
 
 ### `new_contributor_pr.yml` - Willkommensnachricht
 
-**Konfigurationsdatei:** [`new_contributor_pr.yml`](../../projects/django/.github/workflows/new_contributor_pr.yml)
+**Konfigurationsdatei:** [`new_contributor_pr.yml`](https://github.com/django/django/blob/main/.github/workflows/new_contributor_pr.yml)
 
 **Trigger:** Erster PR eines neuen Contributors
 
@@ -480,7 +480,7 @@ So sieht man alle Probleme auf einmal.
 
 ### `labels.yml` - Automatisches Labeling
 
-**Konfigurationsdatei:** [`labels.yml`](../../projects/django/.github/workflows/labels.yml)
+**Konfigurationsdatei:** [`labels.yml`](https://github.com/django/django/blob/main/.github/workflows/labels.yml)
 
 **Trigger:** PR erstellt oder bearbeitet
 
@@ -491,11 +491,11 @@ Falls nicht, wird automatisch das Label `no ticket` hinzugefügt für eine konsi
 
 ### `check_pr_quality.yml` - PR-Qualitätsprüfung
 
-**Komnfigurationsdatei:** [`check_pr_quality.yml`](../../projects/django/.github/workflows/check_pr_quality.yml)
+**Komnfigurationsdatei:** [`check_pr_quality.yml`](https://github.com/django/django/blob/main/.github/workflows/check_pr_quality.yml)
 
 **Trigger:** PR erstellt oder bearbeitet
 
-Führt ein Python-Skript ([`scripts/pr_quality/check_pr.py`](../../projects/django/scripts/pr_quality/check_pr.py)) aus, das die PR-Qualität prüft. 
+Führt ein Python-Skript ([`scripts/pr_quality/check_pr.py`](https://github.com/django/django/blob/main/scripts/pr_quality/check_pr.py)) aus, das die PR-Qualität prüft. 
 
 Konkret werden folgende Checks durchgeführt:
 

@@ -1,0 +1,119 @@
+name: Tests
+
+# --- Konzept: Trigger ---
+# Test-Workflow: Läuft bei jedem Push auf main und bei jedem Pull Request.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+  pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+
+# --- Konzept: Least Privilege ---
+permissions:
+  contents: read
+
+# --- Konzept: Concurrency Control ---
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # --- Job 1: Schnelle Tests mit SQLite ---
+  # Läuft bei jedem PR (schnelles Feedback mit In-Memory-DB SQLite).
+  test-sqlite:
+    name: Tests (SQLite)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: uv sync --frozen --group dev
+
+      - name: Run tests with coverage
+        run: uv run pytest -v --cov --cov-report=term-missing --cov-report=xml
+
+      # --- Konzept: Coverage als Job Summary ---
+      - name: Coverage summary
+        if: always()
+        run: |
+          echo "## Coverage Report (SQLite)" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          uv run coverage report >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+  # --- Job 2: Tests gegen PostgreSQL ---
+  # Stellt sicher, dass die App auch mit der Produktionsdatenbank funktioniert.
+  test-postgres:
+    name: Tests (PostgreSQL)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    # --- Konzept: Service-Container ---
+    # GitHub Actions startet einen PostgreSQL-Container als Sidecar.
+    # Der Health-Check stellt sicher, dass die DB bereit ist, bevor Tests laufen.
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: todo_test
+          POSTGRES_USER: todo
+          POSTGRES_PASSWORD: todo
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: uv sync --frozen --group dev --extra postgres
+
+      - name: Run tests against PostgreSQL
+        env:
+          DATABASE_URL: "postgresql+psycopg://todo:todo@localhost:5432/todo_test"
+        run: uv run pytest -v
+
+  # --- Job 3: Frontend-Tests ---
+  # Django führt JavaScript-Tests als eigenen parallelen Job in tests.yml aus
+  # (QUnit + Grunt + Puppeteer). Der Demonstrator nutzt Vitest + Testing Library.
+  test-frontend:
+    name: Frontend Tests (Vitest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "frontend/package-lock.json"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
