@@ -3,10 +3,10 @@
 # 3 Services: nginx (Frontend) + api (FastAPI) + db (PostgreSQL)
 #
 # Unterschiede zu docker-compose.yml (Entwicklung):
-#   - "image:" statt "build:" -- Swarm kann nicht bauen, nur fertige Images pullen
-#   - "deploy:" Sektion -- Replicas, Rolling Updates, Restart-Policy
+#   - "image:" statt "build:" -> Swarm kann nicht bauen, nur fertige Images pullen
+#   - "deploy:" Sektion -> Replicas, Rolling Updates, Restart-Policy
 #   - DB-Port nicht exponiert (nur internes Netzwerk)
-#   - nginx als Entrypoint (Port 80) -- leitet API-Requests an den Backend-Service
+#   - nginx als Entrypoint (Port 80) -> leitet API-Requests an den Backend-Service
 #
 # Voraussetzungen auf dem Server:
 #   docker swarm init
