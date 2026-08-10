@@ -1,4 +1,6 @@
 site/
+projects/demonstrator/
+projects/django/
 
 # Python
 __pycache__/
