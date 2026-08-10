@@ -25,7 +25,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Check for issue reference and manage labels
-        uses: actions/github-script@f28e40c7f34b966cc01117ee4b5e3a33458a81fb # v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           script: |
             const title = context.payload.pull_request.title;
@@ -64,7 +64,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Check PR description
-        uses: actions/github-script@f28e40c7f34b966cc01117ee4b5e3a33458a81fb # v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           script: |
             const body = context.payload.pull_request.body || '';
