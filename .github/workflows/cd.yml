@@ -32,6 +32,9 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Set image name (lowercase)
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
@@ -49,8 +52,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ghcr.io/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
   # --- Frontend-Image (React + nginx) ---
   build-frontend:
@@ -65,6 +68,9 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Set image name (lowercase)
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
         with:
@@ -78,8 +84,8 @@ jobs:
           context: ./frontend
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}-frontend:latest
-            ghcr.io/${{ github.repository }}-frontend:${{ github.sha }}
+            ghcr.io/${{ env.IMAGE_NAME }}-frontend:latest
+            ghcr.io/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
 
   # --- Deployment via SSH + Docker Swarm ---
   # needs: wartet bis BEIDE Images erfolgreich gebaut und gepusht sind.
@@ -93,6 +99,9 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
+      - name: Set image name (lowercase)
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
       # --- Konzept: Deployment via SSH ---
       # Der Workflow verbindet sich per SSH mit dem Swarm Manager und führt "docker stack deploy" aus. 
@@ -121,8 +130,8 @@ jobs:
             cd ~/todo-api
 
             # GHCR-Image-Referenzen setzen
-            export API_IMAGE="ghcr.io/${{ github.repository }}:${{ github.sha }}"
-            export FRONTEND_IMAGE="ghcr.io/${{ github.repository }}-frontend:${{ github.sha }}"
+            export API_IMAGE="ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+            export FRONTEND_IMAGE="ghcr.io/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}"
 
             # Neue Images pullen
             docker pull "$API_IMAGE"
