@@ -126,12 +126,9 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          envs: API_IMAGE,FRONTEND_IMAGE
           script: |
             cd ~/todo-api
-
-            # GHCR-Image-Referenzen setzen
-            export API_IMAGE="ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}"
-            export FRONTEND_IMAGE="ghcr.io/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}"
 
             # Neue Images pullen
             docker pull "$API_IMAGE"
@@ -144,3 +141,6 @@ jobs:
             echo "Waiting for services to become healthy..."
             sleep 15
             docker service ls
+        env:
+          API_IMAGE: ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          FRONTEND_IMAGE: ghcr.io/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
