@@ -1,6 +1,6 @@
 name: PR Checks
 
-# --- Konzept: Prozessqualität (aus Djangos Community-Workflows) ---
+# --- Konzept: Prozessqualität ---
 # Qualität von PRs (GitHub Issues) prüfen.
 on:
   pull_request:

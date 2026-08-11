@@ -1,6 +1,7 @@
 # --- Multi-Stage Build (API) ---
 # Stage 1: Python-Abhängigkeiten mit uv installieren (schneller als pip)
 # Stage 2: Schlankes Runtime-Image (nur fertige Pakete, ohne uv/pip/Build-Tools)
+# CI trigger
 
 # Stage 1: Dependencies
 FROM python:3.14-slim AS builder
