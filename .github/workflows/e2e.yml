@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   e2e:
-    # --- Konzept: Label-gated (wie bei Django) ---
+    # --- Konzept: Label-gated ---
     # Job läuft nur wenn das Label "e2e" gesetzt ist.
     if: contains(github.event.pull_request.labels.*.name, 'e2e')
     name: Playwright (Chromium)
@@ -58,7 +58,7 @@ jobs:
       # --- E2E-Tests ausführen ---
       - name: Run E2E tests
         working-directory: frontend
-        run: npm run test:e2e
+        run: npm run test:e2e #test:e2e bezieht sich auf das in der package.json definierte Skript bzw dahinter liegende Kommando 
 
       # --- Konzept: Artefakte bei Fehler (wie Djangos screenshots.yml) ---
       # Playwright lädt Screenshots hoch bei fehlgeschlagenen Tests.
