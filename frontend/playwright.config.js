@@ -7,7 +7,7 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:5173",
     headless: true,
-    screenshot: "on", // Screenshots werden nur aufgenommen und hochgeladen, wenn die Tests fehlschlagen
+    screenshot: "only-on-failure", // Screenshots werden nur aufgenommen und hochgeladen, wenn die Tests fehlschlagen
   },
   projects: [
     {
