@@ -1,11 +1,11 @@
 #### Issue
-<!-- Referenziere das zugehörige GitHub Issue (z.B. #42). -->
-<!-- Falls kein Issue existiert: Erstelle zuerst eines oder schreibe "N/A" mit kurzer Begründung. -->
+Referenziere das zugehörige GitHub Issue (z.B. #42).
+Falls kein Issue existiert: Erstelle zuerst eines oder schreibe "N/A" mit kurzer Begründung.
 
-Closes #XXXX
+Closes (Ticket)
 
 #### Beschreibung
-<!-- Was ändert dieser PR und warum? (mind. 5 Wörter (wird vom PR-Check geprüft!)) -->
+Was ändert dieser PR und warum? (mind. 5 Wörter)
 
 
 
