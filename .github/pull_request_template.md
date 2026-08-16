@@ -2,7 +2,7 @@
 <!-- Referenziere das zugehörige GitHub Issue (z.B. #42). -->
 <!-- Falls kein Issue existiert: Erstelle zuerst eines. -->
 
-Closes #
+Closes <!-- Ticketreferenz -->
 
 #### Beschreibung
 <!-- Was ändert dieser PR und warum? (mind. 5 Wörter, wird vom PR-Check geprüft) -->
