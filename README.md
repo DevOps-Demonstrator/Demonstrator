@@ -22,6 +22,7 @@ Die vollständige Dokumentation ist als MkDocs-Seite aufgebaut:
 | **Django-Analyse** | [docs/django/übersicht.md](docs/django/übersicht.md) |
 | **Demonstrator** | [docs/demonstrator/übersicht.md](docs/demonstrator/übersicht.md) |
 
+Unter folgender URL ist die GitHub Pages aufrufbar: https://devops-demonstrator.github.io/Demonstrator/  
 
 ## Quick Start
 
@@ -35,4 +36,5 @@ Für die vollständige CI/CD-Pipeline müssen im GitHub Repository einmalig konf
 - **Label `e2e`** (Issues > Labels): Für On-Demand E2E-Tests per PR
 - **Ruleset importieren** (Settings > Rulesets): [`.github/rulesets/branch-protection.json`](.github/rulesets/branch-protection.json)
 
-Details: [Demonstrator-Übersicht](docs/demonstrator/übersicht.md#repository-einrichtung) bzw https://devops-demonstrator.github.io/Demonstrator/demonstrator/%C3%BCbersicht/
+Details: [Demonstrator-Übersicht](docs/demonstrator/übersicht.md#repository-einrichtung) 
+bzw https://devops-demonstrator.github.io/Demonstrator/demonstrator/%C3%BCbersicht/
