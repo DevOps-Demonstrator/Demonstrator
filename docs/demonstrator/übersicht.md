@@ -54,26 +54,7 @@ Als Demonstrator dient eine **Todo-App**: eine Anwendung zur Verwaltung von ToDo
 
 Die Anwendung besteht aus drei Komponenten, die jeweils als eigener Docker-Container laufen:
 
-```
-Browser :80
-    │
-    ▼
-┌─────────────────────────────────┐
-│  Frontend (nginx)               │  Statische Dateien (HTML/JS/CSS)
-│  React wird zu statischen       │  ausliefern + API-Requests an
-│  Dateien kompiliert, nginx      │  den Backend-Container
-│  liefert sie aus.               │  weiterleiten
-└──────────────┬──────────────────┘
-               │ /todos, /health, /docs
-┌──────────────▼──────────────────┐
-│  API (FastAPI)                  │  REST-Schnittstelle +
-│  Python + uvicorn               │  Geschäftslogik
-└──────────────┬──────────────────┘
-               │ SQL
-┌──────────────▼──────────────────┐
-│  Datenbank (PostgreSQL)         │  Persistente Datenhaltung
-└─────────────────────────────────┘
-```
+![Komponentenübersicht](diagrams/uebersicht.svg)
 
 | Container | Technologie | Dockerfile | Aufgabe |
 |---|---|---|---|
@@ -111,7 +92,7 @@ Für die lokale Entwicklung startet man Backend und Frontend separat - das Front
 ## Projektstruktur
 
 ```
-demonstrator/
+/
 ├── app/                         # Backend (FastAPI)
 │   ├── main.py                  #   App + Health-Endpoint + SPA-Serving
 │   ├── core/database.py         #   DB-Verbindung (SQLite/PostgreSQL)
@@ -138,28 +119,34 @@ demonstrator/
 │   ├── test_crud.py             #   11 Unit-Tests
 │   └── test_api.py              #   15 Integrationstests (inkl. Health-Check)
 │
+├── docs/                        # MkDocs-Dokumentation
+│   ├── demonstrator/            #   Demonstrator-Analyse + Pipeline
+│   └── django/                  #   Django-Analyse (Referenzprojekt)
+│
 ├── .github/
 │   ├── pull_request_template.md #   PR-Vorlage (Issue, Beschreibung, Checkliste)
 │   ├── dependabot.yml           #   Automatische Dependency-Updates (pip, npm, Actions, Docker)
-│   └── workflows/               #   CI/CD-Pipeline (7 Workflows)
+│   └── workflows/               #   CI/CD-Pipeline (7 Workflows + Pages)
 │       ├── linters.yml          #     Backend (Black, Ruff) + Frontend (oxlint) + zizmor
 │       ├── tests.yml            #     Tests + Coverage (SQLite + PostgreSQL + Frontend)
 │       ├── e2e.yml              #     Playwright Browser-Tests (On-Demand)
 │       ├── pr_checks.yml        #     Issue-Referenz + PR-Beschreibung
 │       ├── security.yml         #     Dependency-Audit (pip-audit)
 │       ├── cd.yml               #     Docker-Images bauen + pushen + Deploy (API + Frontend)
-│       └── smoke-test.yml       #     Multi-Container Smoke-Test
+│       ├── smoke-test.yml       #     Multi-Container Smoke-Test
+│       └── pages.yml            #     MkDocs-Dokumentation auf GitHub Pages deployen
 │
 ├── .editorconfig                # Editor-Formatierung
 ├── .pre-commit-config.yaml      # Pre-Commit Hooks (Black, Ruff, oxlint, zizmor)
 ├── pyproject.toml               # Projekt-Config + Tool-Einstellungen + Dependency Groups
 ├── uv.lock                      # Lockfile (deterministische Abhängigkeiten)
+├── mkdocs.yml                   # MkDocs-Konfiguration
 ├── Makefile                     # Standardisierte Befehle (uv run ...)
 ├── Dockerfile                   # API: Multi-Stage Build (uv + Python)
 ├── docker-compose.yml           # Dev: Frontend + API + PostgreSQL
 ├── docker-compose.prod.yml      # Prod: Swarm-Deployment (3 Container)
 ├── .env.example                 # Dokumentierte Umgebungsvariablen
-├── README.md                    # Quick Start + Projektübersicht
+├── README.md                    # Quick Start + Repo-Übersicht
 ├── CONTRIBUTING.md              # Entwicklungsworkflow + Konventionen
 └── .gitignore
 ```
@@ -261,17 +248,7 @@ Die CI-Workflows (Linters, Tests, Security) und der CD-Workflow (`cd.yml`) laufe
 
 Die Absicherung, dass nur geprüfter Code gebaut und deployt wird, läuft deshalb über **GitHub Branch Protection Rules** - eine Einstellung im Repository, die verhindert, dass Code ohne bestandene CI-Checks auf `main` gelangt:
 
-```
-PR erstellt
-    │
-    ├──> linters.yml  ──┐
-    ├──> tests.yml    ──┼──> Alle bestanden? ──> Merge erlaubt ──> Push auf main
-    └──> security.yml ──┘         ✗                                     │
-                            Merge blockiert                        cd.yml
-                                                                   ├── build-api
-                                                                   ├── build-frontend
-                                                                   └── deploy (needs: builds)
-```
+![Branch Protection Flow](diagrams/branch_protection.svg)
 
 ### Einrichtung (einmalig pro Repository)
 
@@ -289,6 +266,72 @@ In den GitHub Repository Settings unter **Settings → Branches → Add branch p
 
 Damit ist garantiert, dass kein Code `main` erreicht (und damit `cd.yml`) ohne ein Code Review durch ein Teammitglied **und** bestandene CI-Checks. 
 Beides muss erfüllt sein bevor ein PR gemergt werden kann.
+
+---
+
+## Repository-Einrichtung
+
+Damit die CI/CD-Pipeline vollständig funktioniert, müssen nach dem Klonen des Repositories einmalig folgende Schritte auf GitHub durchgeführt werden.
+
+### 1. Lokale Entwicklungsumgebung
+
+```bash
+# uv installieren (falls noch nicht vorhanden)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Abhängigkeiten + Pre-Commit Hooks
+make install
+
+# Frontend
+cd frontend && npm install
+```
+
+### 2. GitHub Label: `e2e`
+
+Der E2E-Workflow (`e2e.yml`) läuft nur, wenn ein PR das Label `e2e` trägt.
+Das Label muss einmalig erstellt werden:
+
+**Settings → Issues → Labels → New label** → Name: `e2e`
+
+### 3. GitHub Secrets (nur für Deployment)
+
+Der Deploy-Job in `cd.yml` verbindet sich per SSH mit dem Produktionsserver.
+Die Zugangsdaten werden als Repository Secrets konfiguriert:
+
+**Settings → Secrets and variables → Actions → New repository secret**
+
+| Secret | Beschreibung |
+|---|---|
+| `DEPLOY_HOST` | IP-Adresse oder Hostname des Swarm-Manager-Servers |
+| `DEPLOY_USER` | SSH-Benutzername für den Deployment-Server |
+| `DEPLOY_SSH_KEY` | Privater SSH-Schlüssel für den Deployment-Server |
+
+`GITHUB_TOKEN` wird automatisch von GitHub bereitgestellt und muss **nicht** manuell angelegt werden.
+
+Ohne diese Secrets laufen alle CI-Workflows (Linters, Tests, Security, etc.) trotzdem - nur der Deploy-Job schlägt fehl.
+
+### 4. Branch Protection Rules
+
+Siehe [Abschnitt oben](#branch-protection): Schützt `main` vor ungeprüftem Code.
+
+### 5. Server vorbereiten (nur für Deployment)
+
+Auf dem Zielserver muss einmalig Docker Swarm initialisiert und der GHCR-Zugriff eingerichtet werden:
+
+```bash
+docker swarm init
+docker login ghcr.io -u <github-user> -p <personal-access-token>
+```
+
+### Checkliste
+
+| Schritt | Wo | Pflicht? |
+|---|---|---|
+| `make install` + `cd frontend && npm install` | Lokal | Ja |
+| Label `e2e` erstellen | GitHub → Labels | Ja (sonst kein E2E-Trigger) |
+| Branch Protection Rules | GitHub → Settings → Branches | Empfohlen |
+| Secrets (`DEPLOY_*`) | GitHub → Settings → Secrets | Nur für Deployment |
+| `docker swarm init` + GHCR-Login | Zielserver | Nur für Deployment |
 
 ---
 

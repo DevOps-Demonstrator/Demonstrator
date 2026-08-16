@@ -16,6 +16,8 @@ Der Demonstrator nutzt **sieben GitHub Actions Workflows**, aufgeteilt nach Vera
 | **CD** | `cd.yml` | Push auf `main` | Images bauen + pushen + SSH Deploy (`needs:` Verkettung) |
 | **Smoke-Test** | `smoke-test.yml` | Push + PR (Infra-Dateien) | Multi-Container Smoke-Test (Frontend + API + DB) |
 
+![CI/CD-Pipeline](diagrams/pipeline.svg)
+
 ### Vergleich zu Django
 
 Django gruppiert seine 17 Workflows in sechs Kategorien.
@@ -69,7 +71,7 @@ In den Workflows bedeutet das:
 - run: pytest
 
 # Nachher (uv):
-- uses: astral-sh/setup-uv@v6
+- uses: astral-sh/setup-uv@v9
 - run: uv sync --frozen --group dev
 - run: uv run pytest
 ```
@@ -96,7 +98,7 @@ permissions:
 ```
 
 Jeder Workflow bekommt nur die Rechte, die er braucht.
-Ausnahme: `cd.yml` braucht zusätzlich `packages: write` für die Container Registry.
+Ausnahme: Die Build-Jobs in `cd.yml` brauchen zusätzlich `packages: write` für die Container Registry. Fiese Berechtigung wird auf **Job-Level** gesetzt, nicht auf Workflow-Level.
 
 ### Concurrency Control
 
@@ -138,8 +140,8 @@ black:
   runs-on: ubuntu-latest
   timeout-minutes: 5
   steps:
-    - uses: actions/checkout@v4
-    - uses: astral-sh/setup-uv@v6
+    - uses: actions/checkout@v7
+    - uses: astral-sh/setup-uv@v9
     - name: Check formatting
       run: uvx black --check --diff .
 ```
@@ -155,8 +157,8 @@ ruff:
   runs-on: ubuntu-latest
   timeout-minutes: 5
   steps:
-    - uses: actions/checkout@v4
-    - uses: astral-sh/setup-uv@v6
+    - uses: actions/checkout@v7
+    - uses: astral-sh/setup-uv@v9
     - name: Check linting + imports
       run: uvx ruff check --output-format=github .
 ```
@@ -176,8 +178,8 @@ frontend:
     run:
       working-directory: frontend
   steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v7
+    - uses: actions/setup-node@v7
       with:
         node-version: "22"
         cache: "npm"
@@ -199,8 +201,8 @@ zizmor:
   runs-on: ubuntu-latest
   timeout-minutes: 5
   steps:
-    - uses: actions/checkout@v4
-    - uses: zizmorcore/zizmor-action@v0.3.0
+    - uses: actions/checkout@v7
+    - uses: zizmorcore/zizmor-action@v0.6.2
       with:
         annotations: true
 ```
@@ -225,8 +227,8 @@ test-sqlite:
   runs-on: ubuntu-latest
   timeout-minutes: 10
   steps:
-    - uses: actions/checkout@v4
-    - uses: astral-sh/setup-uv@v6
+    - uses: actions/checkout@v7
+    - uses: astral-sh/setup-uv@v9
     - name: Install dependencies
       run: uv sync --frozen --group dev
     - name: Run tests with coverage
@@ -262,8 +264,8 @@ test-postgres:
         --health-timeout 3s
         --health-retries 5
   steps:
-    - uses: actions/checkout@v4
-    - uses: astral-sh/setup-uv@v6
+    - uses: actions/checkout@v7
+    - uses: astral-sh/setup-uv@v9
     - name: Install dependencies
       run: uv sync --frozen --group dev --extra postgres
     - name: Run tests against PostgreSQL
@@ -353,8 +355,8 @@ test-frontend:
     run:
       working-directory: frontend
   steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: actions/checkout@v7
+    - uses: actions/setup-node@v7
       with:
         node-version: "22"
         cache: "npm"
@@ -419,7 +421,7 @@ e2e:
     - run: npm run test:e2e
 
     # Screenshots bei Fehler als Artefakt hochladen
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       if: failure()
       with:
         name: playwright-report-${{ github.event.pull_request.head.sha }}
@@ -492,8 +494,8 @@ dependency-audit:
   runs-on: ubuntu-latest
   timeout-minutes: 5
   steps:
-    - uses: actions/checkout@v4
-    - uses: astral-sh/setup-uv@v6
+    - uses: actions/checkout@v7
+    - uses: astral-sh/setup-uv@v9
     - name: Install dependencies
       run: uv sync --frozen --group dev
     - name: Audit dependencies
@@ -538,7 +540,7 @@ Wird automatisch als Vorlage geladen, wenn ein neuer PR auf GitHub erstellt wird
 Closes #XXXX
 
 #### Beschreibung
-<!-- Was ändert dieser PR und warum? (mind. 5 Wörter -- wird vom PR-Check geprüft) -->
+<!-- Was ändert dieser PR und warum? (mind. 5 Wörter, wird vom PR-Check geprüft) -->
 
 #### Checkliste
 - [ ] Dieser PR referenziert ein GitHub Issue.
@@ -562,7 +564,7 @@ ticket-reference:
   name: Issue Reference
   steps:
     - name: Check for issue reference and manage labels
-      uses: actions/github-script@v7
+      uses: actions/github-script@v9
       with:
         script: |
           const title = context.payload.pull_request.title;
@@ -585,7 +587,7 @@ pr-description:
   name: PR Description
   steps:
     - name: Check PR description
-      uses: actions/github-script@v7
+      uses: actions/github-script@v9
       with:
         script: |
           const body = context.payload.pull_request.body || '';
@@ -630,24 +632,23 @@ Der Workflow baut **zwei Images parallel** - API und Frontend:
 ```yaml
 build-api:
   name: Build & Push API Image
+  permissions:
+    contents: read
+    packages: write
   steps:
-    - uses: docker/build-push-action@v6
+    - uses: actions/checkout@v7
+    - name: Set image name (lowercase)
+      run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+    - uses: docker/login-action@v4
+    - uses: docker/build-push-action@v7
       with:
         context: .
         tags: |
-          ghcr.io/${{ github.repository }}:latest
-          ghcr.io/${{ github.repository }}:${{ github.sha }}
-
-build-frontend:
-  name: Build & Push Frontend Image
-  steps:
-    - uses: docker/build-push-action@v6
-      with:
-        context: ./frontend
-        tags: |
-          ghcr.io/${{ github.repository }}-frontend:latest
-          ghcr.io/${{ github.repository }}-frontend:${{ github.sha }}
+          ghcr.io/${{ env.IMAGE_NAME }}:latest
+          ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 ```
+
+
 
 | Image | Dockerfile | Inhalt |
 |---|---|---|
@@ -663,14 +664,14 @@ Jedes Image bekommt zwei Tags:
 
 ```dockerfile
 # Stage 1: Builder - hat uv, installiert Abhängigkeiten
-FROM python:3.12-slim AS builder
+FROM python:3.14-slim AS builder
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 WORKDIR /build
 COPY pyproject.toml uv.lock* ./
 RUN uv pip install --system --prefix=/install ".[postgres]"
 
-# Stage 2: Runtime - hat KEIN uv, nur die fertigen Pakete
-FROM python:3.12-slim
+# Stage 2: Runtime - hat kein uv, nur die fertigen Pakete
+FROM python:3.14-slim
 WORKDIR /app
 COPY --from=builder /install /usr/local
 COPY app/ app/
@@ -712,9 +713,21 @@ deploy:
   name: Deploy to Swarm
   needs: [build-api, build-frontend]    # Wartet auf beide Builds
   steps:
-    - uses: appleboy/scp-action@v0.1.7    # Compose-File auf Server kopieren
-    - uses: appleboy/ssh-action@v1.2.0    # docker stack deploy ausführen
+    - uses: appleboy/scp-action@v0.1.7       # Compose-File auf Server kopieren
+    - uses: appleboy/ssh-action@v1.2.5       # docker stack deploy ausführen
+      with:
+        envs: API_IMAGE,FRONTEND_IMAGE       # Variablen sicher übergeben
+        script: |
+          docker pull "$API_IMAGE"
+          docker pull "$FRONTEND_IMAGE"
+          docker stack deploy -c docker-compose.prod.yml todo-api
+      env:
+        API_IMAGE: ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        FRONTEND_IMAGE: ghcr.io/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}
 ```
+
+Die Image-Referenzen werden über `env:` und `envs:` an die SSH-Session übergeben, statt sie direkt im `script:`-Block zu expandieren. 
+Das verhindert Code-Injection über Template-Expansion.
 
 `needs:` ist GitHubs nativer Mechanismus für Job-Abhängigkeiten. 
 Im Gegensatz zu `workflow_run` (das zwischen separaten Workflow-Dateien verkettet) funktioniert `needs:` innerhalb desselben Workflows und erzeugt eine echte Dependency-Kette im GitHub Actions UI.
@@ -751,7 +764,7 @@ Es gibt kein zusätzliches Tool zu lernen oder zu betreiben.
 **Wie Docker Swarm im Demonstrator eingesetzt wird:**
 
 1. **Deployment:** Der CD-Workflow kopiert `docker-compose.prod.yml` auf den Server und führt `docker stack deploy` aus — Swarm startet die definierten Services als Cluster-Tasks.
-2. **Replicas:** Swarm verteilt mehrere Instanzen desselben Services und leitet Requests per internem Load Balancer automatisch an verfügbare Container weiter.
+2. **Replicas:** Swarm verteilt mehrere Instanzen desselben Services und leitet Requests per internem Load Balancer (Layer 4) automatisch an verfügbare Container weiter.
 3. **Rolling Updates:** Bei einem neuen Deployment ersetzt Swarm Container einzeln (`parallelism: 1`, `order: start-first`), sodass der Service durchgehend erreichbar bleibt.
 4. **Self-Healing:** Fällt ein Container aus (z.B. Health-Check schlägt fehl), startet Swarm automatisch einen neuen, um die gewünschte Replica-Anzahl wiederherzustellen.
 
@@ -779,7 +792,7 @@ deploy:
     parallelism: 1               # Bei Fehler: einzeln zurückrollen
 ```
 
-**`order: start-first`** ist entscheidend für Zero-Downtime-Deployments: 
+**`order: start-first`** ermöglicht Zero-Downtime-Deployments: 
 Der neue Container wird gestartet und muss den Health-Check bestehen, bevor der alte Container gestoppt wird. 
 Zu keinem Zeitpunkt gibt es null laufende Instanzen.
 
@@ -901,7 +914,7 @@ In Production laufen Frontend und Backend als **separate Container**:
 ```
                     ┌─────────────────────────────────┐
   Browser :80  ──>  │  nginx (Frontend-Container)     │
-                    │  ├── /            → React SPA   │
+                    │  ├── / → React Single Page App  │
                     │  ├── /todos       → proxy → api │
                     │  └── /health      → proxy → api │
                     └─────────────────┬───────────────┘

@@ -184,12 +184,12 @@ dependencies = [
 # Dev-Dependencies (PEP 735 Dependency Groups)
 [dependency-groups]
 dev = [
-    "pytest>=8.0.0,<9.0.0",
-    "pytest-cov>=5.0.0,<6.0.0",
+    "pytest>=9.0.3,<10.0.0",
+    "pytest-cov>=5.0.0,<8.0.0",
     "httpx>=0.27.0,<1.0.0",
-    "pre-commit>=3.7.0,<4.0.0",
+    "pre-commit>=3.7.0,<5.0.0",
     "ruff>=0.5.0,<1.0.0",
-    "black>=24.0.0,<25.0.0",
+    "black>=26.3.1,<27.0.0",
     "pip-audit>=2.7.0,<3.0.0",
 ]
 ```
