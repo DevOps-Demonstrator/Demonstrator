@@ -1,6 +1,6 @@
 # CI/CT/CD-Demonstrator (Studienarbeit)
 
-Dieses Repository enthält sowohl den **Demonstrator** (FastAPI Todo-API mit React-Frontend und CI/CD-Pipeline) als auch die zugehörige **Dokumentation** (MkDocs).
+Dieses Repository enthält sowohl den **Demonstrator** (FastAPI Todo-API mit React-Frontend und CI/CD-Pipeline) als auch die zugehörigen **Dokumentationen (Django-Analyse und Demonstrator-Doku)** (MkDocs).
 
 ## Repo-Aufbau
 
@@ -9,7 +9,7 @@ Dieses Repository enthält sowohl den **Demonstrator** (FastAPI Todo-API mit Rea
 | **App (Backend)** | `app/` | FastAPI REST-API + SQLAlchemy |
 | **App (Frontend)** | `frontend/` | React + Vite + nginx |
 | **Tests** | `tests/`, `frontend/src/**/*.test.*`, `frontend/tests/` | pytest, Vitest, Playwright |
-| **CI/CD** | `.github/workflows/` | 7 Workflows (Linters, Tests, E2E, PR Checks, Security, CD, Smoke-Test) |
+| **CI/CD** | `.github/workflows/` | 7 Workflows (Linters, Tests, E2E, PR Checks, Security, CD, Smoke-Test) + Pages |
 | **Dokumentation** | `docs/` | MkDocs-Dokumentation (Django-Analyse + Demonstrator) |
 | **Infrastruktur** | `Dockerfile`, `docker-compose*.yml` | Docker Multi-Stage Builds + Swarm Deployment |
 
@@ -20,9 +20,8 @@ Die vollständige Dokumentation ist als MkDocs-Seite aufgebaut:
 | Thema | Seite |
 |---|---|
 | **Django-Analyse** | [docs/django/übersicht.md](docs/django/übersicht.md) |
-| **Demonstrator-Übersicht** | [docs/demonstrator/übersicht.md](docs/demonstrator/übersicht.md) |
-| **Lokale Tools** | [docs/demonstrator/lokale-tools.md](docs/demonstrator/lokale-tools.md) |
-| **CI/CD-Pipeline** | [docs/demonstrator/pipeline.md](docs/demonstrator/pipeline.md) |
+| **Demonstrator** | [docs/demonstrator/übersicht.md](docs/demonstrator/übersicht.md) |
+
 
 ## Quick Start
 

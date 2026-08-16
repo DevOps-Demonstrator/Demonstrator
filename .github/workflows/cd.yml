@@ -89,7 +89,7 @@ jobs:
 
   # --- Deployment via SSH + Docker Swarm ---
   # needs: wartet bis BEIDE Images erfolgreich gebaut und gepusht sind.
-  # Schlägt ein Build fehl, wird nicht deployt.
+  # Schlägt ein Build fehl, wird nicht deployed.
   deploy:
     name: Deploy to Swarm
     needs: [build-api, build-frontend]

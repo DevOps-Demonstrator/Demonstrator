@@ -186,7 +186,7 @@ Der Demonstrator nutzt stattdessen **GitHub Issues**, die direkt in die Plattfor
 
 - Das [**PR-Template**](../../.github/pull_request_template.md) fordert `Closes #XXXX` als Issue-Referenz.
 - Der Workflow [`pr_checks.yml`](../../.github/workflows/pr_checks.yml) prüft automatisch, ob eine `#123`-Referenz vorhanden ist.
-- Das Schlüsselwort `Closes` bewirkt, dass GitHub das referenzierte Issue **automatisch schließt**, wenn der PR gemergt wird.
+- Das Schlüsselwort `Closes` bewirkt, dass GitHub das referenzierte Issue **automatisch schließt**, wenn der PR gemerged wird.
 
 So entsteht eine lückenlose Verbindung zwischen Anforderung (Issue), Umsetzung (PR) und Auslieferung (CD) (ohne manuellen Aufwand).
 
@@ -246,7 +246,7 @@ Die Datei [`.env.example`](../../.env.example) dokumentiert alle Variablen mit B
 
 Die CI-Workflows (Linters, Tests, Security) und der CD-Workflow (`cd.yml`) laufen in **separaten Workflow-Dateien**. Innerhalb einer Datei kann man mit `needs:` Job-Abhängigkeiten definieren (z.B. Deploy wartet auf Build). Zwischen Dateien geht das nicht.
 
-Die Absicherung, dass nur geprüfter Code gebaut und deployt wird, läuft deshalb über **GitHub Branch Protection Rules** - eine Einstellung im Repository, die verhindert, dass Code ohne bestandene CI-Checks auf `main` gelangt:
+Die Absicherung, dass nur geprüfter Code gebaut und deployed wird, läuft deshalb über **GitHub Branch Protection Rules** - eine Einstellung im Repository, die verhindert, dass Code ohne bestandene CI-Checks auf `main` gelangt:
 
 ![Branch Protection Flow](diagrams/branch_protection.svg)
 
@@ -265,7 +265,7 @@ In den GitHub Repository Settings unter **Settings → Branches → Add branch p
 | Status checks: `Security` | Required | Dependency-Scan muss bestehen |
 
 Damit ist garantiert, dass kein Code `main` erreicht (und damit `cd.yml`) ohne ein Code Review durch ein Teammitglied **und** bestandene CI-Checks. 
-Beides muss erfüllt sein bevor ein PR gemergt werden kann.
+Beides muss erfüllt sein bevor ein PR gemerged werden kann.
 
 ---
 
@@ -314,7 +314,7 @@ Ohne diese Secrets laufen alle CI-Workflows (Linters, Tests, Security, etc.) tro
 
 Siehe [Abschnitt oben](#branch-protection): Schützt `main` vor ungeprüftem Code.
 
-### 5. Server vorbereiten (nur für Deployment)
+### (Optional) 5. Server vorbereiten (nur für Deployment)
 
 Auf dem Zielserver muss einmalig Docker Swarm initialisiert und der GHCR-Zugriff eingerichtet werden:
 

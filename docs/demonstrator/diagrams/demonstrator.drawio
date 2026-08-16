@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Komponentenübersicht" id="komponenten">
-        <mxGraphModel dx="405" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="500" math="0" shadow="0">
+        <mxGraphModel dx="1056" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="500" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -29,7 +29,7 @@
         </mxGraphModel>
     </diagram>
     <diagram name="Branch Protection Flow" id="branchprotection">
-        <mxGraphModel dx="405" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+        <mxGraphModel dx="1056" dy="569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -44,6 +44,9 @@
                 </mxCell>
                 <mxCell id="b4" value="security.yml" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontColor=#000000;fontSize=11;" parent="1" vertex="1">
                     <mxGeometry x="200" y="260" width="120" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="b_review" value="Code Review&lt;br&gt;&lt;div&gt;&lt;b&gt;(1 Approval)&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontColor=#000000;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="340" width="120" height="35" as="geometry"/>
                 </mxCell>
                 <mxCell id="b5" value="Alle bestanden?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;fontColor=#000000;fontSize=11;" parent="1" vertex="1">
                     <mxGeometry x="390" y="155" width="140" height="90" as="geometry"/>
@@ -78,6 +81,9 @@
                 <mxCell id="ba3" style="strokeColor=#000000;" parent="1" source="b1" target="b4" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
+                <mxCell id="ba_r1" style="strokeColor=#000000;" parent="1" source="b1" target="b_review" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="ba4" style="strokeColor=#000000;" parent="1" source="b2" target="b5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
@@ -85,6 +91,9 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="ba6" style="strokeColor=#000000;" parent="1" source="b4" target="b5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="ba_r2" style="strokeColor=#000000;" parent="1" source="b_review" target="b5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="ba7" value="Ja" style="strokeColor=#000000;fontColor=#000000;fontSize=10;" parent="1" source="b5" target="b6" edge="1">

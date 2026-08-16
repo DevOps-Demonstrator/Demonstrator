@@ -16,7 +16,7 @@ Zunächst werden die Änderungen lokal, bevor der Code das Repository erreicht, 
 Nach einem Push oder Pull Request übernimmt weiter GitHub Actions und führt automatisch Tests, Linting und weitere Prüfungen durch.
 Aufwändigere Checks - etwa Browser-Tests mit Selenium oder Performance-Benchmarks - laufen nur **on-demand**, wenn ein entsprechendes Label auf den Pull Request gesetzt ist (z.B. `run selenium`).
 Ergänzend dazu testet ein nächtlicher Cron-Job die gesamte Python-Versionsmatrix, um Regressionen frühzeitig zu erkennen.
-Nach einem Merge werden abschließend die Dokumentation deployt und Coverage-Ergebnisse auf dem PR gepostet.
+Nach einem Merge werden abschließend die Dokumentation deployed und Coverage-Ergebnisse auf dem PR gepostet.
 
 ![Django DevOps Workflow](devops_workflow.png)
 

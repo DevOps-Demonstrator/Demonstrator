@@ -550,7 +550,7 @@ Closes #XXXX
 ```
 
 Das Template enthält `Closes #XXXX` anstatt nur `#XXXX` - das Schlüsselwort `Closes` bewirkt, 
-dass GitHub das referenzierte Issue **automatisch schließt**, wenn der PR gemergt wird.
+dass GitHub das referenzierte Issue **automatisch schließt**, wenn der PR gemerged wird.
 
 ### Workflow: Zwei parallele Jobs
 
@@ -608,7 +608,7 @@ Das erzwingt, dass Teammitglieder dokumentieren, **was** und **warum** sie ände
 
 **Trigger:** Push auf `main`
 
-GitHub's [Branch Protection Rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule) schützen den main-Branch davor, dass fehlerhafter oder ungeprüfter Code gemergt wird — indem sie einen Merge erst zulassen, wenn alle definierten Required Status Checks (z.B. Linting, Tests, Build) erfolgreich durchlaufen sind. 
+GitHub's [Branch Protection Rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule) schützen den main-Branch davor, dass fehlerhafter oder ungeprüfter Code gemerged wird — indem sie einen Merge erst zulassen, wenn alle definierten Required Status Checks (z.B. Linting, Tests, Build) erfolgreich durchlaufen sind. 
 Der Deployment-Workflow braucht daher keinen expliziten Verweis auf die CI-Workflows, 
 weil GitHub selbst den Merge blockiert, solange diese Checks nicht bestanden sind.
 
@@ -623,7 +623,7 @@ build-frontend ┘
 
 `needs:` ist GitHubs Mechanismus für Job-Abhängigkeiten innerhalb eines Workflows. 
 Der Deploy-Job startet so erst, wenn **beide** Build-Jobs erfolgreich abgeschlossen sind. 
-Schlägt ein Build fehl, wird nicht deployt.
+Schlägt ein Build fehl, wird nicht deployed.
 
 ### Docker-Builds (2 parallele Jobs)
 
