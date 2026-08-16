@@ -44,7 +44,7 @@ Der Demonstrator bildet die wichtigsten Kategorien mit sieben Workflows ab:
 | Security-Scan | zizmor (CI-Workflows) | zizmor (Workflows) + pip-audit (Deps) + wöchentlicher Cron |
 | CD | Docs-Deployment | Docker Build → GHCR Push → SSH Deploy → Docker Swarm (alles in `cd.yml` via `needs:`) |
 | Deployment-Strategie | - | Rolling Update, Zero Downtime, 2 Replicas |
-| Qualitäts-Gate | Branch Protection Rules | Branch Protection Rules (Code Review + CI müssen bestehen bevor Code auf `main` gelangt) |
+| Qualitäts-Gate | Branch Protection Rules | GitHub Rulesets (Code Review + CI müssen bestehen bevor Code auf `main` gelangt) |
 | Geplante Ausführung | Nächtlich | Wöchentlich (Security) |
 
 
@@ -608,8 +608,8 @@ Das erzwingt, dass Teammitglieder dokumentieren, **was** und **warum** sie ände
 
 **Trigger:** Push auf `main`
 
-GitHub's [Branch Protection Rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule) schützen den main-Branch davor, dass fehlerhafter oder ungeprüfter Code gemerged wird — indem sie einen Merge erst zulassen, wenn alle definierten Required Status Checks (z.B. Linting, Tests, Build) erfolgreich durchlaufen sind. 
-Der Deployment-Workflow braucht daher keinen expliziten Verweis auf die CI-Workflows, 
+Das [GitHub Ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) ([`.github/rulesets/branch-protection.json`](../../.github/rulesets/branch-protection.json)) schützt den main-Branch davor, dass fehlerhafter oder ungeprüfter Code gemerged wird, indem es einen Merge erst zulässt, wenn alle 8 definierten Required Status Checks (Linting, Tests, Security) und ein Code Review bestanden sind.
+Der Deployment-Workflow braucht daher keinen expliziten Verweis auf die CI-Workflows,
 weil GitHub selbst den Merge blockiert, solange diese Checks nicht bestanden sind.
 
 

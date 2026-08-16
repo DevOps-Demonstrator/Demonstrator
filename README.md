@@ -33,6 +33,6 @@ Für die vollständige CI/CD-Pipeline müssen im GitHub Repository einmalig konf
 
 - **GitHub Secrets** (Settings > Secrets and variables > Actions): `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`
 - **Label `e2e`** (Issues > Labels): Für On-Demand E2E-Tests per PR
-- **Branch Protection** (Settings > Branches): Required PRs + Status Checks
+- **Ruleset importieren** (Settings > Rulesets): [`.github/rulesets/branch-protection.json`](.github/rulesets/branch-protection.json)
 
 Details: [Demonstrator-Übersicht](docs/demonstrator/übersicht.md#repository-einrichtung)

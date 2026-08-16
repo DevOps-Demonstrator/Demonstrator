@@ -126,6 +126,8 @@ Für die lokale Entwicklung startet man Backend und Frontend separat - das Front
 ├── .github/
 │   ├── pull_request_template.md #   PR-Vorlage (Issue, Beschreibung, Checkliste)
 │   ├── dependabot.yml           #   Automatische Dependency-Updates (pip, npm, Actions, Docker)
+│   ├── rulesets/                 #   Branch Protection als importierbare JSON
+│   │   └── branch-protection.json
 │   └── workflows/               #   CI/CD-Pipeline (7 Workflows + Pages)
 │       ├── linters.yml          #     Backend (Black, Ruff) + Frontend (oxlint) + zizmor
 │       ├── tests.yml            #     Tests + Coverage (SQLite + PostgreSQL + Frontend)
@@ -242,29 +244,37 @@ Die Datei [`.env.example`](../../.env.example) dokumentiert alle Variablen mit B
 
 ---
 
-## Branch Protection
+## Branch Protection (GitHub Rulesets)
 
 Die CI-Workflows (Linters, Tests, Security) und der CD-Workflow (`cd.yml`) laufen in **separaten Workflow-Dateien**. Innerhalb einer Datei kann man mit `needs:` Job-Abhängigkeiten definieren (z.B. Deploy wartet auf Build). Zwischen Dateien geht das nicht.
 
-Die Absicherung, dass nur geprüfter Code gebaut und deployed wird, läuft deshalb über **GitHub Branch Protection Rules** - eine Einstellung im Repository, die verhindert, dass Code ohne bestandene CI-Checks auf `main` gelangt:
+Die Absicherung, dass nur geprüfter Code gebaut und deployed wird, läuft deshalb über **GitHub Rulesets** (Nachfolger der klassischen Branch Protection Rule). Rulesets bieten dieselbe Funktionalität, können aber als [JSON-Datei versioniert, exportiert und importiert](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets) werden.
 
 ![Branch Protection Flow](diagrams/branch_protection.svg)
 
+### Ruleset-Konfiguration
+
+Die Konfiguration liegt als importierbare JSON-Datei im Repository: [`.github/rulesets/branch-protection.json`](../../.github/rulesets/branch-protection.json)
+
+| Regel | Einstellung |
+|---|---|
+| **Ziel** | Default-Branch (`main`) |
+| **Pull Request erforderlich** | Ja, mit mindestens 1 Approval |
+| **Required Status Checks** | Alle 8 CI-Jobs müssen bestehen |
+
+Die 8 Required Status Checks entsprechen den Job-Namen in den Workflows:
+
+| Workflow | Required Status Check |
+|---|---|
+| `linters.yml` | `Black (Formatting)`, `Ruff (Linting)`, `Frontend (Lint + Build)`, `zizmor (Workflow Security)` |
+| `tests.yml` | `Tests (SQLite)`, `Tests (PostgreSQL)`, `Frontend Tests (Vitest)` |
+| `security.yml` | `pip-audit (Dependency Scan)` |
+
 ### Einrichtung (einmalig pro Repository)
 
-In den GitHub Repository Settings unter **Settings → Branches → Add branch protection rule**:
+**Settings → Rules → Rulesets → New ruleset → Import a ruleset** → die Datei `.github/rulesets/branch-protection.json` hochladen → **Create**.
 
-| Einstellung | Wert | Zweck |
-|---|---|---|
-| Branch name pattern | `main` | Schutz für den Hauptbranch |
-| Require a pull request before merging | Aktiviert | Kein direkter Push auf `main` |
-| Require approvals | 1 | Mindestens ein Teammitglied muss den PR reviewen und freigeben |
-| Require status checks to pass | Aktiviert | CI muss bestehen |
-| Status checks: `Linters` | Required | Formatting + Linting muss bestehen |
-| Status checks: `Tests` | Required | Alle Tests müssen bestehen |
-| Status checks: `Security` | Required | Dependency-Scan muss bestehen |
-
-Damit ist garantiert, dass kein Code `main` erreicht (und damit `cd.yml`) ohne ein Code Review durch ein Teammitglied **und** bestandene CI-Checks. 
+Damit ist garantiert, dass kein Code `main` erreicht (und damit `cd.yml`) ohne ein Code Review durch ein Teammitglied **und** bestandene CI-Checks.
 Beides muss erfüllt sein bevor ein PR gemerged werden kann.
 
 ---
@@ -310,9 +320,10 @@ Die Zugangsdaten werden als Repository Secrets konfiguriert:
 
 Ohne diese Secrets laufen alle CI-Workflows (Linters, Tests, Security, etc.) trotzdem - nur der Deploy-Job schlägt fehl.
 
-### 4. Branch Protection Rules
+### 4. GitHub Ruleset importieren
 
-Siehe [Abschnitt oben](#branch-protection): Schützt `main` vor ungeprüftem Code.
+Die Branch-Protection-Konfiguration liegt als JSON im Repository und kann direkt importiert werden.
+Details: [Branch Protection (GitHub Rulesets)](#branch-protection-github-rulesets)
 
 ### (Optional) 5. Server vorbereiten (nur für Deployment)
 
@@ -329,7 +340,7 @@ docker login ghcr.io -u <github-user> -p <personal-access-token>
 |---|---|---|
 | `make install` + `cd frontend && npm install` | Lokal | Ja |
 | Label `e2e` erstellen | GitHub → Labels | Ja (sonst kein E2E-Trigger) |
-| Branch Protection Rules | GitHub → Settings → Branches | Empfohlen |
+| Ruleset importieren (`.github/rulesets/`) | GitHub → Settings → Rules → Rulesets | Empfohlen |
 | Secrets (`DEPLOY_*`) | GitHub → Settings → Secrets | Nur für Deployment |
 | `docker swarm init` + GHCR-Login | Zielserver | Nur für Deployment |
 

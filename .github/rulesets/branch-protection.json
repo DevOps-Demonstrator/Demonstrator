@@ -1,0 +1,57 @@
+{
+  "name": "Branch Protection (main)",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "include": [
+        "~DEFAULT_BRANCH"
+      ],
+      "exclude": []
+    }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews_on_push": false,
+        "require_code_owner_review": false,
+        "require_last_push_approval": false,
+        "required_review_thread_resolution": false
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "required_status_checks": [
+          {
+            "context": "Black (Formatting)"
+          },
+          {
+            "context": "Ruff (Linting)"
+          },
+          {
+            "context": "Frontend (Lint + Build)"
+          },
+          {
+            "context": "zizmor (Workflow Security)"
+          },
+          {
+            "context": "Tests (SQLite)"
+          },
+          {
+            "context": "Tests (PostgreSQL)"
+          },
+          {
+            "context": "Frontend Tests (Vitest)"
+          },
+          {
+            "context": "pip-audit (Dependency Scan)"
+          }
+        ],
+        "strict_required_status_checks_policy": false
+      }
+    }
+  ]
+}
