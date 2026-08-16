@@ -1,5 +1,5 @@
 site_name: "Studienarbeit - CI/CT/CD-Demonstrator"
-site_url: ""
+site_url: "https://devops-demonstrator.github.io/Demonstrator/"
 
 docs_dir: docs
 site_dir: site

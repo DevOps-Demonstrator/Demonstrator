@@ -35,25 +35,31 @@ jobs:
             const hasRef = regex.test(title) || regex.test(body);
             const labels = context.payload.pull_request.labels.map(l => l.name);
 
-            if (hasRef && labels.includes(label)) {
-              await github.rest.issues.removeLabel({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-                name: label
-              });
-              console.log(`Removed "${label}" label -- issue reference found.`);
-            } else if (!hasRef && !labels.includes(label)) {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-                labels: [label]
-              });
-              core.warning(
-                'PR title or body should reference a GitHub Issue (e.g. #42). ' +
+            if (!hasRef) {
+              // Label setzen falls noch nicht vorhanden
+              if (!labels.includes(label)) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.payload.pull_request.number,
+                  labels: [label]
+                });
+              }
+              core.setFailed(
+                'PR title or body must reference a GitHub Issue (e.g. #42 or Closes #42). ' +
                 'Label "no ticket" was added.'
               );
+            } else {
+              // Label entfernen falls vorhanden
+              if (labels.includes(label)) {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.payload.pull_request.number,
+                  name: label
+                });
+              }
+              console.log('Issue reference found.');
             }
 
   # --- Konzept: PR-Beschreibung prüfen ---
