@@ -15,7 +15,7 @@ In **Phase 4** wird der Code per `git push` an GitHub übertragen, wo die GitHub
 Dieselben Tools (z.B. black, isort, ...) werden dem Prinzip *Vertrauen ist gut, Kontrolle ist besser* nach redundant, sowohl lokal als auch remote in GitHub Actions, eingesetzt.
 Lokal geben sie schnell Feedback und remote dienen sie als Sicherheitsschicht (falls beispielsweise ein Entwickler Pre-Commit nicht installiert hat).
 
-![Django Lokaler Workflow](local_workflow.png) 
+![Django Lokaler Workflow](./diagrams/local_workflow.svg) 
 
 
 ### Formatierung, Stil, Linting und Sicherheit

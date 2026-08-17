@@ -39,8 +39,6 @@ Parallel dazu laufen bei PR-Events die **Community**-Workflows, die Prozessaufga
 Alle Prüfungsergebnisse fließen in das **Result**: 
 * Bestehen alle Checks, ist der PR mergebar, schlägt eine Prüfung fehl, muss der Entwickler nachbessern und erneut pushen.
 
-![Django CI/CD Workflows](ci_workflow.png)
-
 > **Kosten** bezeichnen hier den Verbrauch an GitHub Actions Runner-Minuten. Jeder Workflow-Job belegt einen Runner (virtuelle Maschine), dessen Laufzeit abgerechnet wird. 
 Die Kosten hängen von drei Faktoren ab: der **Laufzeit** des Jobs, dem **Betriebssystem** des Runners (Linux ist am günstigsten) und der **Anzahl paralleler Jobs** in der Build-Matrix. Öffentliche Repositories wie dieses hier von Django erhalten diese Minuten kostenlos, die Ressourcen sind aber begrenzt. ([About billing for GitHub Actions](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions)).
 
