@@ -18,7 +18,7 @@ Aufwändigere Checks - etwa Browser-Tests mit Selenium oder Performance-Benchmar
 Ergänzend dazu testet ein nächtlicher Cron-Job die gesamte Python-Versionsmatrix, um Regressionen frühzeitig zu erkennen.
 Nach einem Merge werden abschließend die Dokumentation deployed und Coverage-Ergebnisse auf dem PR gepostet.
 
-![Django DevOps Workflow](devops_workflow.png)
+![Django DevOps Workflow](./diagrams/devops_workflow.svg)
 
 ## Übersicht - DevOps Konfigurationen 
 
