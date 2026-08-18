@@ -1,6 +1,6 @@
 # CI/CT/CD - Demonstrator (Studienarbeit) 
 
-Die Studienarbeit untersucht und demonstriert DevOps-Prozesse, schwerpunktmäßig **Continuous Integration**, **Continuous Testing** und **Continuous Delivery/Deployment**, anhand eines Open-Source-Projektes als Fallbeispiel und eines Demonstrators.
+Die Studienarbeit untersucht DevOps-Prozesse, schwerpunktmäßig **Continuous Integration**, **Continuous Testing** und **Continuous Delivery/Deployment**, anhand eines Open-Source-Projektes als Fallbeispiel und demonstriert ausgewählte an einem Demonstrator.
 
 ## Aufbau
 
@@ -26,10 +26,6 @@ Die relevantesten Konzepte aus der Django-Analyse werden auf ein **Studenten-Pro
 | Übersicht (Konzeptauswahl, App, Vergleich) | [Demonstrator Übersicht](demonstrator/übersicht.md) |
 | Lokale Tools (EditorConfig, Pre-Commit, Ruff) | [Lokale Tools](demonstrator/lokale-tools.md) |
 | CI/CD-Pipeline (GitHub Actions, Docker) | [CI/CD-Pipeline](demonstrator/pipeline.md) |
-
-### 3. Cheat-Sheets
-
-> TBD
 
 ## Begriffe
 
