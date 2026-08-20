@@ -1,0 +1,1287 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://devops-demonstrator.github.io/Demonstrator/demonstrator/lokale-tools/">
+      
+      
+        <link rel="prev" href="../%C3%BCbersicht/">
+      
+      
+        <link rel="next" href="../pipeline/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Lokale Tools - Studienarbeit - CI/CT/CD-Demonstrator</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lokale-tools" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-header__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Studienarbeit - CI/CT/CD-Demonstrator
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lokale Tools
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-nav__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Studienarbeit - CI/CT/CD-Demonstrator
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Django Analyse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Django Analyse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/%C3%BCbersicht/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/lokale-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokaler Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demonstrator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Demonstrator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%C3%BCbersicht/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokale Tools
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokale Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ubersicht" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Übersicht
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-editorconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. EditorConfig
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-code-qualitat-lokal-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Code-Qualität (Lokal + CI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-zentralisierte-konfiguration-pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Zentralisierte Konfiguration (pyproject.toml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD-Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ubersicht" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Übersicht
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-editorconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. EditorConfig
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-code-qualitat-lokal-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Code-Qualität (Lokal + CI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-zentralisierte-konfiguration-pyprojecttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Zentralisierte Konfiguration (pyproject.toml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Übersicht
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%C3%BCbersicht/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Demonstrator
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="lokale-tools">Lokale Tools<a class="headerlink" href="#lokale-tools" title="Permanent link">&para;</a></h1>
+<p>Im Folgenden werden die lokalen Tools des Demonstrators beschrieben, also alles, was <strong>auf dem Rechner des Entwicklers</strong> läuft, bevor Code gepusht wird.
+Jedes Tool wird im Vergleich zur Django-Analyse erläutert, um zu zeigen, wie die dort identifizierten Konzepte für ein (insbesondere im Vergleich zu Django) kleineres Projekt angepasst wurden.</p>
+<hr />
+<h2 id="ubersicht">Übersicht<a class="headerlink" href="#ubersicht" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Funktion</th>
+<th>Lokal</th>
+<th>CI</th>
+<th>Django-Äquivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.editorconfig</code></td>
+<td>Einheitliche Editor-Einstellungen</td>
+<td>Ja</td>
+<td>-</td>
+<td><code>.editorconfig</code> (identisch)</td>
+</tr>
+<tr>
+<td><strong>Black</strong></td>
+<td>Python-Formatierung</td>
+<td>Pre-Commit</td>
+<td>Job</td>
+<td>Black (identisch)</td>
+</tr>
+<tr>
+<td><strong>Ruff</strong></td>
+<td>Python-Linting + Import-Sortierung</td>
+<td>Pre-Commit</td>
+<td>Job</td>
+<td>flake8 + isort (2 → 1)</td>
+</tr>
+<tr>
+<td><strong>oxlint</strong></td>
+<td>JavaScript-Linting (Frontend)</td>
+<td>Pre-Commit</td>
+<td>Job</td>
+<td>biome</td>
+</tr>
+<tr>
+<td><strong>zizmor</strong></td>
+<td>Workflow-Security (GitHub Actions)</td>
+<td>Pre-Commit</td>
+<td>Job</td>
+<td>zizmor (identisch)</td>
+</tr>
+<tr>
+<td><strong>uv</strong></td>
+<td>Paketmanagement, venv, Lockfile</td>
+<td>Ja</td>
+<td>Ja</td>
+<td>pip + virtualenv + pip-tools (3 → 1)</td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td>Zentrale Python-Tool-Konfiguration</td>
+<td>-</td>
+<td>-</td>
+<td><code>.flake8</code> + <code>tox.ini</code> + <code>pyproject.toml</code> (3 → 1)</td>
+</tr>
+</tbody>
+</table>
+<p>Wie der Übersicht entnommen werden kann, ist die zentrale Idee dieselbe Qualitätssicherung wie bei Django umzusetzen, aber mit <strong>weniger Tools und weniger Konfigurationsdateien</strong>. 
+Das ist möglich, weil der Demonstrator modernere Tools einsetzt, die jeweils mehrere ältere ersetzen. 
+Zusätzlich wird die Python-Tool-Konfiguration (Black, Ruff, pytest, Coverage) in <code>pyproject.toml</code> zentralisiert.</p>
+<hr />
+<h2 id="1-editorconfig">1. EditorConfig<a class="headerlink" href="#1-editorconfig" title="Permanent link">&para;</a></h2>
+<p><strong>Konzept aus der Django-Analyse:</strong> EditorConfig ist die erste "Verteidigungslinie" - sie verhindert Formatierungsprobleme, bevor Code geschrieben wird.</p>
+<p>Dieses Konzept wird <strong>genauso übernommen</strong>, da es ohne großen Aufwand in jedem Projekt unabhängig der Größe sinnvoll ist.</p>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.editorconfig"><code>.editorconfig</code></a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span><span class="w">                        </span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">[*]                                # Standardregeln für alle Dateien</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">indent_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">space</span><span class="w">               </span><span class="c1"># Spaces statt Tabs</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">indent_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4</span><span class="w">                    </span><span class="c1"># 4 Spaces Einrückung</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="na">end_of_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">lf</span><span class="w">                   </span><span class="c1"># Unix-Zeilenenden (kein \r\n)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="na">charset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">utf-8</span><span class="w">                    </span><span class="c1"># Einheitliche Zeichenkodierung</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="na">trim_trailing_whitespace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span><span class="w">    </span><span class="c1"># Leerzeichen am Zeilenende entfernen</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="na">insert_final_newline</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">true</span><span class="w">        </span><span class="c1"># Datei endet mit Newline</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="na">[*.py]                             # Python spezifisch </span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="na">max_line_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">88</span><span class="w">               </span><span class="c1"># Max Zeilenlänge</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">[*.{yml,yaml,json,toml}]</span><span class="w">          </span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="na">indent_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span><span class="w">                    </span><span class="c1"># 2 Spaces (YAML-, JSON-Konvention)</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="k">[Makefile]</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="na">indent_style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">tab</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="k">[Dockerfile]</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="na">indent_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4</span>
+</code></pre></div>
+<p><strong>Relevanz</strong>: 
+In Softwareprojekten nutzen Teammitglieder häufig verschiedene Editoren (VS Code, PyCharm, Vim, ...).
+Ohne EditorConfig entstehen Commits, die nur aus Whitespace-Änderungen bestehen.
+Das erzeugt beispielsweise unnötige Merge-Konflikte und erschwert Code Reviews.
+Mit der EditorConfig wird dies gelöst, indem für verschiedene Dateitypen (hier Python, YAML, JSON, Dockerfile) vordefinierte Konfigurationen (etwa die maximale Zeilenlänge) automatisch beim Öffnen und Speichern einer Datei übernommen werden.</p>
+<hr />
+<h2 id="2-code-qualitat-lokal-ci">2. Code-Qualität (Lokal + CI)<a class="headerlink" href="#2-code-qualitat-lokal-ci" title="Permanent link">&para;</a></h2>
+<p><strong>Konzept aus der Django-Analyse:</strong> 
+Fehler so früh wie möglich finden, bestenfalls noch vor dem Commit (Shift-Left Prinzip). 
+Django setzt dafür sechs Pre-Commit Hooks ein und führt dieselben Prüfungen nochmal in der CI aus ("Trust but verify").</p>
+<p>Der Demonstrator nutzt vier Tools für Code-Qualität, aufgeteilt in zwei Ebenen:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Lokal (Pre-Commit)</th>
+<th>CI (<code>linters.yml</code>)</th>
+<th>Prüft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Black</strong></td>
+<td>Ja (Hook)</td>
+<td>Ja (Job)</td>
+<td>Python-Formatierung</td>
+</tr>
+<tr>
+<td><strong>Ruff</strong></td>
+<td>Ja (Hook)</td>
+<td>Ja (Job)</td>
+<td>Python-Linting + Import-Sortierung</td>
+</tr>
+<tr>
+<td><strong>oxlint</strong></td>
+<td>Ja (Hook)</td>
+<td>Ja (Job)</td>
+<td>JavaScript-Linting (Frontend)</td>
+</tr>
+<tr>
+<td><strong>zizmor</strong></td>
+<td>Ja (Hook)</td>
+<td>Ja (Job)</td>
+<td>GitHub Actions Workflow-Security</td>
+</tr>
+</tbody>
+</table>
+<p>Alle Tools laufen <strong>bei jedem Commit</strong> als Pre-Commit Hooks. 
+Der Entwickler bekommt so direkt Feedback, egal ob Python-, JavaScript- oder Workflow-Dateien geändert wurden. 
+Dieselben Prüfungen laufen nochmal in der CI als Sicherheitsnetz ("Trust but verify").</p>
+<h3 id="21-pre-commit-hooks">2.1 Pre-Commit Hooks<a class="headerlink" href="#21-pre-commit-hooks" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.pre-commit-config.yaml"><code>.pre-commit-config.yaml</code></a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">repos</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="c1"># Python: Code-Formatierung (Einrückung, Zeilenlänge, Klammern, ...)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/psf/black-pre-commit-mirror</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24.10.0</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">black</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="c1"># Python: Linting (statische Code-Analyse) + Import-Sortierung (ersetzt flake8 + isort)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.7.4</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--fix</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span><span class="c1"># JavaScript: Linting (Frontend)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/oxc-project/mirrors-oxlint</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.16.10</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oxlint</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^frontend/.*\.(js|jsx)$</span><span class="w">    </span><span class="c1"># Nur Frontend-Dateien prüfen</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="c1"># GitHub Actions: Workflow-Security</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/zizmorcore/zizmor-pre-commit</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.26.1</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zizmor</span>
+</code></pre></div>
+<p><strong>Installation:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>sync<span class="w"> </span>--group<span class="w"> </span>dev<span class="w">       </span><span class="c1"># Installiert pre-commit als Dev-Dependency</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install<span class="w"> </span><span class="c1"># Hooks in .git/hooks/ einrichten</span>
+</code></pre></div>
+<p>Nach der Installation laufen alle vier Hooks <strong>automatisch bei jedem <code>git commit</code></strong>. Schlägt eine Prüfung fehl, wird der Commit abgelehnt und der Entwickler behebt das Problem sofort.</p>
+<p><strong>Black</strong> ist der gleiche Formatter, den auch Django verwendet.
+Er formatiert Python-Code deterministisch - es gibt keine Konfiguration des Stils (nur die Zeilenlänge ist einstellbar). 
+Das löst Diskussionen über Codestil ("Klammern in derselben Zeile?", "Leerzeichen um Operatoren?"), weil Black entscheidet und niemand manuell formatieren muss.</p>
+<p><strong><a href="https://docs.astral.sh/ruff/">Ruff</a></strong> ist ein moderner Python-Linter, der flake8 und isort in einem einzigen Tool vereint:</p>
+<ul>
+<li><strong>Ein Tool statt zwei</strong>: Weniger Konfiguration, weniger Abhängigkeiten, weniger Versionskonflikte.</li>
+<li><strong>Schneller</strong>: In Rust geschrieben, typischerweise 10-100x schneller als flake8.</li>
+<li><strong><code>--fix</code></strong>: Behebt viele Probleme automatisch (z.B. falsche Import-Reihenfolge).</li>
+<li><strong>Mehr Regeln</strong>: Neben PEP 8 (Regeln <code>E</code>, <code>W</code>, <code>F</code>) aktiviert der Demonstrator zusätzlich:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Regelgruppe</th>
+<th>Prüft</th>
+<th>Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>I</code> (isort)</td>
+<td>Import-Sortierung</td>
+<td>Imports in falscher Reihenfolge</td>
+</tr>
+<tr>
+<td><code>UP</code> (pyupgrade)</td>
+<td>Veraltete Python-Syntax</td>
+<td><code>dict()</code> statt <code>{}</code></td>
+</tr>
+<tr>
+<td><code>B</code> (bugbear)</td>
+<td>Häufige Fehlerquellen</td>
+<td>Mutable Default-Argumente</td>
+</tr>
+<tr>
+<td><code>SIM</code> (simplify)</td>
+<td>Vereinfachbaren Code</td>
+<td>Unnötige <code>if-else</code>-Ketten</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vergleich-zu-django">Vergleich zu Django<a class="headerlink" href="#vergleich-zu-django" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Funktion</th>
+<th>Django</th>
+<th>Demonstrator</th>
+<th>Wo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code-Formatierung</td>
+<td>Black</td>
+<td>Black</td>
+<td>Pre-Commit + CI</td>
+</tr>
+<tr>
+<td>Docs-Formatierung</td>
+<td>blacken-docs</td>
+<td>- (keine RST-Docs)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Import-Sortierung</td>
+<td>isort</td>
+<td>Ruff (Regel <code>I</code>)</td>
+<td>Pre-Commit + CI</td>
+</tr>
+<tr>
+<td>Python-Linting</td>
+<td>flake8</td>
+<td>Ruff (Regeln <code>E</code>, <code>W</code>, <code>F</code>, <code>B</code>, <code>SIM</code>)</td>
+<td>Pre-Commit + CI</td>
+</tr>
+<tr>
+<td>JS-Linting</td>
+<td>biome</td>
+<td>oxlint</td>
+<td>Pre-Commit + CI</td>
+</tr>
+<tr>
+<td>CI-Security</td>
+<td>zizmor</td>
+<td>zizmor</td>
+<td>Pre-Commit + CI</td>
+</tr>
+</tbody>
+</table>
+<p>Wie bei Django laufen alle Linting-Tools sowohl lokal als Pre-Commit Hook als auch in der CI. 
+Lokal gibt es sofortiges Feedback, die CI dient als Sicherheitsnetz falls jemand Pre-Commit nicht installiert hat.</p>
+<hr />
+<h2 id="3-zentralisierte-konfiguration-pyprojecttoml">3. Zentralisierte Konfiguration (<code>pyproject.toml</code>)<a class="headerlink" href="#3-zentralisierte-konfiguration-pyprojecttoml" title="Permanent link">&para;</a></h2>
+<p><strong>Konzept aus der Django-Analyse:</strong> Django verteilt seine Tool-Konfiguration über mehrere Dateien (<code>.flake8</code>, <code>tox.ini</code>, <code>pyproject.toml</code>, <code>biome.json</code>, <code>zizmor.yml</code>).
+Das ist bei einem Projekt mit vielen Tools und historisch gewachsener Konfiguration nachvollziehbar.</p>
+<p>Der Demonstrator konfiguriert <strong>alle Tools in einer einzigen Datei</strong>: <code>pyproject.toml</code>.</p>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../pyproject.toml"><code>pyproject.toml</code></a></p>
+<h3 id="projekt-metadaten-abhangigkeiten">Projekt-Metadaten + Abhängigkeiten<a class="headerlink" href="#projekt-metadaten-abhangigkeiten" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">[project]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"todo-api"</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.1.0"</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"FastAPI Todo-API -- CI/CT/CD Demonstrator"</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&gt;=3.10"</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="s2">"fastapi&gt;=0.111.0,&lt;1.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="s2">"uvicorn&gt;=0.30.0,&lt;1.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="s2">"sqlalchemy&gt;=2.0.0,&lt;3.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">]</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># Dev-Dependencies (PEP 735 Dependency Groups)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">[dependency-groups]</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="s2">"pytest&gt;=9.0.3,&lt;10.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="s2">"pytest-cov&gt;=5.0.0,&lt;8.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="s2">"httpx&gt;=0.27.0,&lt;1.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="s2">"pre-commit&gt;=3.7.0,&lt;5.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="s2">"ruff&gt;=0.5.0,&lt;1.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="s2">"black&gt;=26.3.1,&lt;27.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="s2">"pip-audit&gt;=2.7.0,&lt;3.0.0"</span><span class="p">,</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="p">]</span>
+</code></pre></div>
+<p>Entwicklungs-Abhängigkeiten sind als <strong>Dependency Group</strong> (vgl. PEP 735) definiert.
+<a href="https://docs.astral.sh/uv/">uv</a> nutzt diese Gruppen nativ mit <code>uv sync --group dev</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>sync<span class="w"> </span>--group<span class="w"> </span>dev<span class="w">    </span><span class="c1"># App + Entwicklungstools</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>uv<span class="w"> </span>sync<span class="w">                </span><span class="c1"># Nur die App</span>
+</code></pre></div>
+<h3 id="uv-als-paketmanager">uv als Paketmanager<a class="headerlink" href="#uv-als-paketmanager" title="Permanent link">&para;</a></h3>
+<p>Der Demonstrator nutzt <strong>uv</strong> statt pip als Python-Paketmanager.
+uv ist von <a href="https://astral.sh/">Astral</a> (gleiche Firma wie Ruff) und 10-100x schneller als pip.
+Es ersetzt pip, pip-tools, virtualenv und pyenv in einem einzigen Tool.</p>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>pip</th>
+<th>uv</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Installation</td>
+<td><code>pip install ".[dev]"</code></td>
+<td><code>uv sync --group dev</code></td>
+</tr>
+<tr>
+<td>Befehl ausführen</td>
+<td><code>pytest</code></td>
+<td><code>uv run pytest</code></td>
+</tr>
+<tr>
+<td>Lockfile</td>
+<td>- (kein Standard)</td>
+<td><code>uv.lock</code> (deterministisch)</td>
+</tr>
+<tr>
+<td>Geschwindigkeit</td>
+<td>Baseline</td>
+<td>10-100x schneller</td>
+</tr>
+<tr>
+<td>CI-Integration</td>
+<td><code>actions/setup-python</code></td>
+<td><code>astral-sh/setup-uv</code></td>
+</tr>
+<tr>
+<td>Docker</td>
+<td><code>pip install</code></td>
+<td><code>uv pip install</code> (oder <code>COPY --from=ghcr.io/astral-sh/uv</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Best Practices mit uv:</strong></p>
+<ol>
+<li>
+<p><strong>Nie die <code>.venv</code> manuell aktivieren.</strong> Statt <code>source .venv/bin/activate &amp;&amp; pytest</code> immer <code>uv run pytest</code> nutzen. <code>uv run</code> stellt bei jedem Aufruf automatisch sicher, dass die virtuelle Umgebung existiert und mit dem Lockfile synchron ist.</p>
+</li>
+<li>
+<p><strong><code>uv.lock</code> committen.</strong> Das Lockfile enthält die exakt aufgelösten Versionen aller Abhängigkeiten. Es stellt sicher, dass alle Teammitglieder und die CI dieselben Versionen verwenden (vergleichbar mit <code>package-lock.json</code> bei npm).</p>
+</li>
+<li>
+<p><strong><code>--frozen</code> in CI.</strong> In der CI wird <code>uv sync --frozen</code> statt <code>uv sync</code> verwendet. Der <code>--frozen</code>-Flag verbietet uv, das Lockfile neu zu berechnen. Wenn jemand Abhängigkeiten in <code>pyproject.toml</code> ändert aber vergisst <code>uv lock</code> auszuführen, schlägt die CI fehl, anstatt still eine andere Version zu installieren.</p>
+</li>
+<li>
+<p><strong><code>uvx</code> für Einmal-Tools.</strong> <code>uvx black --check .</code> installiert Black temporär in einer isolierten Umgebung und führt es sofort aus. Best-Practice für CI-Linting-Jobs, die das Tool nicht dauerhaft brauchen.</p>
+</li>
+</ol>
+<h3 id="black-konfiguration">Black-Konfiguration<a class="headerlink" href="#black-konfiguration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">[tool.black]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">target-version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"py310"</span><span class="p">]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">88</span>
+</code></pre></div>
+<h3 id="ruff-konfiguration">Ruff-Konfiguration<a class="headerlink" href="#ruff-konfiguration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[tool.ruff]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">target-version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"py310"</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">88</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">[tool.ruff.lint]</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="s2">"E"</span><span class="p">,</span><span class="w">   </span><span class="c1"># pycodestyle errors</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="s2">"W"</span><span class="p">,</span><span class="w">   </span><span class="c1"># pycodestyle warnings</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="s2">"F"</span><span class="p">,</span><span class="w">   </span><span class="c1"># pyflakes</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="s2">"I"</span><span class="p">,</span><span class="w">   </span><span class="c1"># isort (import sorting)</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="s2">"UP"</span><span class="p">,</span><span class="w">  </span><span class="c1"># pyupgrade</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="s2">"B"</span><span class="p">,</span><span class="w">   </span><span class="c1"># flake8-bugbear</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="s2">"SIM"</span><span class="p">,</span><span class="w"> </span><span class="c1"># flake8-simplify</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">]</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="k">[tool.ruff.lint.isort]</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="n">known-first-party</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"app"</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="pytest-konfiguration">Pytest-Konfiguration<a class="headerlink" href="#pytest-konfiguration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">[tool.pytest.ini_options]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"tests"</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="coverage-konfiguration">Coverage-Konfiguration<a class="headerlink" href="#coverage-konfiguration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">[tool.coverage.run]</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"app"</span><span class="p">]</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">[tool.coverage.report]</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">show_missing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">fail_under</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span>
+</code></pre></div>
+<p>Coverage misst nur den <code>app/</code>-Ordner und schlägt fehl, wenn die Abdeckung unter 80% fällt.</p>
+<h3 id="vergleich-konfigurationsdateien">Vergleich: Konfigurationsdateien<a class="headerlink" href="#vergleich-konfigurationsdateien" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Django</th>
+<th>Demonstrator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Projekt-Metadaten</td>
+<td><code>pyproject.toml</code></td>
+<td><code>pyproject.toml</code></td>
+</tr>
+<tr>
+<td>Black</td>
+<td><code>pyproject.toml</code></td>
+<td><code>pyproject.toml</code></td>
+</tr>
+<tr>
+<td>isort</td>
+<td><code>pyproject.toml</code></td>
+<td><code>pyproject.toml</code> (via Ruff)</td>
+</tr>
+<tr>
+<td>Linter (flake8/Ruff)</td>
+<td><code>.flake8</code></td>
+<td><code>pyproject.toml</code></td>
+</tr>
+<tr>
+<td>Test-Runner</td>
+<td><code>tox.ini</code></td>
+<td><code>pyproject.toml</code></td>
+</tr>
+<tr>
+<td>JS-Linter</td>
+<td><code>biome.json</code></td>
+<td><code>package.json</code> (oxlint)</td>
+</tr>
+<tr>
+<td>CI-Security</td>
+<td><code>zizmor.yml</code></td>
+<td>In <code>linters.yml</code> (zizmor-Action)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Weiter zur <strong><a href="../pipeline/">CI/CD-Pipeline</a></strong> - die Pipeline-seitige Umsetzung der hier beschriebenen lokalen Tools.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zurück zum Seitenanfang
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.path", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

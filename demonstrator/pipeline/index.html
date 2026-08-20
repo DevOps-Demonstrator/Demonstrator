@@ -1,0 +1,2116 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://devops-demonstrator.github.io/Demonstrator/demonstrator/pipeline/">
+      
+      
+        <link rel="prev" href="../lokale-tools/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>CI/CD-Pipeline - Studienarbeit - CI/CT/CD-Demonstrator</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cicd-pipeline" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-header__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Studienarbeit - CI/CT/CD-Demonstrator
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CI/CD-Pipeline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-nav__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Studienarbeit - CI/CT/CD-Demonstrator
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Django Analyse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Django Analyse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/%C3%BCbersicht/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/lokale-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokaler Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demonstrator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Demonstrator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%C3%BCbersicht/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lokale-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokale Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD-Pipeline
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD-Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow-Architektur
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gemeinsame-grundkonzepte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gemeinsame Grundkonzepte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-linters-lintersyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Linters (linters.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-tests-testsyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tests (tests.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-e2e-tests-e2eyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. E2E Tests (e2e.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-security-securityyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Security (security.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-pr-checks-pr_checksyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. PR Checks (pr_checks.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deployment-cd-cdyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Deployment: CD (cd.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-smoke-test-smoke-testyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Smoke-Test (smoke-test.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erganzende-devops-manahmen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ergänzende DevOps-Maßnahmen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow-Architektur
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gemeinsame-grundkonzepte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gemeinsame Grundkonzepte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-linters-lintersyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Linters (linters.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-tests-testsyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Tests (tests.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-e2e-tests-e2eyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. E2E Tests (e2e.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-security-securityyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Security (security.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-pr-checks-pr_checksyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. PR Checks (pr_checks.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-deployment-cd-cdyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Deployment: CD (cd.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-smoke-test-smoke-testyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Smoke-Test (smoke-test.yml)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erganzende-devops-manahmen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ergänzende DevOps-Maßnahmen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Übersicht
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%C3%BCbersicht/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Demonstrator
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cicd-pipeline">CI/CD-Pipeline<a class="headerlink" href="#cicd-pipeline" title="Permanent link">&para;</a></h1>
+<p>Der Demonstrator nutzt <strong>sieben GitHub Actions Workflows</strong>, aufgeteilt nach Verantwortlichkeit, analog zu Djangos Trennung in eigenständige Workflow-Dateien.</p>
+<hr />
+<h2 id="workflow-architektur">Workflow-Architektur<a class="headerlink" href="#workflow-architektur" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Datei</th>
+<th>Trigger</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Linters</strong></td>
+<td><code>linters.yml</code></td>
+<td>Push + PR</td>
+<td>Formatting + Linting (Black, Ruff, oxlint, zizmor)</td>
+</tr>
+<tr>
+<td><strong>Tests</strong></td>
+<td><code>tests.yml</code></td>
+<td>Push + PR</td>
+<td>Unit-/Integrationstests + Coverage (SQLite + PostgreSQL)</td>
+</tr>
+<tr>
+<td><strong>PR Checks</strong></td>
+<td><code>pr_checks.yml</code></td>
+<td>Pull Requests</td>
+<td>Issue-Referenz + PR-Beschreibung prüfen</td>
+</tr>
+<tr>
+<td><strong>E2E Tests</strong></td>
+<td><code>e2e.yml</code></td>
+<td>PR mit Label <code>e2e</code></td>
+<td>Playwright Browser-Tests (On-Demand)</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td><code>security.yml</code></td>
+<td>Push + PR + Wöchentlich</td>
+<td>Dependency-Schwachstellenscan</td>
+</tr>
+<tr>
+<td><strong>CD</strong></td>
+<td><code>cd.yml</code></td>
+<td>Push auf <code>main</code></td>
+<td>Images bauen + pushen + SSH Deploy (<code>needs:</code> Verkettung)</td>
+</tr>
+<tr>
+<td><strong>Smoke-Test</strong></td>
+<td><code>smoke-test.yml</code></td>
+<td>Push + PR (Infra-Dateien)</td>
+<td>Multi-Container Smoke-Test (Frontend + API + DB)</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="CI/CD-Pipeline" src="../diagrams/pipeline.svg" /></p>
+<h3 id="vergleich-zu-django">Vergleich zu Django<a class="headerlink" href="#vergleich-zu-django" title="Permanent link">&para;</a></h3>
+<p>Django gruppiert seine 17 Workflows in sechs Kategorien.
+Der Demonstrator bildet die wichtigsten Kategorien mit sieben Workflows ab:</p>
+<table>
+<thead>
+<tr>
+<th>Django-Kategorie</th>
+<th>Django-Workflows</th>
+<th>Demonstrator-Pendant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Immer</strong> (tests, linters, docs, migrations, commit-msgs)</td>
+<td>5</td>
+<td><code>linters.yml</code> + <code>tests.yml</code></td>
+</tr>
+<tr>
+<td><strong>On-Demand</strong> (selenium, coverage, benchmark, ...)</td>
+<td>6</td>
+<td><code>e2e.yml</code> (Playwright, Label-gated) + Coverage in <code>tests.yml</code></td>
+</tr>
+<tr>
+<td><strong>Nightly/Scheduled</strong> (schedules, schedule_tests)</td>
+<td>2</td>
+<td><code>security.yml</code> (wöchentlicher Cron)</td>
+</tr>
+<tr>
+<td><strong>Prozessqualität</strong> (labels, commit-messages, PR-quality)</td>
+<td>3</td>
+<td><code>pr_checks.yml</code> (Issue-Referenz + PR-Beschreibung)</td>
+</tr>
+<tr>
+<td><strong>Supply-Chain-Security</strong> (zizmor in linters.yml)</td>
+<td>(Teil von Linters)</td>
+<td><code>linters.yml</code> (zizmor) + <code>security.yml</code> (pip-audit)</td>
+</tr>
+<tr>
+<td><strong>Deployment</strong> (Read the Docs, Coverage-Kommentar)</td>
+<td>2</td>
+<td><code>cd.yml</code> (Build + Deploy via <code>needs:</code>) + <code>smoke-test.yml</code> (Smoke-Test)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pipeline-in-zahlen">Pipeline in Zahlen<a class="headerlink" href="#pipeline-in-zahlen" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Metrik</th>
+<th>Django</th>
+<th>Demonstrator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workflow-Dateien</td>
+<td>17</td>
+<td>7</td>
+</tr>
+<tr>
+<td>CI-Jobs pro PR</td>
+<td>5+ (immer) + 6 (on-demand)</td>
+<td>10 (4 Linters + 3 Tests + 1 Security + 2 PR Checks) + E2E (on-demand) + Smoke-Test (bei Infra-Änderungen)</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>On-Demand per Label</td>
+<td>Immer aktiv (mit Schwellenwert)</td>
+</tr>
+<tr>
+<td>Security-Scan</td>
+<td>zizmor (CI-Workflows)</td>
+<td>zizmor (Workflows) + pip-audit (Deps) + wöchentlicher Cron</td>
+</tr>
+<tr>
+<td>CD</td>
+<td>Docs-Deployment</td>
+<td>Docker Build → GHCR Push → SSH Deploy → Docker Swarm (alles in <code>cd.yml</code> via <code>needs:</code>)</td>
+</tr>
+<tr>
+<td>Deployment-Strategie</td>
+<td>-</td>
+<td>Rolling Update, Zero Downtime, 2 Replicas</td>
+</tr>
+<tr>
+<td>Qualitäts-Gate</td>
+<td>Branch Protection Rules</td>
+<td>GitHub Rulesets (Code Review + CI müssen bestehen bevor Code auf <code>main</code> gelangt)</td>
+</tr>
+<tr>
+<td>Geplante Ausführung</td>
+<td>Nächtlich</td>
+<td>Wöchentlich (Security)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="gemeinsame-grundkonzepte">Gemeinsame Grundkonzepte<a class="headerlink" href="#gemeinsame-grundkonzepte" title="Permanent link">&para;</a></h2>
+<p>Alle Workflows verwenden dieselben Grundkonzepte aus der Django-Analyse:</p>
+<h3 id="uv-statt-pip">uv statt pip<a class="headerlink" href="#uv-statt-pip" title="Permanent link">&para;</a></h3>
+<p>Alle Python-bezogenen Workflows nutzen <strong>uv</strong> statt pip für die Installation von Abhängigkeiten.
+uv ist von <a href="https://astral.sh/">Astral</a> - derselben Firma, die auch Ruff entwickelt - und 10-100x schneller als pip.</p>
+<p>So wie <strong>Ruff</strong> die Linting-Tools (flake8 + isort) modernisiert, modernisiert <strong>uv</strong> das Paketmanagement (pip + virtualenv + pip-tools).
+Der Demonstrator nutzt damit durchgängig den Astral-Stack.</p>
+<p>In den Workflows bedeutet das:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Vorher (pip):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install ".[dev]"</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Nachher (uv):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">astral-sh/setup-uv@v9</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv sync --frozen --group dev</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv run pytest</span>
+</code></pre></div>
+<p>Drei zentrale Unterschiede zur pip-basierten CI:</p>
+<ol>
+<li>
+<p><strong><code>uv run</code> statt direkter Aufruf.</strong> Jeder Python-Befehl wird über <code>uv run</code> ausgeführt. Das stellt sicher, dass die virtuelle Umgebung existiert und synchron ist (ohne manuelle Aktivierung).</p>
+</li>
+<li>
+<p><strong><code>--frozen</code> in CI.</strong> Verbietet uv, das Lockfile (<code>uv.lock</code>) neu zu berechnen. Wenn <code>pyproject.toml</code> und <code>uv.lock</code> nicht übereinstimmen, schlägt der Build sofort fehl statt still andere Versionen zu installieren.</p>
+</li>
+<li>
+<p><strong><code>uvx</code> für Einmal-Tools.</strong> Installiert und führt ein Tool temporär aus, ohne es dauerhaft zu installieren. 
+Geeignet für Linting-Jobs:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uvx black --check --diff .</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uvx ruff check --output-format=github .</span>
+</code></pre></div>
+<h3 id="least-privilege">Least Privilege<a class="headerlink" href="#least-privilege" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">permissions</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+</code></pre></div>
+<p>Jeder Workflow bekommt nur die Rechte, die er braucht.
+Ausnahme: Die Build-Jobs in <code>cd.yml</code> brauchen zusätzlich <code>packages: write</code> für die Container Registry. Fiese Berechtigung wird auf <strong>Job-Level</strong> gesetzt, nicht auf Workflow-Level.</p>
+<h3 id="concurrency-control">Concurrency Control<a class="headerlink" href="#concurrency-control" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">concurrency</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.workflow }}-${{ github.ref }}</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">cancel-in-progress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>Alte CI-Runs werden bei neuen Pushes abgebrochen.
+Ausnahme: <code>cd.yml</code> setzt <code>cancel-in-progress: false</code>, damit kein halbfertiges Image entsteht.</p>
+<h3 id="timeout">Timeout<a class="headerlink" href="#timeout" title="Permanent link">&para;</a></h3>
+<p>Jeder Job hat ein Zeitlimit. Schützt vor endlos laufenden Prozessen.</p>
+<h3 id="umgebungsspezifische-konfiguration">Umgebungsspezifische Konfiguration<a class="headerlink" href="#umgebungsspezifische-konfiguration" title="Permanent link">&para;</a></h3>
+<p>Der Demonstrator konfiguriert sich über Umgebungsvariablen.
+Derselbe Code läuft in jeder Umgebung, nur die Konfiguration unterscheidet sich. 
+Eine vollständige Übersicht aller Variablen findet sich in der 
+<a href="../%C3%BCbersicht/#umgebungsvariablen">Demonstrator-Übersicht</a>.</p>
+<hr />
+<h2 id="1-linters-lintersyml">1. Linters (<code>linters.yml</code>)<a class="headerlink" href="#1-linters-lintersyml" title="Permanent link">&para;</a></h2>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/workflows/linters.yml"><code>linters.yml</code></a></p>
+<p><strong>Trigger:</strong> Push auf <code>main</code>, Pull Requests</p>
+<p>Vier parallele Jobs prüfen Formatting, Linting, Frontend und Workflow-Security unabhängig voneinander:</p>
+<h3 id="job-black-formatting">Job: Black (Formatting)<a class="headerlink" href="#job-black-formatting" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">black</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Black (Formatting)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">astral-sh/setup-uv@v9</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check formatting</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uvx black --check --diff .</span>
+</code></pre></div>
+<p><code>uvx</code> installiert Black temporär und führt es sofort aus, kein <code>pip install</code> nötig.
+<code>--diff</code> zeigt die konkreten Änderungen an, die Black vornehmen würde.</p>
+<h3 id="job-ruff-linting">Job: Ruff (Linting)<a class="headerlink" href="#job-ruff-linting" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">ruff</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ruff (Linting)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">astral-sh/setup-uv@v9</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check linting + imports</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uvx ruff check --output-format=github .</span>
+</code></pre></div>
+<p><code>--output-format=github</code> erzeugt Annotationen direkt im Pull Request.
+Fehler erscheinen als Inline-Kommentare an der betroffenen Zeile.
+Django nutzt dafür <code>gh-problem-matcher-wrap</code> mit flake8, Ruff hat dieses Feature nativ eingebaut.</p>
+<h3 id="job-frontend-oxlint-build">Job: Frontend (oxlint + Build)<a class="headerlink" href="#job-frontend-oxlint-build" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">frontend</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Frontend (Lint + Build)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nt">defaults</span><span class="p">:</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nt">run</span><span class="p">:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v7</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="s">"22"</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">        </span><span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="s">"npm"</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">        </span><span class="nt">cache-dependency-path</span><span class="p">:</span><span class="w"> </span><span class="s">"frontend/package-lock.json"</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lint</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run lint</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run build</span>
+</code></pre></div>
+<p>oxlint prüft JavaScript/JSX-Code auf Fehler und Stilprobleme. Der Build-Schritt (<code>npm run build</code>) stellt zusätzlich sicher, dass der Produktions-Build fehlerfrei durchläuft.</p>
+<h3 id="job-zizmor-workflow-security">Job: zizmor (Workflow-Security)<a class="headerlink" href="#job-zizmor-workflow-security" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">zizmor</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zizmor (Workflow Security)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zizmorcore/zizmor-action@v0.6.2</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="nt">annotations</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>zizmor scannt alle GitHub Actions Workflows auf Sicherheitsprobleme: ungepinnte Actions, gefährliche Trigger, übermäßige Permissions. Django nutzt dasselbe Tool.</p>
+<hr />
+<h2 id="2-tests-testsyml">2. Tests (<code>tests.yml</code>)<a class="headerlink" href="#2-tests-testsyml" title="Permanent link">&para;</a></h2>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/workflows/tests.yml"><code>tests.yml</code></a></p>
+<p><strong>Trigger:</strong> Push auf <code>main</code>, Pull Requests</p>
+<p>Der Workflow besteht aus <strong>drei parallelen Jobs</strong> - analog zu Djangos <code>tests.yml</code>, das ebenfalls Backend-Tests und JavaScript-Tests parallel ausführt.</p>
+<h3 id="job-1-tests-mit-sqlite-schnelles-feedback">Job 1: Tests mit SQLite (schnelles Feedback)<a class="headerlink" href="#job-1-tests-mit-sqlite-schnelles-feedback" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">test-sqlite</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tests (SQLite)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">astral-sh/setup-uv@v9</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv sync --frozen --group dev</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests with coverage</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv run pytest -v --cov --cov-report=term-missing --cov-report=xml</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Coverage summary</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">      </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">        </span><span class="no">echo "## Coverage Report (SQLite)" &gt;&gt; $GITHUB_STEP_SUMMARY</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">        </span><span class="no">echo '```' &gt;&gt; $GITHUB_STEP_SUMMARY</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">        </span><span class="no">uv run coverage report &gt;&gt; $GITHUB_STEP_SUMMARY</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">        </span><span class="no">echo '```' &gt;&gt; $GITHUB_STEP_SUMMARY</span>
+</code></pre></div>
+<h3 id="job-2-tests-mit-postgresql-service-container">Job 2: Tests mit PostgreSQL (Service-Container)<a class="headerlink" href="#job-2-tests-mit-postgresql-service-container" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">test-postgres</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tests (PostgreSQL)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nt">postgres</span><span class="p">:</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16-alpine</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">        </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo_test</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">        </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432:5432</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">      </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="no">--health-cmd pg_isready</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="no">--health-interval 5s</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">        </span><span class="no">--health-timeout 3s</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">        </span><span class="no">--health-retries 5</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">astral-sh/setup-uv@v9</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv sync --frozen --group dev --extra postgres</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests against PostgreSQL</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">        </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="s">"postgresql+psycopg://todo:todo@localhost:5432/todo_test"</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv run pytest -v</span>
+</code></pre></div>
+<p>Django nutzt <code>services:</code> mit Health-Checks in <code>check-migrations.yml</code>, <code>coverage_tests.yml</code> und <code>schedule_tests.yml</code>.
+Der Demonstrator übernimmt dieses Muster: GitHub Actions startet einen PostgreSQL-Container als Sidecar, der Health-Check (<code>pg_isready</code>) stellt sicher, dass die Datenbank bereit ist, bevor die Tests starten.</p>
+<p>Die Datenbank-URL wird per Umgebungsvariable <code>DATABASE_URL</code> übergeben.
+Lokal und im SQLite-Job ist sie nicht gesetzt, sodass der Default (<code>sqlite:///./todo.db</code>) greift.</p>
+<h3 id="coverage-integration">Coverage-Integration<a class="headerlink" href="#coverage-integration" title="Permanent link">&para;</a></h3>
+<p>Django trennt Test-Coverage in zwei On-Demand-Workflows (<code>coverage_tests.yml</code> + <code>coverage_comment.yml</code>), die nur per Label aktiviert werden.
+Denn bei Django dauern die Tests mit Coverage Minuten, zu teuer für jeden PR.</p>
+<p>Im Demonstrator dauern alle Tests ungefähr eine Sekunde.
+Deshalb läuft Coverage <strong>immer mit</strong> (<code>--cov</code>) und die Ergebnisse werden als <strong>Job Summary</strong> direkt in der GitHub Actions UI angezeigt.</p>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Django</th>
+<th>Demonstrator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trigger</td>
+<td>On-Demand (Label <code>coverage</code>)</td>
+<td>Immer (bei jedem Push/PR)</td>
+</tr>
+<tr>
+<td>Ergebnis-Anzeige</td>
+<td>PR-Kommentar (separater Workflow mit Schreibrechten)</td>
+<td>Job Summary (keine Extra-Permissions nötig)</td>
+</tr>
+<tr>
+<td>Workflows</td>
+<td>2 (Tests + Kommentar)</td>
+<td>1 (integriert)</td>
+</tr>
+<tr>
+<td>Schwellenwert</td>
+<td>Keiner</td>
+<td><code>fail_under = 80</code> in <code>pyproject.toml</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Schwellenwert</strong>: Die Coverage-Konfiguration in <code>pyproject.toml</code> definiert ein Minimum von 80%:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">[tool.coverage.run]</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"app"</span><span class="p">]</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">[tool.coverage.report]</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">show_missing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">fail_under</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span>
+</code></pre></div>
+<p>Fällt die Coverage unter 80%, schlägt der Workflow fehl. Neue Änderungen <strong>müssen</strong> getestet sein.</p>
+<h3 id="docker-compose">Docker Compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h3>
+<p>Lokal lassen sich App und Datenbank mit Docker Compose starten:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># docker-compose.yml</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">db</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16-alpine</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"CMD-SHELL"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"pg_isready</span><span class="nv"> </span><span class="s">-U</span><span class="nv"> </span><span class="s">todo"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">  </span><span class="nt">api</span><span class="p">:</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8000:8000"</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="s">"postgresql+psycopg://todo:todo@db:5432/todo"</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">      </span><span class="nt">db</span><span class="p">:</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">  </span><span class="nt">frontend</span><span class="p">:</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./frontend</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"80:80"</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api</span>
+</code></pre></div>
+<p><code>depends_on</code> mit <code>condition: service_healthy</code> stellt sicher, dass die API erst startet, wenn PostgreSQL bereit ist - dasselbe Prinzip wie die Health-Checks in den CI-Service-Containern.</p>
+<h3 id="job-3-frontend-tests-wie-djangos-javascript-tests">Job 3: Frontend-Tests (wie Djangos <code>javascript-tests</code>)<a class="headerlink" href="#job-3-frontend-tests-wie-djangos-javascript-tests" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">test-frontend</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Frontend Tests (Vitest)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">defaults</span><span class="p">:</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nt">run</span><span class="p">:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v7</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">        </span><span class="nt">node-version</span><span class="p">:</span><span class="w"> </span><span class="s">"22"</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">        </span><span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="s">"npm"</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">        </span><span class="nt">cache-dependency-path</span><span class="p">:</span><span class="w"> </span><span class="s">"frontend/package-lock.json"</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm test</span>
+</code></pre></div>
+<p>Django führt JavaScript-Tests als eigenen parallelen Job <code>javascript-tests</code> in <code>tests.yml</code> aus - mit QUnit als Test-Framework und Grunt + Puppeteer als Runner. Der Demonstrator nutzt das moderne Äquivalent:</p>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Django</th>
+<th>Demonstrator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test-Framework</td>
+<td>QUnit</td>
+<td>Vitest</td>
+</tr>
+<tr>
+<td>Test-Runner</td>
+<td>Grunt + Puppeteer (Headless Chrome)</td>
+<td>Vitest + jsdom</td>
+</tr>
+<tr>
+<td>DOM-Umgebung</td>
+<td>Echter Browser (Puppeteer)</td>
+<td>Simuliert (jsdom)</td>
+</tr>
+<tr>
+<td>Bibliothek</td>
+<td>Manuell (jQuery + QUnit Assertions)</td>
+<td>React Testing Library</td>
+</tr>
+<tr>
+<td>Testdateien</td>
+<td><code>js_tests/*.test.js</code> (12 Dateien)</td>
+<td><code>src/**/*.test.{js,jsx}</code> (4 Dateien, 22 Tests)</td>
+</tr>
+</tbody>
+</table>
+<p>Die Tests prüfen:</p>
+<ul>
+<li><strong>API-Client</strong> (<code>api.test.js</code>): fetch-Aufrufe, Fehlerbehandlung, Filter-Parameter</li>
+<li><strong>TodoForm</strong> (<code>TodoForm.test.jsx</code>): Formular-Rendering, Submit, Validierung, Feld-Reset</li>
+<li><strong>TodoItem</strong> (<code>TodoItem.test.jsx</code>): Checkbox-State, Toggle/Delete-Callbacks, Priority-Labels, CSS-Klassen</li>
+<li><strong>TodoList</strong> (<code>TodoList.test.jsx</code>): Leerer Zustand, Rendering aller Todos</li>
+</ul>
+<h3 id="vergleich-zu-django_1">Vergleich zu Django<a class="headerlink" href="#vergleich-zu-django_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Django (<code>tests.yml</code> + weitere)</th>
+<th>Demonstrator (<code>tests.yml</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jobs</td>
+<td>3 parallel (Windows, JS, Scripts)</td>
+<td>3 parallel (SQLite, PostgreSQL, Frontend)</td>
+</tr>
+<tr>
+<td>Backend-Datenbanken</td>
+<td>SQLite + PostgreSQL (Service-Container)</td>
+<td>SQLite + PostgreSQL (Service-Container)</td>
+</tr>
+<tr>
+<td>Frontend-Tests</td>
+<td>QUnit + Puppeteer (eigener Job)</td>
+<td>Vitest + Testing Library (eigener Job)</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>Separater On-Demand-Workflow</td>
+<td>Integriert, immer aktiv</td>
+</tr>
+<tr>
+<td>Docker Compose</td>
+<td>- (Framework, nicht deploybar)</td>
+<td><code>docker-compose.yml</code> (App + DB + Frontend)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-e2e-tests-e2eyml">3. E2E Tests (<code>e2e.yml</code>)<a class="headerlink" href="#3-e2e-tests-e2eyml" title="Permanent link">&para;</a></h2>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/workflows/e2e.yml"><code>e2e.yml</code></a></p>
+<p><strong>Trigger:</strong> Pull Requests mit Label <code>e2e</code> (On-Demand)</p>
+<p>Django nutzt <strong>Selenium mit Chrome Headless</strong> für Browser-Tests der Admin-UI. Diese Tests laufen nicht bei jedem PR, sondern nur <strong>on-demand per Label</strong> (<code>selenium</code>).
+Sie sind teurer als Unit-Tests, weil sie einen echten Browser starten.</p>
+<p>Der Demonstrator übernimmt genau dieses Pattern mit <strong>Playwright</strong> als modernem Äquivalent:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">e2e</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="c1"># Label-gated: Läuft nur wenn "e2e" Label gesetzt ist</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">contains(github.event.pull_request.labels.*.name, 'e2e')</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Playwright (Chromium)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="c1"># Backend + Frontend starten</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv run uvicorn app.main:app --port 8000 &amp;</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npx playwright install chromium --with-deps</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span><span class="c1"># E2E-Tests im echten Browser</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">npm run test:e2e</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">    </span><span class="c1"># Screenshots bei Fehler als Artefakt hochladen</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v7</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">      </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">failure()</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">playwright-report-${{ github.event.pull_request.head.sha }}</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">frontend/test-results/</span>
+</code></pre></div>
+<h3 id="was-wird-getestet">Was wird getestet?<a class="headerlink" href="#was-wird-getestet" title="Permanent link">&para;</a></h3>
+<p>Die E2E-Tests verifizieren den <strong>gesamten Stack durch einen echten Browser</strong>, also Frontend, API und Datenbank zusammen:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Verifiziert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App-Titel sichtbar</td>
+<td>Frontend rendert korrekt</td>
+</tr>
+<tr>
+<td>Leerer Zustand</td>
+<td>Empty State wird angezeigt</td>
+</tr>
+<tr>
+<td>Todo erstellen</td>
+<td>Formular → API → DB → Anzeige</td>
+</tr>
+<tr>
+<td>Todo abhaken/wieder öffnen</td>
+<td>Checkbox → PUT → Reload → CSS-Klasse</td>
+</tr>
+<tr>
+<td>Todo löschen</td>
+<td>Delete-Button → DELETE → Reload → Empty State</td>
+</tr>
+<tr>
+<td>Mehrere Todos</td>
+<td>Liste rendert mehrere Items</td>
+</tr>
+<tr>
+<td>Input-Reset</td>
+<td>Formular wird nach Submit geleert</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vergleich-zu-django_2">Vergleich zu Django<a class="headerlink" href="#vergleich-zu-django_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Django (<code>selenium.yml</code>)</th>
+<th>Demonstrator (<code>e2e.yml</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool</td>
+<td>Selenium + Chrome Headless</td>
+<td>Playwright + Chromium Headless</td>
+</tr>
+<tr>
+<td>Trigger</td>
+<td>On-Demand (Label <code>selenium</code>)</td>
+<td>On-Demand (Label <code>e2e</code>)</td>
+</tr>
+<tr>
+<td>Screenshots</td>
+<td>Eigener Workflow (<code>screenshots.yml</code>) + oxipng + Artifact Upload</td>
+<td>Integriert: automatisch bei Fehler + Artifact Upload</td>
+</tr>
+<tr>
+<td>Datenbanken</td>
+<td>SQLite + PostgreSQL (2 Jobs)</td>
+<td>SQLite (1 Job)</td>
+</tr>
+<tr>
+<td>Testdaten-Cleanup</td>
+<td>Django-TestCase (Transaktion-Rollback)</td>
+<td>API-Aufrufe in <code>beforeEach</code></td>
+</tr>
+<tr>
+<td>Tests auch in Nightly?</td>
+<td>Ja (<code>schedule_tests.yml</code>)</td>
+<td>Nein (Tests laufen in Sekunden)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="on-demand-konzept">On-Demand-Konzept<a class="headerlink" href="#on-demand-konzept" title="Permanent link">&para;</a></h3>
+<p>Django setzt Selenium-Tests bewusst <strong>nicht</strong> bei jedem PR ein.</p>
+<p>Der Demonstrator übernimmt dieses Konzept. 
+Während die Unit-Tests (Vitest) bei jedem PR laufen, werden E2E-Tests nur bei Bedarf ausgelöst: 
+<strong>ein Maintainer setzt das Label <code>e2e</code> auf den PR</strong>, und der Workflow startet automatisch.</p>
+<hr />
+<h2 id="4-security-securityyml">4. Security (<code>security.yml</code>)<a class="headerlink" href="#4-security-securityyml" title="Permanent link">&para;</a></h2>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/workflows/security.yml"><code>security.yml</code></a></p>
+<p><strong>Trigger:</strong> Push auf <code>main</code>, Pull Requests, <strong>wöchentlicher Cron</strong> (Montags 08:00 UTC), manuell auslösbar</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">"0</span><span class="nv"> </span><span class="s">8</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">1"</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+</code></pre></div>
+<p>Dieser Workflow demonstriert zwei Django-Konzepte gleichzeitig:</p>
+<h3 id="supply-chain-security">Supply-Chain-Security<a class="headerlink" href="#supply-chain-security" title="Permanent link">&para;</a></h3>
+<p>Django sichert seine CI-Pipeline mit <a href="https://docs.zizmor.sh/">zizmor</a> ab - einem Scanner für GitHub Actions Workflows.
+Der Demonstrator wendet dasselbe Prinzip auf die Angriffsfläche <strong>Abhängigkeiten</strong> an.</p>
+<p><a href="https://github.com/pypa/pip-audit">pip-audit</a> prüft alle installierten Python-Pakete gegen bekannte Schwachstellen (CVE-Datenbanken wie PyPI Advisory Database und OSV).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">dependency-audit</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip-audit (Dependency Scan)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">astral-sh/setup-uv@v9</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv sync --frozen --group dev</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Audit dependencies</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uv run pip-audit</span>
+</code></pre></div>
+<h3 id="scheduled-execution">Scheduled Execution<a class="headerlink" href="#scheduled-execution" title="Permanent link">&para;</a></h3>
+<p>Der <code>schedule</code>-Trigger ist von Djangos <code>schedules.yml</code> inspiriert.
+Django nutzt nächtliche Cron-Jobs, um die vollständige Testmatrix gegen neue Python-Versionen zu prüfen.</p>
+<p>Der Demonstrator nutzt einen wöchentlichen Cron-Job für den Dependency-Scan.
+Neue Schwachstellen können jederzeit in bestehenden Paketen entdeckt werden, der wöchentliche Scan findet sie auch ohne Code-Änderungen.</p>
+<p><strong><code>workflow_dispatch</code></strong> erlaubt zusätzlich das manuelle Auslösen - analog zu Djangos <code>schedule_tests.yml</code>.</p>
+<hr />
+<h2 id="5-pr-checks-pr_checksyml">5. PR Checks (<code>pr_checks.yml</code>)<a class="headerlink" href="#5-pr-checks-pr_checksyml" title="Permanent link">&para;</a></h2>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/workflows/pr_checks.yml"><code>pr_checks.yml</code></a></p>
+<p><strong>Trigger:</strong> Pull Requests (opened, edited, synchronize, reopened)</p>
+<p>Django nutzt drei separate Workflows, um die Prozessqualität von Pull Requests sicherzustellen: <code>labels.yml</code>, <code>check_pr_quality.yml</code> und <code>check_commit_messages.yml</code>.
+Ergänzend dazu definiert Djangos <a href="https://github.com/django/django/blob/main/.github/pull_request_template.md"><code>pull_request_template.md</code></a> ein PR-Template, das Entwicklern die erwarteten Felder vorgibt: Ticketnummer, Beschreibung, Checkliste.</p>
+<p>Der Demonstrator übernimmt dieses Zusammenspiel: 
+Das <strong>PR-Template</strong> leitet den Entwickler an, der <strong>Workflow</strong> prüft automatisch, ob die Vorgaben eingehalten wurden.</p>
+<h3 id="pr-template-pull_request_templatemd">PR-Template (<code>pull_request_template.md</code>)<a class="headerlink" href="#pr-template-pull_request_templatemd" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/pull_request_template.md"><code>pull_request_template.md</code></a></p>
+<p>Wird automatisch als Vorlage geladen, wenn ein neuer PR auf GitHub erstellt wird:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="gu">#### Issue</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>&lt;!-- Referenziere das zugehörige GitHub Issue (z.B. <span class="ni">#42</span>). --&gt;
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>&lt;!-- Falls kein Issue existiert: Erstelle zuerst eines oder schreibe "N/A" mit kurzer Begründung. --&gt;
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>Closes <span class="ni">#XXXX</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="gu">#### Beschreibung</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>&lt;!-- Was ändert dieser PR und warum? (mind. 5 Wörter, wird vom PR-Check geprüft) --&gt;
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="gu">#### Checkliste</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="k">- [ ]</span> Dieser PR referenziert ein GitHub Issue.
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="k">- [ ]</span> Dieser PR zielt auf den <span class="sb">`main`</span>-Branch.
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="k">- [ ]</span> Ich habe relevante Tests hinzugefügt oder aktualisiert.
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="k">- [ ]</span> Die CI-Pipeline (Linting, Tests) läuft erfolgreich.
+</code></pre></div>
+<p>Das Template enthält <code>Closes #XXXX</code> anstatt nur <code>#XXXX</code> - das Schlüsselwort <code>Closes</code> bewirkt, 
+dass GitHub das referenzierte Issue <strong>automatisch schließt</strong>, wenn der PR gemerged wird.</p>
+<h3 id="workflow-zwei-parallele-jobs">Workflow: Zwei parallele Jobs<a class="headerlink" href="#workflow-zwei-parallele-jobs" title="Permanent link">&para;</a></h3>
+<h3 id="job-1-issue-referenz-aus-djangos-labelsyml">Job 1: Issue-Referenz (aus Djangos <code>labels.yml</code>)<a class="headerlink" href="#job-1-issue-referenz-aus-djangos-labelsyml" title="Permanent link">&para;</a></h3>
+<p>Django prüft, ob der PR-Titel eine Trac-Ticketnummer enthält, und setzt automatisch ein Label <code>"no ticket"</code>, wenn nicht.
+Der Demonstrator übernimmt dieses Konzept für <strong>GitHub Issues</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">ticket-reference</span><span class="p">:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Issue Reference</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check for issue reference and manage labels</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/github-script@v9</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">        </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">          </span><span class="no">const title = context.payload.pull_request.title;</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">          </span><span class="no">const body = context.payload.pull_request.body || '';</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">          </span><span class="no">const regex = /#[0-9]+/;</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">          </span><span class="no">const hasRef = regex.test(title) || regex.test(body);</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">          </span><span class="no">// Label "no ticket" hinzufügen oder entfernen</span>
+</code></pre></div>
+<p>Der Check sucht nach <code>#123</code>-Referenzen sowohl im <strong>Titel</strong> als auch im <strong>Body</strong> des PRs.
+Fehlt die Referenz, wird das Label <code>"no ticket"</code> gesetzt - der PR wird dadurch nicht blockiert, aber das fehlende Ticket ist sichtbar.</p>
+<h3 id="job-2-pr-beschreibung-aus-djangos-check_pr_qualityyml">Job 2: PR-Beschreibung (aus Djangos <code>check_pr_quality.yml</code>)<a class="headerlink" href="#job-2-pr-beschreibung-aus-djangos-check_pr_qualityyml" title="Permanent link">&para;</a></h3>
+<p>Django prüft unter anderem, ob eine aussagekräftige Beschreibung vorhanden ist (mindestens 5 Wörter).
+Der Demonstrator übernimmt genau diesen Check:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">pr-description</span><span class="p">:</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PR Description</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check PR description</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/github-script@v9</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">        </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">          </span><span class="no">const body = context.payload.pull_request.body || '';</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">          </span><span class="no">const wordCount = body.trim().split(/\s+/).filter(w =&gt; w.length &gt; 0).length;</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">          </span><span class="no">if (wordCount &lt; 5) {</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">            </span><span class="no">core.setFailed(`PR description is too short (${wordCount} words).`);</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">          </span><span class="no">}</span>
+</code></pre></div>
+<p>Dieser Check <strong>blockiert</strong> den PR, wenn die Beschreibung fehlt oder zu kurz ist.
+Das erzwingt, dass Teammitglieder dokumentieren, <strong>was</strong> und <strong>warum</strong> sie ändern.</p>
+<hr />
+<h2 id="6-deployment-cd-cdyml">6. Deployment: CD (<code>cd.yml</code>)<a class="headerlink" href="#6-deployment-cd-cdyml" title="Permanent link">&para;</a></h2>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/workflows/cd.yml"><code>cd.yml</code></a></p>
+<p><strong>Trigger:</strong> Push auf <code>main</code></p>
+<p>Das <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets">GitHub Ruleset</a> (<a href="../../.github/rulesets/branch-protection.json"><code>.github/rulesets/branch-protection.json</code></a>) schützt den main-Branch davor, dass fehlerhafter oder ungeprüfter Code gemerged wird, indem es einen Merge erst zulässt, wenn alle 8 definierten Required Status Checks (Linting, Tests, Security) und ein Code Review bestanden sind.
+Der Deployment-Workflow braucht daher keinen expliziten Verweis auf die CI-Workflows,
+weil GitHub selbst den Merge blockiert, solange diese Checks nicht bestanden sind.</p>
+<p>Der Workflow enthält drei Jobs mit <code>needs:</code>-Verkettung:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>build-api ──┐
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>            ├──→ deploy (needs: [build-api, build-frontend])
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>build-frontend ┘
+</code></pre></div>
+<p><code>needs:</code> ist GitHubs Mechanismus für Job-Abhängigkeiten innerhalb eines Workflows. 
+Der Deploy-Job startet so erst, wenn <strong>beide</strong> Build-Jobs erfolgreich abgeschlossen sind. 
+Schlägt ein Build fehl, wird nicht deployed.</p>
+<h3 id="docker-builds-2-parallele-jobs">Docker-Builds (2 parallele Jobs)<a class="headerlink" href="#docker-builds-2-parallele-jobs" title="Permanent link">&para;</a></h3>
+<p>Der Workflow baut <strong>zwei Images parallel</strong> - API und Frontend:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">build-api</span><span class="p">:</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build &amp; Push API Image</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">permissions</span><span class="p">:</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="nt">packages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set image name (lowercase)</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" &gt;&gt; $GITHUB_ENV</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/login-action@v4</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@v7</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="w">        </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="w">        </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="w">          </span><span class="no">ghcr.io/${{ env.IMAGE_NAME }}:latest</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="w">          </span><span class="no">ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Image</th>
+<th>Dockerfile</th>
+<th>Inhalt</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ghcr.io/&lt;repo&gt;:latest</code></td>
+<td><code>./Dockerfile</code></td>
+<td>FastAPI + Python-Pakete (uv)</td>
+</tr>
+<tr>
+<td><code>ghcr.io/&lt;repo&gt;-frontend:latest</code></td>
+<td><code>./frontend/Dockerfile</code></td>
+<td>React-Build + nginx</td>
+</tr>
+</tbody>
+</table>
+<p>Jedes Image bekommt zwei Tags:</p>
+<ul>
+<li><strong><code>latest</code></strong> - Immer die aktuellste Version auf <code>main</code>.</li>
+<li><strong><code>&lt;commit-sha&gt;</code></strong> - Eindeutige, unveränderliche Referenz auf genau diesen Build.</li>
+</ul>
+<h3 id="dockerfile-mit-health-check">Dockerfile mit Health Check<a class="headerlink" href="#dockerfile-mit-health-check" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c"># Stage 1: Builder - hat uv, installiert Abhängigkeiten</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.14-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>ghcr.io/astral-sh/uv:latest<span class="w"> </span>/uv<span class="w"> </span>/usr/local/bin/uv
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/build</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="k">COPY</span><span class="w"> </span>pyproject.toml<span class="w"> </span>uv.lock*<span class="w"> </span>./
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="k">RUN</span><span class="w"> </span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--system<span class="w"> </span>--prefix<span class="o">=</span>/install<span class="w"> </span><span class="s2">".[postgres]"</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="c"># Stage 2: Runtime - hat kein uv, nur die fertigen Pakete</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.14-slim</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/install<span class="w"> </span>/usr/local
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="k">COPY</span><span class="w"> </span>app/<span class="w"> </span>app/
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="k">HEALTHCHECK</span><span class="w"> </span>--interval<span class="o">=</span>30s<span class="w"> </span>--timeout<span class="o">=</span>5s<span class="w"> </span>--retries<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="w">    </span><span class="k">CMD</span><span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">"uvicorn"</span><span class="p">,</span><span class="w"> </span><span class="s2">"app.main:app"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--host"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0.0.0.0"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--port"</span><span class="p">,</span><span class="w"> </span><span class="s2">"8000"</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>Kein <code>uv run</code> im Container?</strong></p>
+<p>Lokal und in der CI wird jeder Python-Befehl über <code>uv run</code> ausgeführt, weil uv dort eine virtuelle Umgebung (<code>.venv</code>) verwaltet.
+Im Docker-Container ist das anders:</p>
+<ul>
+<li>Die <strong>Builder-Stage</strong> nutzt uv einmalig, um die Pakete zu installieren (<code>uv pip install --system --prefix=/install</code>). Das <code>--system</code>-Flag installiert direkt ins System-Python, nicht in eine <code>.venv</code>.</li>
+<li>Die <strong>Runtime-Stage</strong> kopiert nur die fertigen Pakete nach <code>/usr/local</code>. uv selbst wird <strong>nicht</strong> in das Runtime-Image kopiert.</li>
+</ul>
+<p>Das Runtime-Image enthält bewusst <strong>weder uv noch pip noch Build-Tools</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Was</th>
+<th>Builder-Stage</th>
+<th>Runtime-Stage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uv</td>
+<td>Ja (zum Installieren)</td>
+<td>Nein</td>
+</tr>
+<tr>
+<td>pip</td>
+<td>Ja (im Base-Image)</td>
+<td>Nein (nicht kopiert)</td>
+</tr>
+<tr>
+<td>setuptools / wheel</td>
+<td>Ja</td>
+<td>Nein</td>
+</tr>
+<tr>
+<td>Installierte Pakete</td>
+<td>In <code>/install</code></td>
+<td>In <code>/usr/local</code> (kopiert)</td>
+</tr>
+<tr>
+<td>App-Code</td>
+<td>Nein</td>
+<td>Ja</td>
+</tr>
+</tbody>
+</table>
+<p>Weniger Tools im Runtime-Image bedeutet: kleineres Image, weniger Angriffsfläche, keine Möglichkeit zur Laufzeit Pakete nachzuinstallieren.</p>
+<p>Das <code>HEALTHCHECK</code>-Directive prüft regelmäßig den <code>/health</code>-Endpoint der API.
+Container-Orchestrierungstools (z.B. Docker Compose oder Kubernetes) nutzen diesen Check, um ungesunde Container automatisch neu zu starten.</p>
+<h3 id="deploy-job-via-needs">Deploy-Job (via <code>needs:</code>)<a class="headerlink" href="#deploy-job-via-needs" title="Permanent link">&para;</a></h3>
+<p>Der Deploy-Job ist im selben Workflow wie die Build-Jobs und nutzt <code>needs:</code> um erst nach erfolgreichem Build beider Images zu starten:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nt">deploy</span><span class="p">:</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy to Swarm</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">build-api</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">build-frontend</span><span class="p p-Indicator">]</span><span class="w">    </span><span class="c1"># Wartet auf beide Builds</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/scp-action@v0.1.7</span><span class="w">       </span><span class="c1"># Compose-File auf Server kopieren</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appleboy/ssh-action@v1.2.5</span><span class="w">       </span><span class="c1"># docker stack deploy ausführen</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">        </span><span class="nt">envs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">API_IMAGE,FRONTEND_IMAGE</span><span class="w">       </span><span class="c1"># Variablen sicher übergeben</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">        </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">          </span><span class="no">docker pull "$API_IMAGE"</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">          </span><span class="no">docker pull "$FRONTEND_IMAGE"</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">          </span><span class="no">docker stack deploy -c docker-compose.prod.yml todo-api</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">      </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="w">        </span><span class="nt">API_IMAGE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="w">        </span><span class="nt">FRONTEND_IMAGE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/${{ env.IMAGE_NAME }}-frontend:${{ github.sha }}</span>
+</code></pre></div>
+<p>Die Image-Referenzen werden über <code>env:</code> und <code>envs:</code> an die SSH-Session übergeben, statt sie direkt im <code>script:</code>-Block zu expandieren. 
+Das verhindert Code-Injection über Template-Expansion.</p>
+<p><code>needs:</code> ist GitHubs nativer Mechanismus für Job-Abhängigkeiten. 
+Im Gegensatz zu <code>workflow_run</code> (das zwischen separaten Workflow-Dateien verkettet) funktioniert <code>needs:</code> innerhalb desselben Workflows und erzeugt eine echte Dependency-Kette im GitHub Actions UI.</p>
+<p>Der Workflow benötigt drei <strong>GitHub Secrets</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEPLOY_HOST</code></td>
+<td>IP-Adresse oder Hostname des Swarm-Manager-Servers</td>
+</tr>
+<tr>
+<td><code>DEPLOY_USER</code></td>
+<td>SSH-Benutzername</td>
+</tr>
+<tr>
+<td><code>DEPLOY_SSH_KEY</code></td>
+<td>Privater SSH-Schlüssel</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docker-swarm-als-orchestrierungstool">Docker Swarm als Orchestrierungstool<a class="headerlink" href="#docker-swarm-als-orchestrierungstool" title="Permanent link">&para;</a></h3>
+<p>Docker Swarm ist Dockers eingebauter <strong>Cluster- und Orchestrierungsmodus</strong>. 
+Er erweitert die Docker Engine um die Fähigkeit, Container nicht nur auf einem einzelnen Host zu starten, sondern über mehrere Server hinweg koordiniert zu verwalten — inklusive Load Balancing, Rolling Updates und automatischem Neustart bei Ausfällen.</p>
+<p>Ein Swarm-Cluster besteht aus <strong>Manager-Nodes</strong> (steuern das Cluster) und <strong>Worker-Nodes</strong> (führen Container aus).
+Im einfachsten Fall — wie beim Demonstrator — übernimmt ein einzelner Server beide Rollen.</p>
+<p><strong>Warum Docker Swarm und nicht Kubernetes?</strong></p>
+<table>
+<thead>
+<tr>
+<th>Kriterium</th>
+<th>Docker Swarm</th>
+<th>Kubernetes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Einrichtung</td>
+<td><code>docker swarm init</code> (ein Befehl)</td>
+<td>Cluster-Setup mit kubeadm, Helm, etc.</td>
+</tr>
+<tr>
+<td>Konfiguration</td>
+<td>Standard <code>docker-compose.yml</code> mit <code>deploy:</code>-Sektion</td>
+<td>Eigene Manifest-Dateien (Deployments, Services, Ingress)</td>
+</tr>
+<tr>
+<td>Lernkurve</td>
+<td>Gering — wer Docker Compose kennt, kann Swarm nutzen</td>
+<td>Steil — eigenes Ökosystem mit vielen Konzepten</td>
+</tr>
+<tr>
+<td>Skalierung</td>
+<td>Dutzende Server, Hunderte Container</td>
+<td>Tausende Server, Zehntausende Container</td>
+</tr>
+<tr>
+<td>Geeignet für</td>
+<td>Kleine bis mittlere Projekte</td>
+<td>Große verteilte Systeme, Enterprise</td>
+</tr>
+</tbody>
+</table>
+<p>Für den Demonstrator ist Docker Swarm die richtige Wahl, weil es <strong>die gesamte Orchestrierung mit bereits bekannten Werkzeugen</strong> ermöglicht: Compose-Dateien definieren die Services, <code>docker stack deploy</code> rollt sie aus. 
+Es gibt kein zusätzliches Tool zu lernen oder zu betreiben.</p>
+<p><strong>Wie Docker Swarm im Demonstrator eingesetzt wird:</strong></p>
+<ol>
+<li><strong>Deployment:</strong> Der CD-Workflow kopiert <code>docker-compose.prod.yml</code> auf den Server und führt <code>docker stack deploy</code> aus — Swarm startet die definierten Services als Cluster-Tasks.</li>
+<li><strong>Replicas:</strong> Swarm verteilt mehrere Instanzen desselben Services und leitet Requests per internem Load Balancer (Layer 4) automatisch an verfügbare Container weiter.</li>
+<li><strong>Rolling Updates:</strong> Bei einem neuen Deployment ersetzt Swarm Container einzeln (<code>parallelism: 1</code>, <code>order: start-first</code>), sodass der Service durchgehend erreichbar bleibt.</li>
+<li><strong>Self-Healing:</strong> Fällt ein Container aus (z.B. Health-Check schlägt fehl), startet Swarm automatisch einen neuen, um die gewünschte Replica-Anzahl wiederherzustellen.</li>
+</ol>
+<h3 id="produktions-compose-docker-composeprodyml">Produktions-Compose (<code>docker-compose.prod.yml</code>)<a class="headerlink" href="#produktions-compose-docker-composeprodyml" title="Permanent link">&para;</a></h3>
+<p>Die Produktionsdatei <a href="../../docker-compose.prod.yml"><code>docker-compose.prod.yml</code></a> unterscheidet sich von der Entwicklungsdatei in vier Punkten:</p>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th><code>docker-compose.yml</code> (Dev)</th>
+<th><code>docker-compose.prod.yml</code> (Prod)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API-Image</td>
+<td><code>build: .</code> (baut lokal)</td>
+<td><code>image: ghcr.io/&lt;repo&gt;:latest</code> (aus Registry)</td>
+</tr>
+<tr>
+<td>Frontend-Image</td>
+<td><code>build: ./frontend</code> (baut lokal)</td>
+<td><code>image: ghcr.io/&lt;repo&gt;-frontend:latest</code> (aus Registry)</td>
+</tr>
+<tr>
+<td>Replicas</td>
+<td>1 (implizit)</td>
+<td>2 (Load Balancing)</td>
+</tr>
+<tr>
+<td>Update-Strategie</td>
+<td>-</td>
+<td>Rolling Update (<code>start-first</code>, <code>parallelism: 1</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Die <code>deploy</code>-Sektion konfiguriert Docker Swarm:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">deploy</span><span class="p">:</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w">                    </span><span class="c1"># Zwei API-Instanzen</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="nt">update_config</span><span class="p">:</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">               </span><span class="c1"># Ein Container nach dem anderen</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">    </span><span class="nt">delay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span><span class="w">                   </span><span class="c1"># 10s Pause zwischen Updates</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start-first</span><span class="w">           </span><span class="c1"># Neuer Container startet VOR dem alten</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">  </span><span class="nt">rollback_config</span><span class="p">:</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">               </span><span class="c1"># Bei Fehler: einzeln zurückrollen</span>
+</code></pre></div>
+<p><strong><code>order: start-first</code></strong> ermöglicht Zero-Downtime-Deployments: 
+Der neue Container wird gestartet und muss den Health-Check bestehen, bevor der alte Container gestoppt wird. 
+Zu keinem Zeitpunkt gibt es null laufende Instanzen.</p>
+<h3 id="einrichtung-auf-dem-server-einmalig">Einrichtung auf dem Server (einmalig)<a class="headerlink" href="#einrichtung-auf-dem-server-einmalig" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Docker Swarm initialisieren</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>docker<span class="w"> </span>swarm<span class="w"> </span>init
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># GHCR-Zugriff einrichten</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>docker<span class="w"> </span>login<span class="w"> </span>ghcr.io<span class="w"> </span>-u<span class="w"> </span>&lt;github-user&gt;<span class="w"> </span>-p<span class="w"> </span>&lt;personal-access-token&gt;
+</code></pre></div>
+<hr />
+<h2 id="7-smoke-test-smoke-testyml">7. Smoke-Test (<code>smoke-test.yml</code>)<a class="headerlink" href="#7-smoke-test-smoke-testyml" title="Permanent link">&para;</a></h2>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/workflows/smoke-test.yml"><code>smoke-test.yml</code></a></p>
+<p><strong>Trigger:</strong> Push auf <code>main</code>, Pull Requests die Infrastruktur-Dateien ändern (<code>Dockerfile</code>, <code>frontend/Dockerfile</code>, <code>frontend/nginx/**</code>, <code>docker-compose.yml</code>, <code>pyproject.toml</code>, <code>app/**</code>)</p>
+<p>Während <code>cd.yml</code> die Images baut und pusht, testet dieser Workflow (als Smoke-Test) den <strong>gesamten Multi-Container-Stack</strong>: Frontend + API + PostgreSQL zusammen.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"Dockerfile"</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"frontend/Dockerfile"</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"frontend/nginx/**"</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"docker-compose.yml"</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"pyproject.toml"</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"app/**"</span>
+</code></pre></div>
+<p>Der <code>paths</code>-Filter ist ein Konzept aus Djangos <code>check-migrations.yml</code> und <code>docs.yml</code>: 
+Der Workflow läuft nur, wenn sich relevante Dateien geändert haben.
+Reine Dokumentations- oder Test-Änderungen lösen keinen Docker-Compose-Build aus.</p>
+<h3 id="ablauf">Ablauf<a class="headerlink" href="#ablauf" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 1. Stack hochfahren (--wait wartet auf alle Health-Checks)</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and start containers</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker compose up --build --wait -d</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="c1"># 2. Smoke-Tests gegen die laufende API</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Health check</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">curl --fail --silent http://localhost:8000/health | grep '"ok"'</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">API smoke test</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">    </span><span class="no">curl --fail --silent -X POST http://localhost:8000/todos \</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">      </span><span class="no">-H "Content-Type: application/json" \</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">      </span><span class="no">-d '{"title": "Smoke Test", "priority": "high"}' | grep '"Smoke Test"'</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="w">    </span><span class="no">curl --fail --silent http://localhost:8000/todos | grep '"Smoke Test"'</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a>
+<a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="c1"># 3. Bei Fehler: Logs anzeigen, dann aufräumen</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Container logs (on failure)</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a><span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">failure()</span>
+<a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker compose logs</span>
+<a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a>
+<a id="__codelineno-26-21" name="__codelineno-26-21" href="#__codelineno-26-21"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tear down</span>
+<a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a><span class="w">  </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always()</span>
+<a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker compose down -v</span>
+</code></pre></div>
+<p>Dieser Workflow prüft, was Unit-Tests nicht abdecken können: 
+Ob die <strong>reale Deployment-Konfiguration</strong> funktioniert - Dockerfile, Umgebungsvariablen, Container-Networking, Health-Checks und die Verbindung zwischen API und Datenbank.</p>
+<hr />
+<h2 id="erganzende-devops-manahmen">Ergänzende DevOps-Maßnahmen<a class="headerlink" href="#erganzende-devops-manahmen" title="Permanent link">&para;</a></h2>
+<p>Neben den Workflows gehören weitere Dateien und Praktiken zur DevOps-Infrastruktur des Demonstrators.</p>
+<h3 id="dependabot-dependabotyml">Dependabot (<code>dependabot.yml</code>)<a class="headerlink" href="#dependabot-dependabotyml" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../.github/dependabot.yml"><code>dependabot.yml</code></a></p>
+<p>GitHub Dependabot erstellt automatisch Pull Requests, wenn Abhängigkeiten veraltet sind.
+Während <code>pip-audit</code> in <code>security.yml</code> bekannte <strong>Schwachstellen</strong> findet, sorgt Dependabot für <strong>proaktive Updates</strong> - auch bei Versionen ohne Sicherheitsprobleme.</p>
+<p>Der Demonstrator konfiguriert Dependabot für vier Ökosysteme:</p>
+<table>
+<thead>
+<tr>
+<th>Ökosystem</th>
+<th>Prüft</th>
+<th>Beispiel-PR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pip</code></td>
+<td>Python-Abhängigkeiten (<code>pyproject.toml</code>)</td>
+<td>"deps: Bump fastapi from 0.111.0 to 0.112.0"</td>
+</tr>
+<tr>
+<td><code>npm</code></td>
+<td>Frontend-Abhängigkeiten (<code>frontend/package.json</code>)</td>
+<td>"deps(frontend): Bump react from 19.2.7 to 19.3.0"</td>
+</tr>
+<tr>
+<td><code>github-actions</code></td>
+<td>Action-Versionen in Workflows</td>
+<td>"ci: Bump actions/checkout from v4 to v5"</td>
+</tr>
+<tr>
+<td><code>docker</code></td>
+<td>Base-Images (<code>Dockerfile</code>)</td>
+<td>"docker: Bump python from 3.12 to 3.13"</td>
+</tr>
+</tbody>
+</table>
+<p>Alle vier laufen wöchentlich (Montags) und erstellen PRs mit automatischen Labels (<code>dependencies</code>, <code>frontend</code>, <code>ci</code>, <code>docker</code>), sodass sie in der PR-Liste sofort erkennbar sind.</p>
+<h3 id="makefile">Makefile<a class="headerlink" href="#makefile" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="../../Makefile"><code>Makefile</code></a></p>
+<p>Das Makefile standardisiert häufige Befehle. 
+Statt sich Befehle wie <code>python -m pytest --cov-report=term-missing</code> zu merken, reicht <code>make test</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>make install     # Abhängigkeiten + Pre-Commit installieren
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>make run         # App lokal starten (SQLite)
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>make test        # Tests mit Coverage
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>make lint        # Formatting + Linting prüfen
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>make format      # Code automatisch formatieren
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>make check       # Lint + Tests (wie in CI)
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>make audit       # Dependency-Schwachstellenscan
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>make docker      # Docker Compose starten (PostgreSQL)
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>make clean       # Caches und Build-Artefakte entfernen
+</code></pre></div>
+<p>Django nutzt Makefiles im <code>docs/</code>-Verzeichnis (<code>make lint</code>, <code>make black</code>, <code>make spelling</code>).
+Der Demonstrator wendet dasselbe Prinzip auf das gesamte Projekt an.</p>
+<h3 id="multi-container-architektur">Multi-Container-Architektur<a class="headerlink" href="#multi-container-architektur" title="Permanent link">&para;</a></h3>
+<p>In Production laufen Frontend und Backend als <strong>separate Container</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>                    ┌─────────────────────────────────┐
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>  Browser :80  ──&gt;  │  nginx (Frontend-Container)     │
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>                    │  ├── / → React Single Page App  │
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>                    │  ├── /todos       → proxy → api │
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>                    │  └── /health      → proxy → api │
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>                    └─────────────────┬───────────────┘
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>                                      │
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>                    ┌─────────────────▼───────────────┐
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>                    │  uvicorn (API-Container)        │
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>                    │  ├── /todos   (FastAPI)         │
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>                    │  └── /health                    │
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>                    └─────────────────┬───────────────┘
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>                                      │
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>                    ┌─────────────────▼───────────────┐
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>                    │  PostgreSQL (DB-Container)      │
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>                    └─────────────────────────────────┘
+</code></pre></div>
+<p>Jeder Container hat ein eigenes Dockerfile mit Multi-Stage Build:</p>
+<table>
+<thead>
+<tr>
+<th>Container</th>
+<th>Dockerfile</th>
+<th>Stages</th>
+<th>Ergebnis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>API</strong></td>
+<td><code>Dockerfile</code></td>
+<td>Python Builder → Runtime</td>
+<td>Schlankes Python-Image ohne Build-Tools</td>
+</tr>
+<tr>
+<td><strong>Frontend</strong></td>
+<td><code>frontend/Dockerfile</code></td>
+<td>Node.js Build → nginx</td>
+<td>Statische Dateien in nginx, kein Node.js zur Laufzeit</td>
+</tr>
+<tr>
+<td><strong>DB</strong></td>
+<td>(offizielles Image)</td>
+<td>-</td>
+<td><code>postgres:16-alpine</code></td>
+</tr>
+</tbody>
+</table>
+<p>Die nginx-Konfiguration (<code>frontend/nginx/default.conf</code>) übernimmt zwei Aufgaben:</p>
+<ol>
+<li><strong>Static Serving</strong>: React-Build direkt ausliefern (<code>try_files</code> für SPA-Routing)</li>
+<li><strong>Reverse Proxy</strong>: API-Requests (<code>/todos</code>, <code>/health</code>, <code>/docs</code>) an den Backend-Container weiterleiten</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zurück zum Seitenanfang
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.path", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

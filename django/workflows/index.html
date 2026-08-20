@@ -1,0 +1,1392 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://devops-demonstrator.github.io/Demonstrator/django/workflows/">
+      
+      
+        <link rel="prev" href="../lokale-tools/">
+      
+      
+        <link rel="next" href="../../demonstrator/%C3%BCbersicht/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>GitHub Workflow - Studienarbeit - CI/CT/CD-Demonstrator</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#github-workflow-analyse" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-header__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Studienarbeit - CI/CT/CD-Demonstrator
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GitHub Workflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-nav__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Studienarbeit - CI/CT/CD-Demonstrator
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Django Analyse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Django Analyse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%C3%BCbersicht/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lokale-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokaler Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Workflow
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow-Architektur
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grundkonzepte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grundkonzepte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-1-continuous-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 1: Continuous Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-2-continuous-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 2: Continuous Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-3-tiefgehendere-qualitatssicherung-on-demand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 3: Tiefgehendere Qualitätssicherung (On-Demand)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-4-sonstige-prozesse-open-source-community" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 4: Sonstige Prozesse (Open-Source-Community)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demonstrator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Demonstrator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demonstrator/%C3%BCbersicht/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demonstrator/lokale-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokale Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demonstrator/pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD-Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-architektur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workflow-Architektur
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grundkonzepte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grundkonzepte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-1-continuous-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 1: Continuous Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-2-continuous-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 2: Continuous Testing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-3-tiefgehendere-qualitatssicherung-on-demand" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 3: Tiefgehendere Qualitätssicherung (On-Demand)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kategorie-4-sonstige-prozesse-open-source-community" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kategorie 4: Sonstige Prozesse (Open-Source-Community)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Übersicht
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%C3%BCbersicht/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Django Analyse
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="github-workflow-analyse">GitHub Workflow - Analyse<a class="headerlink" href="#github-workflow-analyse" title="Permanent link">&para;</a></h1>
+<p>Django nutzt <strong>17 GitHub Actions Workflows</strong> in <code>.github/workflows/</code> als CI/CT Infrastruktur. 
+Folgende Analyse gruppiert sie nach ihrer Funktion im CI/CT-Lifecycle.</p>
+<blockquote>
+<p><strong>Hinweis:</strong> Das Django-Projekt stellt ein Framework bereit und verfügt so über keine deploybaren Produkte. CD-Prozesse sind deshalb nicht gegeben.</p>
+</blockquote>
+<hr />
+<h2 id="workflow-architektur">Workflow-Architektur<a class="headerlink" href="#workflow-architektur" title="Permanent link">&para;</a></h2>
+<h3 id="was-sind-github-actions">Was sind GitHub Actions?<a class="headerlink" href="#was-sind-github-actions" title="Permanent link">&para;</a></h3>
+<p><a href="https://docs.github.com/en/actions">GitHub Actions</a> ist eine in GitHub integrierte CI/CD-Plattform. 
+GitHub beschreibt sie als <em>"a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline"</em> (<a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions">Understanding GitHub Actions</a>). </p>
+<p>Die zentralen Komponenten sind:</p>
+<ul>
+<li><strong>Workflow</strong>: Ein automatisierter Prozess, definiert als YAML-Datei im Verzeichnis <code>.github/workflows/</code> des Repositorys (<a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#workflows">Workflows</a>)</li>
+<li><strong>Event (Trigger)</strong>: Das Ereignis, das einen Workflow auslöst - z.B. ein Push, ein Pull Request, ein Cron-Zeitplan oder das Setzen eines Labels (<a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#events">Events</a>)</li>
+<li><strong>Job</strong>: Eine Gruppe von Schritten, die auf demselben Runner ausgeführt wird. Jobs innerhalb eines Workflows laufen standardmässig <strong>parallel</strong> (<a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#jobs">Jobs</a>)</li>
+<li><strong>Step</strong>: Ein einzelner Schritt innerhalb eines Jobs - entweder ein Shell-Befehl (<code>run</code>) oder eine wiederverwendbare Action (<code>uses</code>) (<a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#steps">Steps</a>)</li>
+<li><strong>Action</strong>: Eine wiederverwendbare Erweiterung (z.B. <code>actions/checkout</code>, <code>actions/setup-python</code>), die häufige Aufgaben kapselt (<a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#actions">Actions</a>)</li>
+<li><strong>Runner</strong>: Die virtuelle Maschine, auf der ein Job ausgeführt wird. GitHub stellt Linux-, Windows- und macOS-Runner bereit (<a href="https://docs.github.com/en/actions/about-github-actions/understanding-github-actions#runners">Runners</a>)</li>
+</ul>
+<h3 id="ubersicht-der-workflow-architektur">Übersicht der Workflow-Architektur<a class="headerlink" href="#ubersicht-der-workflow-architektur" title="Permanent link">&para;</a></h3>
+<p>Das folgende Diagramm zeigt Django's 17 GitHub Actions Workflows - gruppiert nach ihrem Auslöser und ihren Kosten.</p>
+<p>Ausgangspunkt sind zwei <strong>Trigger</strong>: 
+- <strong>Push bzw. Pull Request</strong>:
+Löst automatisch die <strong>Always</strong>-Workflows aus (tests, linters, docs, check-migrations, commit-messages) - schnelle, günstige Prüfungen, die bei <strong>jedem</strong> PR laufen.
+Hängt ein Maintainer ein Label an den PR, werden zusätzlich die <strong>On-Demand</strong>-Workflows aktiviert (z.B. Selenium-Browsertests, Coverage, Benchmarks) - gezielte Tiefenprüfungen mit höheren Kosten.</p>
+<ul>
+<li><strong>Nächtlicher Cron-Job</strong>:
+Unabhängig der anderen Trigger, triggert der <strong>Nightly</strong>-Cron die vollständige Testmatrix (alle OS, alle Python-Versionen, alle Datenbanken).
+Parallel dazu laufen bei PR-Events die <strong>Community</strong>-Workflows, die Prozessaufgaben wie Willkommensnachrichten und Auto-Labeling übernehmen.</li>
+</ul>
+<p>Alle Prüfungsergebnisse fließen in das <strong>Result</strong>: 
+* Bestehen alle Checks, ist der PR mergebar, schlägt eine Prüfung fehl, muss der Entwickler nachbessern und erneut pushen.</p>
+<blockquote>
+<p><strong>Kosten</strong> bezeichnen hier den Verbrauch an GitHub Actions Runner-Minuten. Jeder Workflow-Job belegt einen Runner (virtuelle Maschine), dessen Laufzeit abgerechnet wird. 
+Die Kosten hängen von drei Faktoren ab: der <strong>Laufzeit</strong> des Jobs, dem <strong>Betriebssystem</strong> des Runners (Linux ist am günstigsten) und der <strong>Anzahl paralleler Jobs</strong> in der Build-Matrix. Öffentliche Repositories wie dieses hier von Django erhalten diese Minuten kostenlos, die Ressourcen sind aber begrenzt. (<a href="https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-actions/about-billing-for-github-actions">About billing for GitHub Actions</a>).</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Kategorie</th>
+<th>Workflows</th>
+<th>Trigger</th>
+<th>Kosten</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Immer</strong> (bei jedem PR)</td>
+<td>tests, linters, docs, check-migrations, commit-msgs</td>
+<td>Push/PR</td>
+<td>Niedrig</td>
+</tr>
+<tr>
+<td><strong>On-Demand</strong> (per Label)</td>
+<td>python-matrix, selenium, screenshots, coverage, benchmark, postgis</td>
+<td>Label</td>
+<td>Mittel-Hoch</td>
+</tr>
+<tr>
+<td><strong>Nightly</strong> (Cron)</td>
+<td>schedules + schedule_tests</td>
+<td>Täglich</td>
+<td>Hoch</td>
+</tr>
+<tr>
+<td><strong>Community</strong></td>
+<td>new-contributor, labels, pr-quality</td>
+<td>PR-Events</td>
+<td>Niedrig</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Testintensität</strong>:</p>
+<ul>
+<li><strong>Jeder PR</strong> bekommt schnelle, günstige Checks (Linting, Basistests)</li>
+<li><strong>Kritische PRs</strong> bekommen per Label teurere Checks (Selenium, Coverage)</li>
+<li><strong>Nächtlich</strong> läuft die vollständige Matrix (alle OS, alle Python-Versionen, alle DBs)</li>
+</ul>
+<hr />
+<h2 id="grundkonzepte">Grundkonzepte<a class="headerlink" href="#grundkonzepte" title="Permanent link">&para;</a></h2>
+<p>Bevor die einzelnen Workflows betrachtet werden, ist es zunächst lohnenswert sich den wiederkehrenden Konzepten bzw. Patterns zu widmen:</p>
+<h3 id="trigger-wann-lauft-ein-workflow">Trigger: Wann läuft ein Workflow?<a class="headerlink" href="#trigger-wann-lauft-ein-workflow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span><span class="w">            </span><span class="c1"># Bei jedem Pull Request</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span><span class="w">       </span><span class="c1"># Bei Pushes auf main</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">'42</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span><span class="w">   </span><span class="c1"># Täglich um 02:42 UTC (Nightly)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">        </span><span class="c1"># Manuell auslösbar</span>
+</code></pre></div>
+<h3 id="concurrency-nicht-doppelt-laufen">Concurrency: Nicht doppelt laufen<a class="headerlink" href="#concurrency-nicht-doppelt-laufen" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">concurrency</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.workflow }}-${{ github.ref }}</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">cancel-in-progress</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>Wenn ein Entwickler schnell hintereinander pusht, wird der <strong>ältere</strong> CI-Run abgebrochen. Das spart Rechenzeit und vermeidet verwirrende Ergebnisse.</p>
+<h3 id="permissions-minimale-rechte">Permissions: Minimale Rechte<a class="headerlink" href="#permissions-minimale-rechte" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">permissions</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+</code></pre></div>
+<p>Jeder Workflow bekommt nur die Rechte, die er braucht. Das ist das <strong>Principle of Least Privilege</strong> -- ein kompromittierter Workflow kann keinen Code ändern, keine PRs schliessen, etc. .</p>
+<h3 id="caching-schnellere-builds">Caching: Schnellere Builds<a class="headerlink" href="#caching-schnellere-builds" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v6</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="s">'pip'</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">cache-dependency-path</span><span class="p">:</span><span class="w"> </span><span class="s">'tests/requirements/py3.txt'</span>
+</code></pre></div>
+<p>Abhängigkeiten werden <strong>zwischen Runs gecached</strong>. 
+Solange sich <code>requirements.txt</code> nicht ändert, müssen Pakete nicht neu heruntergeladen werden.</p>
+<h3 id="timeout-schutz-vor-hangenden-jobs">Timeout: Schutz vor hängenden Jobs<a class="headerlink" href="#timeout-schutz-vor-hangenden-jobs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
+</code></pre></div>
+<p>Kein Job darf länger als 60 Minuten laufen. 
+Schützt vor endlos laufenden Tests, die Ressourcen blockieren.</p>
+<hr />
+<h2 id="kategorie-1-continuous-integration">Kategorie 1: Continuous Integration<a class="headerlink" href="#kategorie-1-continuous-integration" title="Permanent link">&para;</a></h2>
+<h3 id="testsyml-haupttests"><code>tests.yml</code> - Haupttests<a class="headerlink" href="#testsyml-haupttests" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/tests.yml"><code>tests.yml</code></a></p>
+<p><strong>Trigger:</strong> Push auf <code>main</code>, Pull Requests (außer reine Docs-Änderungen)</p>
+<ul>
+<li>Minimaler Testlauf bei <strong>jedem</strong> PR (schnelles Feedback)</li>
+<li>Drei parallele Jobs:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Umgebung</th>
+<th>Zu Testen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>windows</code></td>
+<td>Windows, SQLite, Python 3.14</td>
+<td>Cross-Platform-Kompatibilität</td>
+</tr>
+<tr>
+<td><code>javascript-tests</code></td>
+<td>Ubuntu, Node.js 20</td>
+<td>Admin-UI JavaScript</td>
+</tr>
+<tr>
+<td><code>scripts-tests</code></td>
+<td>Ubuntu, Python 3.14</td>
+<td>Hilfsskripte</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -Wall tests/runtests.py -v2</span><span class="w"> </span><span class="c1"># `-Wall` aktiviert alle Python-Warnungen </span>
+</code></pre></div>
+<hr />
+<h3 id="python_matrixyml-multi-version-tests"><code>python_matrix.yml</code> - Multi-Version-Tests<a class="headerlink" href="#python_matrixyml-multi-version-tests" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/python_matrix.yml"><code>python_matrix.yml</code></a></p>
+<p><strong>Trigger:</strong> PRs mit Label <code>python-matrix</code> oder manuell</p>
+<ul>
+<li>Testet gegen <strong>alle</strong> unterstützten Python-Versionen</li>
+<li><strong>DRY (Don't Repeat Yourself)</strong>: Die Python-Versionen stehen genau einmal in <code>pyproject.toml</code>; CI liest sie von dort, statt sie doppelt zu pflegen</li>
+<li>Die Versionen werden <strong>dynamisch aus <code>pyproject.toml</code> extrahiert</strong>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">set-matrix</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="no">python_versions=$(sed -n "s/^.*Programming Language :: Python :: \([[:digit:]]\+\.[[:digit:]]\+\).*$/'\1', /p" pyproject.toml ...)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="no">echo "python_versions=[$python_versions]" &gt;&gt; "$GITHUB_OUTPUT"</span>
+</code></pre></div>
+<hr />
+<h3 id="schedule_testsyml-vollstandige-testmatrix"><code>schedule_tests.yml</code> - Vollständige Testmatrix<a class="headerlink" href="#schedule_testsyml-vollstandige-testmatrix" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/schedule_tests.yml"><code>schedule_tests.yml</code></a></p>
+<p><strong>Trigger:</strong> Wird von <code>schedules.yml</code> nächtlich ausgelöst</p>
+<ul>
+<li>Umfangreichste Testlauf - enthält alles, was für jeden PR zu teuer wäre:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Besonderheit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows, Python 3.12/3.13/3.14/3.15-dev</td>
+<td>Alle Versionen, inkl. Development</td>
+</tr>
+<tr>
+<td><code>pyc-only</code></td>
+<td>Django wird kompiliert, <code>.py</code>-Dateien gelöscht, Tests laufen nur mit <code>.pyc</code></td>
+</tr>
+<tr>
+<td>Selenium (SQLite + PostgreSQL)</td>
+<td>Browser-Tests mit Chrome headless</td>
+</tr>
+<tr>
+<td>PostgreSQL 16, 17, 18</td>
+<td>Mehrere DB-bemerkenswert</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Der <code>pyc-only</code>-Test ist bemerkenswert:
+Er stellt sicher, dass Django auch in Produktionsumgebungen funktioniert, in denen nur kompilierte 
+<code>.pyc</code>-Dateien ausgeliefert werden.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prepare site-packages</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="no">DJANGO_PACKAGE_ROOT=$(python -c 'import site; print(site.getsitepackages()[0])')/django</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="no">python -m compileall -b $DJANGO_PACKAGE_ROOT     # Kompilieren</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="no">find $DJANGO_PACKAGE_ROOT -name '*.py' -delete    # Quelldateien löschen</span>
+</code></pre></div>
+<hr />
+<h3 id="schedulesyml-nachtlicher-trigger"><code>schedules.yml</code> - Nächtlicher Trigger<a class="headerlink" href="#schedulesyml-nachtlicher-trigger" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/schedules.yml"><code>schedules.yml</code></a></p>
+<p><strong>Trigger:</strong> Cron-Job täglich um 02:42 UTC</p>
+<ul>
+<li>Prüft, ob es in den <strong>letzten 24 Stunden</strong> neue Commits gab</li>
+<li><strong>Teure Tests laufen nicht bei jedem Commit</strong>, sondern nächtlich - so werden Regressionen trotzdem zeitnah erkannt, ohne jeden PR zu verlangsamen</li>
+<li>Falls es neue Commits gab, triggert es <code>schedule_tests.yml</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">schedule</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s">'42</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
+</code></pre></div>
+<hr />
+<h2 id="kategorie-2-continuous-testing">Kategorie 2: Continuous Testing<a class="headerlink" href="#kategorie-2-continuous-testing" title="Permanent link">&para;</a></h2>
+<h3 id="lintersyml-statische-analyse"><code>linters.yml</code> - Statische Analyse<a class="headerlink" href="#lintersyml-statische-analyse" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/linters.yml"><code>linters.yml</code></a></p>
+<p><strong>Trigger:</strong> Push auf <code>main</code>, Pull Requests</p>
+<p>Fünf parallele Linting-Jobs:</p>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Tool</th>
+<th>Prüft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>flake8</code></td>
+<td><a href="https://flake8.pycqa.org/">flake8</a></td>
+<td>Python-Stil (PEP 8), einfache Fehler</td>
+</tr>
+<tr>
+<td><code>isort</code></td>
+<td><a href="https://pycqa.github.io/isort/">isort</a></td>
+<td>Import-Reihenfolge</td>
+</tr>
+<tr>
+<td><code>black</code></td>
+<td><a href="https://black.readthedocs.io/">Black</a></td>
+<td>Code-Formatierung</td>
+</tr>
+<tr>
+<td><code>biome</code></td>
+<td><a href="https://biomejs.dev/">Biome</a></td>
+<td>JavaScript/CSS Qualität</td>
+</tr>
+<tr>
+<td><code>zizmor</code></td>
+<td><a href="https://woodruffw.github.io/zizmor/">zizmor</a></td>
+<td>Sicherheit der CI-Workflows</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">flake8</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">liskin/gh-problem-matcher-wrap@e7b7beaaafa52524748b31a381160759d68d61fb</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="nt">linters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flake8</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flake8</span>
+</code></pre></div>
+<blockquote>
+<p><code>gh-problem-matcher-wrap</code> sorgt dafür, dass Linter-Fehler direkt als Annotationen im Pull Request angezeigt werden - der Entwickler sieht den Fehler genau an der betroffenen Zeile.</p>
+</blockquote>
+<p><strong>Beachte:</strong> Die Action ist auf einen <strong>Commit-SHA gepinnt</strong> (<code>e7b7be...</code>), nicht auf ein Tag wie <code>v3</code>. 
+Das ist die <strong>Supply-Chain-Security</strong>: 
+Selbst wenn das Repository der Action kompromittiert wird, ändert sich der ausgeführte Code nicht.</p>
+<hr />
+<h3 id="check-migrationsyml-datenbank-integritat"><code>check-migrations.yml</code> - Datenbank-Integrität<a class="headerlink" href="#check-migrationsyml-datenbank-integritat" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/check-migrations.yml"><code>check-migrations.yml</code></a></p>
+<p><strong>Trigger:</strong> Änderungen an <code>models.py</code> oder Migrations-Dateien (Workflow läuft nur wenn sich relevante Dateien geändert haben)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'tests/**/models.py'</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'tests/**/migrations/**'</span>
+</code></pre></div>
+<p>Startet einen <strong>PostgreSQL-Container</strong> und prüft, ob alle Datenbank-Migrationen vorhanden sind:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:15-alpine</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="no">--health-cmd pg_isready      # Wartet bis DB bereit</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">      </span><span class="no">--health-interval 10s</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">      </span><span class="no">--health-timeout 5s</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="no">--health-retries 5</span>
+</code></pre></div>
+<hr />
+<h3 id="check_commit_messagesyml-konventionen-prufen"><code>check_commit_messages.yml</code> - Konventionen prüfen<a class="headerlink" href="#check_commit_messagesyml-konventionen-prufen" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/check_commit_messages.yml"><code>check_commit_messages.yml</code></a></p>
+<p><strong>Trigger:</strong> Pull Requests (edited, opened, synchronize, reopened)</p>
+<p>Zwei Prüfungen:</p>
+<ol>
+<li>
+<p><strong>Prefix-Check</strong> (nur <code>stable/*</code>-Branches): Commit-Messages müssen mit <code>[Version]</code> beginnen
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[5.1] Fixed #12345 - Beschreibung der Änderung.    # OK
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Fixed #12345 - Beschreibung.                       # FEHLER auf stable/5.1
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Suffix-Check</strong> (alle Branches): Commit-Messages müssen mit einem Punkt enden
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Fixed #12345 - Beschreibung.    # OK
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>Fixed #12345 - Beschreibung     # FEHLER
+</code></pre></div></p>
+</li>
+</ol>
+<p><strong>Prozessqualität</strong> wird getestet: Einheitliche Commit-Messages erleichtern das Lesen der Git-History und das automatische Generieren von Changelogs.</p>
+<hr />
+<h3 id="docsyml-dokumentations-build"><code>docs.yml</code> - Dokumentations-Build<a class="headerlink" href="#docsyml-dokumentations-build" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/docs.yml"><code>docs.yml</code></a></p>
+<p><strong>Trigger:</strong> Änderungen im <code>docs/</code>-Verzeichnis</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lint</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make lint</span><span class="w">               </span><span class="c1"># Sphinx-Lint</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Black</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make black</span><span class="w">              </span><span class="c1"># Code-Beispiele formatiert?</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Spelling</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SPHINXOPTS="-q -W" make spelling</span><span class="w">   </span><span class="c1"># -W: Warnungen = Fehler</span>
+</code></pre></div>
+<p>Die Dokumentation wird <strong>ebenso getestet wie der Code</strong>: 
+Lint, Formatierung und Rechtschreibung müssen bestehen. <code>-W</code> macht Sphinx-Warnungen zu Fehlern.</p>
+<hr />
+<h2 id="kategorie-3-tiefgehendere-qualitatssicherung-on-demand">Kategorie 3: Tiefgehendere Qualitätssicherung (On-Demand)<a class="headerlink" href="#kategorie-3-tiefgehendere-qualitatssicherung-on-demand" title="Permanent link">&para;</a></h2>
+<p>Diese Workflows laufen nur, wenn ein Maintainer ein bestimmtes <strong>Label</strong> an den PR hängt. 
+Das spart Ressourcen und gibt Maintainern Kontrolle.</p>
+<h3 id="seleniumyml-browser-tests"><code>selenium.yml</code> - Browser-Tests<a class="headerlink" href="#seleniumyml-browser-tests" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/selenium.yml"><code>selenium.yml</code></a></p>
+<p><strong>Label:</strong> <code>selenium</code></p>
+<p>Führt Tests mit einem echten Chrome-Browser (headless) aus - gegen SQLite und PostgreSQL:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -Wall runtests.py --selenium=chrome --headless --parallel 1</span>
+</code></pre></div>
+<hr />
+<h3 id="screenshotsyml-visual-regression-tests"><code>screenshots.yml</code> - Visual Regression Tests<a class="headerlink" href="#screenshotsyml-visual-regression-tests" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/screenshots.yml"><code>screenshots.yml</code></a></p>
+<p><strong>Label:</strong> <code>screenshots</code></p>
+<p>Erstellt Screenshots der Django-Admin-Oberfläche und lädt sie als Artefakte hoch:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -Wall runtests.py --selenium=chrome --headless --screenshots</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Optimize screenshots</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oxipng --interlace=0 --opt=4 --strip=safe tests/screenshots/*.png</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">screenshots-${{ github.event.pull_request.head.sha }}</span>
+</code></pre></div>
+<p>So können Reviewer UI-Änderungen visuell vergleichen.</p>
+<hr />
+<h3 id="coverage_testsyml-coverage_commentyml-code-coverage"><code>coverage_tests.yml</code> + <code>coverage_comment.yml</code> - Code Coverage<a class="headerlink" href="#coverage_testsyml-coverage_commentyml-code-coverage" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdateien:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/coverage_tests.yml"><code>coverage_tests.yml</code></a>, <a href="https://github.com/django/django/blob/main/.github/workflows/coverage_comment.yml"><code>coverage_comment.yml</code></a></p>
+<p><strong>Label:</strong> <code>coverage</code></p>
+<p>Ein zweistufiger Workflow:</p>
+<ol>
+<li><strong><code>coverage_tests.yml</code></strong>: Führt Tests mit Coverage-Messung aus und erzeugt einen <strong>Diff-Coverage-Report</strong>. Im Gegensatz zu einem klassischen Coverage-Report, der die gesamte Codebasis bewertet, misst Diff-Coverage nur die Testabdeckung der im PR <strong>neu hinzugefügten oder geänderten Zeilen</strong>. So wird aufgezeigt, ob der <strong>neue Code durch Tests abgedeckt</strong> ist.</li>
+<li><strong><code>coverage_comment.yml</code></strong>: Postet den Report als Kommentar auf den PR</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Stufe 1: Coverage messen</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -Wall tests/runtests.py --settings=test_postgres -v2</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="no">python -m coverage combine</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">    </span><span class="no">python -m coverage report --show-missing</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="no">python -m coverage xml</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span><span class="no">diff-cover tests/coverage.xml --compare-branch=origin/main</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="c1"># Stufe 2: Auf PR posten (separater Workflow für Sicherheit)</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">  </span><span class="nt">workflow_run</span><span class="p">:</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">    </span><span class="nt">workflows</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"Coverage</span><span class="nv"> </span><span class="s">Tests"</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">completed</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>Die Trennung in zwei Workflows ist eine <strong>Sicherheitsmaßnahme</strong>: <code>coverage_comment.yml</code> braucht Schreibrechte auf PRs. 
+Wenn das im selben Workflow wie die Tests liefe, könnte ein bösartiger PR diese Rechte missbrauchen. 
+Durch <code>workflow_run</code> läuft der Kommentar-Workflow im Kontext des Basis-Repos, nicht des PR-Forks.</p>
+<hr />
+<h3 id="benchmarkyml-performance-tests"><code>benchmark.yml</code> - Performance-Tests<a class="headerlink" href="#benchmarkyml-performance-tests" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/benchmark.yml"><code>benchmark.yml</code></a></p>
+<p><strong>Label:</strong> <code>benchmark</code></p>
+<p>Nutzt <a href="https://asv.readthedocs.io/">ASV (Airspeed Velocity)</a> zum Messen von Performance-Regressionen. </p>
+<blockquote>
+<p>ASV führt definierte Benchmarks (z.B. Datenbankabfragen, Template-Rendering) wiederholt gegen zwei Git-Commits aus und vergleicht die gemessenen Ausführungszeiten statistisch. :</p>
+</blockquote>
+<p>Vergleicht die Performance von <code>HEAD^</code> (vorheriger Commit) mit <code>HEAD</code> (aktueller Commit). 
+Durch das wiederholte bzw. kontinuierliche Ausführen mit verschränkten (also verketteten) Prozessen (<code>--interleave-processes</code>) werden Schwankungen durch Systemlast minimiert, sodass echte Regressionen von Messrauschen unterschieden werden können
+<strong>Der Job schlägt fehl, wenn die Performance deutlich sinkt.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="no">asv continuous --interleave-processes -a processes=2 --split --show-stderr 'HEAD^' 'HEAD'</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="no">if grep -q "PERFORMANCE DECREASED" out.txt; then</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">      </span><span class="no">exit 1     # Workflow schlägt fehl bei Performance-Regression</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="no">fi</span>
+</code></pre></div>
+<p>Die Benchmark-Definitionen liegen im separaten Repository <a href="https://github.com/django/django-asv">django/django-asv</a> und decken zentrale Django-Bereiche ab 
+(z.B. Datenbankabfragen oder Request/Response-Handling). 
+ASV erkennt Methoden mit dem Prefix <code>time_</code> automatisch als Benchmark und misst deren Ausführungszeit. 
+<code>setup()</code> wird vor jeder Messung ausgeführt, geht aber nicht in die gemessene Zeit ein.</p>
+<p>Ein konkretes Beispiel ist der <a href="django/django-asv/benchmarks/query_benchmarks/query_filter/benchmark.py"><code>query_filter</code>-Benchmark</a>, der die Ausführungszeit von ORM-Filterabfragen misst:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">...utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">bench_setup</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Book</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">QueryFilter</span><span class="p">:</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>        <span class="n">bench_setup</span><span class="p">(</span><span class="n">migrate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">time_query_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>        <span class="nb">list</span><span class="p">(</span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>        <span class="nb">list</span><span class="p">(</span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>        <span class="nb">list</span><span class="p">(</span><span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>        <span class="c1"># ... </span>
+</code></pre></div>
+<hr />
+<h3 id="postgisyml-geodjango-tests"><code>postgis.yml</code> - GeoDjango-Tests<a class="headerlink" href="#postgisyml-geodjango-tests" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/postgis.yml"><code>postgis.yml</code></a></p>
+<p><strong>Label:</strong> <code>geodjango</code></p>
+<p>Testet die <a href="https://docs.djangoproject.com/en/5.2/ref/contrib/gis/">GeoDjango</a>-Erweiterung gegen mehrere <a href="https://postgis.net/">PostGIS</a>-Versionen. </p>
+<blockquote>
+<p>PostGIS ist eine Erweiterung für PostgreSQL, die räumliche Datentypen (Geometrien, Geographien), räumliche Indizes und Funktionen (z.B. Distanzberechnungen, Flächenverschneidungen) anbietet. </p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">strategy</span><span class="p">:</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">fail-fast</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">matrix</span><span class="p">:</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">    </span><span class="nt">postgis-version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"latest"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"18-3.6-alpine"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"17-master"</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p><code>fail-fast: false</code> bedeutet: Wenn eine Version fehlschlägt, laufen die anderen trotzdem weiter. 
+So sieht man alle Probleme auf einmal.</p>
+<hr />
+<h2 id="kategorie-4-sonstige-prozesse-open-source-community">Kategorie 4: Sonstige Prozesse (Open-Source-Community)<a class="headerlink" href="#kategorie-4-sonstige-prozesse-open-source-community" title="Permanent link">&para;</a></h2>
+<h3 id="new_contributor_pryml-willkommensnachricht"><code>new_contributor_pr.yml</code> - Willkommensnachricht<a class="headerlink" href="#new_contributor_pryml-willkommensnachricht" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/new_contributor_pr.yml"><code>new_contributor_pr.yml</code></a></p>
+<p><strong>Trigger:</strong> Erster PR eines neuen Contributors</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/first-interaction@v1</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="nt">pr-message</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">      </span><span class="no">Hello! Thank you for your contribution!</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">      </span><span class="no">As it's your first contribution be sure to check out the patch review checklist...</span>
+</code></pre></div>
+<p><strong>Automatisches Onboarding</strong>: Neue Contributors bekommen sofort hilfreiche Links.</p>
+<hr />
+<h3 id="labelsyml-automatisches-labeling"><code>labels.yml</code> - Automatisches Labeling<a class="headerlink" href="#labelsyml-automatisches-labeling" title="Permanent link">&para;</a></h3>
+<p><strong>Konfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/labels.yml"><code>labels.yml</code></a></p>
+<p><strong>Trigger:</strong> PR erstellt oder bearbeitet</p>
+<p>Prüft, ob der PR-Titel eine Trac-Ticketnummer enthält (z.B. <code>#12345</code>). 
+Falls nicht, wird automatisch das Label <code>no ticket</code> hinzugefügt für eine konsistente History.</p>
+<hr />
+<h3 id="check_pr_qualityyml-pr-qualitatsprufung"><code>check_pr_quality.yml</code> - PR-Qualitätsprüfung<a class="headerlink" href="#check_pr_qualityyml-pr-qualitatsprufung" title="Permanent link">&para;</a></h3>
+<p><strong>Komnfigurationsdatei:</strong> <a href="https://github.com/django/django/blob/main/.github/workflows/check_pr_quality.yml"><code>check_pr_quality.yml</code></a></p>
+<p><strong>Trigger:</strong> PR erstellt oder bearbeitet</p>
+<p>Führt ein Python-Skript (<a href="https://github.com/django/django/blob/main/scripts/pr_quality/check_pr.py"><code>scripts/pr_quality/check_pr.py</code></a>) aus, das die PR-Qualität prüft. </p>
+<p>Konkret werden folgende Checks durchgeführt:</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Prüft</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Trac-Ticket referenziert</strong></td>
+<td>Ist ein Trac-Ticket verlinkt? (bei trivialen PRs &lt; 80 Zeilen reicht "N/A")</td>
+<td>Error</td>
+</tr>
+<tr>
+<td><strong>Trac-Ticket bereit</strong></td>
+<td>Ist das Ticket im Status "Accepted" oder "Ready for checkin"?</td>
+<td>Error</td>
+</tr>
+<tr>
+<td><strong>has_patch-Flag gesetzt</strong></td>
+<td>Ist das Trac-Ticket als "hat Patch" markiert?</td>
+<td>Warning</td>
+</tr>
+<tr>
+<td><strong>Ticketnummer im PR-Titel</strong></td>
+<td>Enthält der PR-Titel die Ticketnummer (z.B. <code>#36991</code>)?</td>
+<td>Warning</td>
+</tr>
+<tr>
+<td><strong>Branch-Beschreibung vorhanden</strong></td>
+<td>Wurde eine aussagekräftige Beschreibung (mind. 5 Wörter) ausgefüllt?</td>
+<td>Error</td>
+</tr>
+<tr>
+<td><strong>AI-Disclosure ausgefüllt</strong></td>
+<td>Wurde offengelegt, ob AI-Tools verwendet wurden? (seit Januar 2026)</td>
+<td>Error</td>
+</tr>
+<tr>
+<td><strong>Checkliste abgehakt</strong></td>
+<td>Sind die ersten fünf Punkte der PR-Checkliste angekreuzt?</td>
+<td>Error</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ul>
+<li>Checks mit Severity <strong>Error</strong> führen bei Erstcontributorn dazu, dass der PR automatisch geschlossen und ein Kommentar mit Hinweisen gepostet wird. </li>
+<li><strong>Warnings</strong> erzeugen lediglich einen informativen Kommentar. </li>
+<li>Etablierte Contributor (&gt;= 5 Commits in den letzten 3 Jahren) werden von allen Checks ausgenommen.</li>
+</ul>
+</blockquote>
+<p>Der Workflow nutzt <code>pull_request_target</code> mit einem wichtigen Sicherheitspattern:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v6</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="nt">ref</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event.repository.default_branch }}</span><span class="w">   </span><span class="c1"># Nicht den PR-Branch!</span>
+</code></pre></div>
+<p>Der Workflow checkt den <strong>Basis-Branch</strong> aus, nicht den PR-Head. 
+So kann ein bösartiger PR den Workflow-Code nicht verändern.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zurück zum Seitenanfang
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.path", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://devops-demonstrator.github.io/Demonstrator/</loc>
+         <lastmod>2026-08-20</lastmod>
+    </url>
+    <url>
+         <loc>https://devops-demonstrator.github.io/Demonstrator/demonstrator/lokale-tools/</loc>
+         <lastmod>2026-08-20</lastmod>
+    </url>
+    <url>
+         <loc>https://devops-demonstrator.github.io/Demonstrator/demonstrator/pipeline/</loc>
+         <lastmod>2026-08-20</lastmod>
+    </url>
+    <url>
+         <loc>https://devops-demonstrator.github.io/Demonstrator/demonstrator/%C3%BCbersicht/</loc>
+         <lastmod>2026-08-20</lastmod>
+    </url>
+    <url>
+         <loc>https://devops-demonstrator.github.io/Demonstrator/django/lokale-tools/</loc>
+         <lastmod>2026-08-20</lastmod>
+    </url>
+    <url>
+         <loc>https://devops-demonstrator.github.io/Demonstrator/django/workflows/</loc>
+         <lastmod>2026-08-20</lastmod>
+    </url>
+    <url>
+         <loc>https://devops-demonstrator.github.io/Demonstrator/django/%C3%BCbersicht/</loc>
+         <lastmod>2026-08-20</lastmod>
+    </url>
+</urlset>
