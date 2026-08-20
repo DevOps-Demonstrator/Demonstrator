@@ -19,7 +19,7 @@ Die Analyse zeigt den **Weg des Codes von der lokalen Entwicklung bis zum Deploy
 
 ### 2. Demonstrator: CI/CT/CD anhand Python-Webapp 
 
-Die relevantesten Konzepte aus der Django-Analyse werden auf ein **Studenten-Projekt** übertragen: Eine FastAPI Todo-API mit vollständiger CI/CD-Pipeline.
+Die relevantesten Konzepte aus der Django-Analyse werden auf ein **kleineres Projekt** übertragen: Eine FastAPI Todo-API mit vollständiger CI/CD-Pipeline.
 
 | Thema | Dokumentation |
 |---|---|
@@ -33,7 +33,7 @@ Die relevantesten Konzepte aus der Django-Analyse werden auf ein **Studenten-Pro
 |---|---|
 | **CI** (Continuous Integration) | Jede Code-Änderung wird automatisch gebaut und getestet |
 | **CT** (Continuous Testing) | Automatisierte Qualitätssicherung auf allen Ebenen (Unit, Integration, Security, ...) |
-| **CD** (Continuous Delivery - Deployment) | Software ist jederzeit in einem auslieferbaren Zustand |
+| **CD** (Continuous Delivery - Deployment) | Software ist jederzeit in einem auslieferbaren Zustand bzw wird automatisch ausgeliefert (deployed) |
 
 > **Hinweis:** Wenn in der Dokumentation der Einfachheit halber nur von **CI/CD** gesprochen wird, ist Continuous Testing (CT) dabei immer implizit als Teil der CI/CD-Prozesse zu verstehen.
 
