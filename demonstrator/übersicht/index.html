@@ -1,0 +1,1662 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://devops-demonstrator.github.io/Demonstrator/demonstrator/%C3%BCbersicht/">
+      
+      
+        <link rel="prev" href="../../django/workflows/">
+      
+      
+        <link rel="next" href="../lokale-tools/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Übersicht - Studienarbeit - CI/CT/CD-Demonstrator</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#demonstrator-ubersicht" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-header__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Studienarbeit - CI/CT/CD-Demonstrator
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Übersicht
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dark Mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark Mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Light Mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light Mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Suche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Studienarbeit - CI/CT/CD-Demonstrator" class="md-nav__button md-logo" aria-label="Studienarbeit - CI/CT/CD-Demonstrator" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Studienarbeit - CI/CT/CD-Demonstrator
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Django Analyse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Django Analyse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/%C3%BCbersicht/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/lokale-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokaler Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../django/workflows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Demonstrator
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Demonstrator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Übersicht
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ziel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ziel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konzeptauswahl-von-django-zum-demonstrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Konzeptauswahl: Von Django zum Demonstrator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beispiel-anwendung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beispiel-Anwendung
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projektstruktur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Projektstruktur
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projektdokumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Projektdokumentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entwicklungsworkflow-mit-github-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entwicklungsworkflow mit GitHub Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#umgebungsvariablen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Umgebungsvariablen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-protection-github-rulesets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch Protection (GitHub Rulesets)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-einrichtung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository-Einrichtung
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vergleich-django-vs-demonstrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vergleich: Django vs. Demonstrator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailanalysen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailanalysen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lokale-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lokale Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD-Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ziel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ziel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konzeptauswahl-von-django-zum-demonstrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Konzeptauswahl: Von Django zum Demonstrator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beispiel-anwendung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beispiel-Anwendung
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projektstruktur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Projektstruktur
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projektdokumentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Projektdokumentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entwicklungsworkflow-mit-github-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entwicklungsworkflow mit GitHub Issues
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#umgebungsvariablen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Umgebungsvariablen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#branch-protection-github-rulesets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Branch Protection (GitHub Rulesets)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-einrichtung" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository-Einrichtung
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vergleich-django-vs-demonstrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vergleich: Django vs. Demonstrator
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailanalysen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailanalysen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Übersicht
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Demonstrator
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="demonstrator-ubersicht">Demonstrator - Übersicht<a class="headerlink" href="#demonstrator-ubersicht" title="Permanent link">&para;</a></h1>
+<h2 id="ziel">Ziel<a class="headerlink" href="#ziel" title="Permanent link">&para;</a></h2>
+<p>Der Demonstrator setzt die Erkenntnisse aus der <a href="../../django/%C3%BCbersicht/">Django-Analyse</a> praktisch um.
+Aus Djangos DevOps-Konzepten werden diejenigen ausgewählt, die für <strong>kleinere Softwareprojekte (bspw. im Hochschul-Kontext)</strong> - also Projekte mit begrenztem Umfang, kleinem Team und endlicher Laufzeit - den größten Mehrwert bringen.</p>
+<p>Das Ergebnis ist eine vollständige Sammlung an DevOps-Konzepten mit CI/CD-Infrastruktur auf Basis einer kleinen FastAPI-Anwendung.</p>
+<hr />
+<h2 id="konzeptauswahl-von-django-zum-demonstrator">Konzeptauswahl: Von Django zum Demonstrator<a class="headerlink" href="#konzeptauswahl-von-django-zum-demonstrator" title="Permanent link">&para;</a></h2>
+<p>Djangos CI/CD-Infrastruktur ist auf ein Projekt mit über 2.000 Contributors ausgelegt.
+Nicht alles davon ist für ein wie oben beschriebenes Softwareprojekt (begrenzter Umfang) sinnvoll.
+Die folgende Tabelle zeigt, welche <a href="../../django/%C3%BCbersicht/">Konzepte</a> übernommen, angepasst oder bewusst weggelassen wurden und warum.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Django-Prinzip</th>
+<th>Demonstrator</th>
+<th>Begründung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Shift Left</strong> (Pre-Commit)</td>
+<td><strong>Übernommen</strong></td>
+<td>Höchster Mehrwert pro Aufwand: Fehler werden gefunden, bevor sie committet werden.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Least Privilege</strong></td>
+<td><strong>Übernommen</strong></td>
+<td>Trivial umzusetzen (<code>permissions: contents: read</code>), verhindert, dass ein kompromittierter Workflow Schaden anrichtet.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Concurrency Control</strong></td>
+<td><strong>Übernommen</strong></td>
+<td>Eine Zeile YAML spart Runner-Minuten: Alte CI-Runs werden bei neuen Pushes abgebrochen.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Intelligente Filterung</strong> (<code>paths-ignore</code>, <code>paths</code>)</td>
+<td><strong>Übernommen</strong></td>
+<td>Django überspringt Tests bei reinen Doku-Änderungen (<code>paths-ignore: docs/**</code>) und triggert den Migrations-Check nur bei Model-Änderungen (<code>paths</code>). Der Demonstrator nutzt <code>paths-ignore</code> in <code>linters.yml</code> und <code>tests.yml</code> sowie <code>paths</code> in <code>smoke-test.yml</code> für Infrastruktur-Änderungen.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>On-Demand-Testing</strong> (Label-Trigger)</td>
+<td><strong>Übernommen</strong></td>
+<td>Django steuert teure Tests (Selenium, Coverage) per Label. Der Demonstrator nutzt dasselbe Pattern: E2E-Tests (<code>e2e.yml</code>) laufen nur wenn das Label <code>e2e</code> gesetzt wird.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Matrix-Testing</strong> (Multi-Version)</td>
+<td><strong>Weggelassen</strong></td>
+<td>Kleinere Projekte benötigen i.d.R. nur eine Python-Version. Matrix-Testing gegen 5+ Versionen wäre Overkill.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>DRY</strong> (Versionen aus <code>pyproject.toml</code>)</td>
+<td><strong>Angepasst</strong></td>
+<td>Statt Versionen dynamisch zu extrahieren, wird die gesamte Tool-Konfiguration in <code>pyproject.toml</code> zentralisiert. Das DRY-Prinzip wird so einfacher umgesetzt.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Supply-Chain-Security</strong> (SHA-Pinning, zizmor)</td>
+<td><strong>Übernommen</strong></td>
+<td>zizmor scannt Workflows auf Sicherheitsprobleme (wie bei Django). Zusätzlich prüft pip-audit Abhängigkeiten gegen CVE-Datenbanken - das geht über Djangos Ansatz hinaus. <code>persist-credentials: false</code> und Least Privilege auf allen Workflows.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Docs as Code</strong></td>
+<td><strong>Möglich</strong></td>
+<td>Die Pipeline ist vorbereitet für eine MkDocs-Integration. Im Demonstrator wird zunächst auf FastAPIs eingebaute <code>/docs</code> (Swagger UI) gesetzt.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="was-bringt-den-groten-mehrwert">Was bringt den größten Mehrwert?<a class="headerlink" href="#was-bringt-den-groten-mehrwert" title="Permanent link">&para;</a></h3>
+<p>Die übernommenen Konzepte sollen bei einem möglichst <strong>geringen Aufwand, einen hohen Nutzen bringen</strong>:</p>
+<ul>
+<li><strong>Pre-Commit Hooks</strong>: Einmal <code>pre-commit install</code>, danach läuft alles automatisch bei jedem Commit.</li>
+<li><strong>CI-Tests</strong>: Ein Push reicht - Tests und Linting laufen ohne manuelles Zutun.</li>
+<li><strong>CD (Docker)</strong>: Jeder Merge auf <code>main</code> produziert ein deploybares Artefakt.</li>
+</ul>
+<p>Was bewusst <strong>nicht</strong> übernommen wurde, hat ein schlechtes Aufwand-Nutzen-Verhältnis für kleine Projekte: Matrix-Testing und Nightly-Builds.</p>
+<hr />
+<h2 id="beispiel-anwendung">Beispiel-Anwendung<a class="headerlink" href="#beispiel-anwendung" title="Permanent link">&para;</a></h2>
+<p>Als Demonstrator dient eine <strong>Todo-App</strong>: eine Anwendung zur Verwaltung von ToDo's mit Backend (FastAPI) und Frontend (React).</p>
+<p><strong>Warum diese App?</strong></p>
+<ul>
+<li><strong>Überschaubar</strong>: ~200 Zeilen Anwendungscode. Der Leser versteht die App in Minuten, der Fokus bleibt auf der Pipeline.</li>
+<li><strong>Realistisch</strong>: Datenbank (SQLite, Postgres), Input-Validierung (Pydantic), CRUD-Operationen - Komponenten, die i.d.R in allen Projekten (vor allem mit Web-Kontext) vorkommen.</li>
+<li><strong>Testbar</strong>: Trennung von Logik und Routen ermöglicht sowohl Unit- als auch Integrationstests.</li>
+<li><strong>Deploybar</strong>: Lässt sich in ein Docker-Image verpacken und ausliefern (CD).</li>
+</ul>
+<h3 id="komponenten">Komponenten<a class="headerlink" href="#komponenten" title="Permanent link">&para;</a></h3>
+<p>Die Anwendung besteht aus drei Komponenten, die jeweils als eigener Docker-Container laufen:</p>
+<p><img alt="Komponentenübersicht" src="../diagrams/uebersicht.svg" /></p>
+<table>
+<thead>
+<tr>
+<th>Container</th>
+<th>Technologie</th>
+<th>Dockerfile</th>
+<th>Aufgabe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontend</strong></td>
+<td>React + Vite (Build-Stage) → nginx (Runtime-Stage)</td>
+<td><code>frontend/Dockerfile</code></td>
+<td>Statische Dateien ausliefern (kompiliertes HTML/JS/CSS) + Reverse Proxy für API-Requests</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>FastAPI + SQLAlchemy + uvicorn</td>
+<td><code>Dockerfile</code></td>
+<td>REST-Endpoints, Validierung, CRUD</td>
+</tr>
+<tr>
+<td><strong>DB</strong></td>
+<td>PostgreSQL 16</td>
+<td>Offizielles Image</td>
+<td>Datenhaltung (Todos)</td>
+</tr>
+</tbody>
+</table>
+<p>Der Frontend-Container enthält kein Node.js zur Laufzeit. React wird im Multi-Stage Build zu statischen Dateien kompiliert (<code>npm run build</code> → <code>dist/</code>), und nur diese werden in das nginx-Image kopiert. nginx liefert sie als normalen Webserver aus und leitet API-Requests (<code>/todos</code>, <code>/health</code>) an den Backend-Container weiter.</p>
+<p>Lokal ohne Docker kann die API auch standalone mit SQLite laufen - PostgreSQL wird nur im Docker-Setup und in der CI verwendet (siehe <a href="#umgebungsvariablen">Umgebungsvariablen</a>).</p>
+<h3 id="starten-der-anwendung">Starten der Anwendung<a class="headerlink" href="#starten-der-anwendung" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variante</th>
+<th>Befehl</th>
+<th>Was startet</th>
+<th>DB</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend only</strong></td>
+<td><code>uv run uvicorn app.main:app --reload</code></td>
+<td>FastAPI</td>
+<td>SQLite</td>
+<td><code>http://localhost:8000/docs</code></td>
+</tr>
+<tr>
+<td><strong>Frontend only</strong></td>
+<td><code>cd frontend &amp;&amp; npm run dev</code></td>
+<td>Vite Dev-Server (proxied API)</td>
+<td>-</td>
+<td><code>http://localhost:5173</code></td>
+</tr>
+<tr>
+<td><strong>Docker Compose</strong></td>
+<td><code>docker compose up --build</code></td>
+<td>Frontend (nginx) + API + PostgreSQL</td>
+<td>PostgreSQL</td>
+<td><code>http://localhost</code></td>
+</tr>
+</tbody>
+</table>
+<p>Für die lokale Entwicklung startet man Backend und Frontend separat - das Frontend proxied API-Requests automatisch an das Backend (konfiguriert in <code>vite.config.js</code>). Mit Docker Compose läuft der gesamte Stack als 3-Container-Setup, wobei nginx das Frontend ausliefert und API-Requests an den Backend-Container weiterleitet.</p>
+<h3 id="api-endpunkte">API-Endpunkte<a class="headerlink" href="#api-endpunkte" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Methode</th>
+<th>Pfad</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/health</code></td>
+<td>Health-Check (für Container-Orchestrierung)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/todos</code></td>
+<td>Alle Todos auflisten (Filter: <code>completed</code>, <code>priority</code>)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/todos/{id}</code></td>
+<td>Einzelnes Todo abrufen</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/todos</code></td>
+<td>Neues Todo erstellen</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td><code>/todos/{id}</code></td>
+<td>Todo aktualisieren (partiell)</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/todos/{id}</code></td>
+<td>Todo löschen</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="projektstruktur">Projektstruktur<a class="headerlink" href="#projektstruktur" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── app/                         # Backend (FastAPI)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   ├── main.py                  #   App + Health-Endpoint + SPA-Serving
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│   ├── core/database.py         #   DB-Verbindung (SQLite/PostgreSQL)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── models/todo.py           #   SQLAlchemy-Model
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   ├── schemas/todo.py          #   Pydantic-Validierung
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├── crud/todo.py             #   CRUD-Operationen
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   └── routers/todos.py         #   API-Routen (/todos)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>├── frontend/                    # Frontend (React + Vite)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   ├── src/
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   │   ├── App.jsx              #   Hauptkomponente (State, API-Aufrufe)
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   │   ├── api.js               #   API-Client (fetch-Wrapper)
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   │   ├── components/          #   TodoForm, TodoList, TodoItem
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   │   └── *.test.{js,jsx}     #   Unit-Tests (Vitest, co-located)
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│   ├── tests/                   #   E2E-Tests (Playwright)
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│   ├── nginx/default.conf       #   nginx-Config (Reverse Proxy)
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   ├── Dockerfile               #   Multi-Stage: Node Build → nginx
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│   ├── playwright.config.js     #   E2E-Test-Konfiguration
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│   ├── package.json             #   Dependencies + Scripts
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   └── vite.config.js           #   Build-Config + API-Proxy (Dev)
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>├── tests/                       # Backend-Tests
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│   ├── conftest.py              #   Fixtures (In-Memory-DB, TestClient)
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│   ├── test_crud.py             #   11 Unit-Tests
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>│   └── test_api.py              #   15 Integrationstests (inkl. Health-Check)
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>├── docs/                        # MkDocs-Dokumentation
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>│   ├── demonstrator/            #   Demonstrator-Analyse + Pipeline
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>│   └── django/                  #   Django-Analyse (Referenzprojekt)
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>│
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>├── .github/
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>│   ├── pull_request_template.md #   PR-Vorlage (Issue, Beschreibung, Checkliste)
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>│   ├── dependabot.yml           #   Automatische Dependency-Updates (pip, npm, Actions, Docker)
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>│   ├── rulesets/                 #   Branch Protection als importierbare JSON
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>│   │   └── branch-protection.json
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>│   └── workflows/               #   CI/CD-Pipeline (7 Workflows + Pages)
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>│       ├── linters.yml          #     Backend (Black, Ruff) + Frontend (oxlint) + zizmor
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>│       ├── tests.yml            #     Tests + Coverage (SQLite + PostgreSQL + Frontend)
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>│       ├── e2e.yml              #     Playwright Browser-Tests (On-Demand)
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>│       ├── pr_checks.yml        #     Issue-Referenz + PR-Beschreibung
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>│       ├── security.yml         #     Dependency-Audit (pip-audit)
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>│       ├── cd.yml               #     Docker-Images bauen + pushen + Deploy (API + Frontend)
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>│       ├── smoke-test.yml       #     Multi-Container Smoke-Test
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>│       └── pages.yml            #     MkDocs-Dokumentation auf GitHub Pages deployen
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>│
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>├── .editorconfig                # Editor-Formatierung
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>├── .pre-commit-config.yaml      # Pre-Commit Hooks (Black, Ruff, oxlint, zizmor)
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>├── pyproject.toml               # Projekt-Config + Tool-Einstellungen + Dependency Groups
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>├── uv.lock                      # Lockfile (deterministische Abhängigkeiten)
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>├── mkdocs.yml                   # MkDocs-Konfiguration
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>├── Makefile                     # Standardisierte Befehle (uv run ...)
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>├── Dockerfile                   # API: Multi-Stage Build (uv + Python)
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>├── docker-compose.yml           # Dev: Frontend + API + PostgreSQL
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>├── docker-compose.prod.yml      # Prod: Swarm-Deployment (3 Container)
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>├── .env.example                 # Dokumentierte Umgebungsvariablen
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>├── README.md                    # Quick Start + Repo-Übersicht
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>├── CONTRIBUTING.md              # Entwicklungsworkflow + Konventionen
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>└── .gitignore
+</code></pre></div>
+<hr />
+<h2 id="projektdokumentation">Projektdokumentation<a class="headerlink" href="#projektdokumentation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Datei</th>
+<th>Zweck</th>
+<th>Django-Äquivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../README.md"><code>README.md</code></a></td>
+<td>Quick Start, Projektstruktur, CI/CD-Übersicht</td>
+<td><code>README.rst</code></td>
+</tr>
+<tr>
+<td><a href="../../CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a></td>
+<td>Einrichtung, Entwicklungsworkflow, Konventionen, Befehle</td>
+<td><code>CONTRIBUTING.rst</code> + <code>docs/internals/contributing/</code></td>
+</tr>
+<tr>
+<td><a href="../../.github/pull_request_template.md"><code>pull_request_template.md</code></a></td>
+<td>PR-Vorlage: Issue-Referenz, Beschreibung, Checkliste (wird automatisch geladen)</td>
+<td><a href="https://github.com/django/django/blob/main/.github/pull_request_template.md"><code>.github/pull_request_template.md</code></a></td>
+</tr>
+<tr>
+<td><a href="../../.env.example"><code>.env.example</code></a></td>
+<td>Dokumentiert benötigte Umgebungsvariablen mit Beispielwerten</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="entwicklungsworkflow-mit-github-issues">Entwicklungsworkflow mit GitHub Issues<a class="headerlink" href="#entwicklungsworkflow-mit-github-issues" title="Permanent link">&para;</a></h2>
+<p>Jede Änderung am Code beginnt mit einem <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues">GitHub Issue</a>. 
+Issues dokumentieren, <strong>was</strong> geändert werden soll und <strong>warum</strong>, bevor Code geschrieben wird.</p>
+<p>Der Workflow im Demonstrator folgt diesem Ablauf:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1. Issue erstellen       →  Beschreibt das Problem oder Feature
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2. Branch erstellen      →  z.B. feature/42-todo-filter
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>3. Code schreiben        →  Pre-Commit Hooks prüfen lokal
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>4. PR erstellen          →  Template fordert Issue-Referenz (Closes #42)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>5. CI prüft automatisch  →  Linting, Tests, Security, PR Checks
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>6. Code Review           →  Teammitglied prüft und genehmigt
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>7. Merge auf main        →  Issue wird automatisch geschlossen, CD startet
+</code></pre></div>
+<p>Django nutzt dafür ein externes Ticketsystem und prüft per Workflow (<code>labels.yml</code>), ob PRs eine Ticketnummer enthalten.
+Der Demonstrator nutzt stattdessen <strong>GitHub Issues</strong>, die direkt in die Plattform integriert sind:</p>
+<ul>
+<li>Das <a href="../../.github/pull_request_template.md"><strong>PR-Template</strong></a> fordert <code>Closes #XXXX</code> als Issue-Referenz.</li>
+<li>Der Workflow <a href="../../.github/workflows/pr_checks.yml"><code>pr_checks.yml</code></a> prüft automatisch, ob eine <code>#123</code>-Referenz vorhanden ist.</li>
+<li>Das Schlüsselwort <code>Closes</code> bewirkt, dass GitHub das referenzierte Issue <strong>automatisch schließt</strong>, wenn der PR gemerged wird.</li>
+</ul>
+<p>So entsteht eine lückenlose Verbindung zwischen Anforderung (Issue), Umsetzung (PR) und Auslieferung (CD) (ohne manuellen Aufwand).</p>
+<hr />
+<h2 id="umgebungsvariablen">Umgebungsvariablen<a class="headerlink" href="#umgebungsvariablen" title="Permanent link">&para;</a></h2>
+<p>Der Demonstrator lässt sich mit Umgebungsvariablen konfigurieren, um sich an verschiedene Umgebungen anzupassen. 
+Derselbe Code läuft lokal, in der CI und in Docker, nur die Konfiguration unterscheidet sich.</p>
+<h3 id="anwendung">Anwendung<a class="headerlink" href="#anwendung" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DATABASE_URL</code></td>
+<td><code>sqlite:///./todo.db</code></td>
+<td>Datenbank-Verbindung. SQLite für lokale Entwicklung, PostgreSQL für Docker/Produktion. Format: <code>postgresql+psycopg://user:pass@host:port/db</code></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># app/core/database.py</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"DATABASE_URL"</span><span class="p">,</span> <span class="s2">"sqlite:///./todo.db"</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Umgebung</th>
+<th><code>DATABASE_URL</code></th>
+<th>Datenbank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lokal (Entwicklung)</td>
+<td>Nicht gesetzt (Default)</td>
+<td>SQLite (<code>todo.db</code>)</td>
+</tr>
+<tr>
+<td>CI - Test-Job 1</td>
+<td>Nicht gesetzt</td>
+<td>SQLite (in-memory)</td>
+</tr>
+<tr>
+<td>CI - Test-Job 2</td>
+<td><code>postgresql+psycopg://...@localhost</code></td>
+<td>PostgreSQL (Service-Container)</td>
+</tr>
+<tr>
+<td>Docker Compose (Dev/Prod)</td>
+<td><code>postgresql+psycopg://...@db</code></td>
+<td>PostgreSQL (Container)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="github-secrets-cicd">GitHub Secrets (CI/CD)<a class="headerlink" href="#github-secrets-cicd" title="Permanent link">&para;</a></h3>
+<p>Secrets werden nicht im Code gespeichert, sondern in den GitHub Repository Settings konfiguriert:</p>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Verwendet in</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GITHUB_TOKEN</code></td>
+<td><code>cd.yml</code></td>
+<td>Automatisch von GitHub bereitgestellt. Zugriff auf Container Registry (GHCR).</td>
+</tr>
+<tr>
+<td><code>DEPLOY_HOST</code></td>
+<td><code>cd.yml</code> (Deploy-Job)</td>
+<td>IP-Adresse oder Hostname des Swarm-Manager-Servers</td>
+</tr>
+<tr>
+<td><code>DEPLOY_USER</code></td>
+<td><code>cd.yml</code> (Deploy-Job)</td>
+<td>SSH-Benutzername für den Deployment-Server</td>
+</tr>
+<tr>
+<td><code>DEPLOY_SSH_KEY</code></td>
+<td><code>cd.yml</code> (Deploy-Job)</td>
+<td>Privater SSH-Schlüssel für den Deployment-Server</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docker-compose-infrastruktur">Docker Compose (Infrastruktur)<a class="headerlink" href="#docker-compose-infrastruktur" title="Permanent link">&para;</a></h3>
+<p>Diese Variablen konfigurieren die Container-Infrastruktur in <code>docker-compose.yml</code> und <code>docker-compose.prod.yml</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Wert</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POSTGRES_DB</code></td>
+<td><code>todo</code></td>
+<td>Name der PostgreSQL-Datenbank</td>
+</tr>
+<tr>
+<td><code>POSTGRES_USER</code></td>
+<td><code>todo</code></td>
+<td>PostgreSQL-Benutzer</td>
+</tr>
+<tr>
+<td><code>POSTGRES_PASSWORD</code></td>
+<td><code>todo</code></td>
+<td>PostgreSQL-Passwort</td>
+</tr>
+<tr>
+<td><code>API_IMAGE</code></td>
+<td><code>ghcr.io/OWNER/REPO:latest</code></td>
+<td>Docker-Image für die API (nur <code>docker-compose.prod.yml</code>)</td>
+</tr>
+<tr>
+<td><code>FRONTEND_IMAGE</code></td>
+<td><code>ghcr.io/OWNER/REPO-frontend:latest</code></td>
+<td>Docker-Image für das Frontend (nur <code>docker-compose.prod.yml</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Die Datei <a href="../../.env.example"><code>.env.example</code></a> dokumentiert alle Variablen mit Beispielwerten.</p>
+<hr />
+<h2 id="branch-protection-github-rulesets">Branch Protection (GitHub Rulesets)<a class="headerlink" href="#branch-protection-github-rulesets" title="Permanent link">&para;</a></h2>
+<p>Die CI-Workflows (Linters, Tests, Security) und der CD-Workflow (<code>cd.yml</code>) laufen in <strong>separaten Workflow-Dateien</strong>. Innerhalb einer Datei kann man mit <code>needs:</code> Job-Abhängigkeiten definieren (z.B. Deploy wartet auf Build). Zwischen Dateien geht das nicht.</p>
+<p>Die Absicherung, dass nur geprüfter Code gebaut und deployed wird, läuft deshalb über <strong>GitHub Rulesets</strong> (Nachfolger der klassischen Branch Protection Rule). Rulesets bieten dieselbe Funktionalität, können aber als <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets">JSON-Datei versioniert, exportiert und importiert</a> werden.</p>
+<p><img alt="Branch Protection Flow" src="../diagrams/branch_protection.svg" /></p>
+<h3 id="ruleset-konfiguration">Ruleset-Konfiguration<a class="headerlink" href="#ruleset-konfiguration" title="Permanent link">&para;</a></h3>
+<p>Die Konfiguration liegt als importierbare JSON-Datei im Repository: <a href="../../.github/rulesets/branch-protection.json"><code>.github/rulesets/branch-protection.json</code></a></p>
+<table>
+<thead>
+<tr>
+<th>Regel</th>
+<th>Einstellung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ziel</strong></td>
+<td>Default-Branch (<code>main</code>)</td>
+</tr>
+<tr>
+<td><strong>Pull Request erforderlich</strong></td>
+<td>Ja, mit mindestens 1 Approval</td>
+</tr>
+<tr>
+<td><strong>Required Status Checks</strong></td>
+<td>Alle 8 CI-Jobs müssen bestehen</td>
+</tr>
+</tbody>
+</table>
+<p>Die 8 Required Status Checks entsprechen den Job-Namen in den Workflows:</p>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Required Status Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>linters.yml</code></td>
+<td><code>Black (Formatting)</code>, <code>Ruff (Linting)</code>, <code>Frontend (Lint + Build)</code>, <code>zizmor (Workflow Security)</code></td>
+</tr>
+<tr>
+<td><code>tests.yml</code></td>
+<td><code>Tests (SQLite)</code>, <code>Tests (PostgreSQL)</code>, <code>Frontend Tests (Vitest)</code></td>
+</tr>
+<tr>
+<td><code>security.yml</code></td>
+<td><code>pip-audit (Dependency Scan)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="einrichtung-einmalig-pro-repository">Einrichtung (einmalig pro Repository)<a class="headerlink" href="#einrichtung-einmalig-pro-repository" title="Permanent link">&para;</a></h3>
+<p><strong>Settings → Rules → Rulesets → New ruleset → Import a ruleset</strong> → die Datei <code>.github/rulesets/branch-protection.json</code> hochladen → <strong>Create</strong>.</p>
+<p>Damit ist garantiert, dass kein Code <code>main</code> erreicht (und damit <code>cd.yml</code>) ohne ein Code Review durch ein Teammitglied <strong>und</strong> bestandene CI-Checks.
+Beides muss erfüllt sein bevor ein PR gemerged werden kann.</p>
+<hr />
+<h2 id="repository-einrichtung">Repository-Einrichtung<a class="headerlink" href="#repository-einrichtung" title="Permanent link">&para;</a></h2>
+<p>Damit die CI/CD-Pipeline vollständig funktioniert, müssen nach dem Klonen des Repositories einmalig folgende Schritte auf GitHub durchgeführt werden.</p>
+<h3 id="1-lokale-entwicklungsumgebung">1. Lokale Entwicklungsumgebung<a class="headerlink" href="#1-lokale-entwicklungsumgebung" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># uv installieren (falls noch nicht vorhanden)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Abhängigkeiten + Pre-Commit Hooks</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>make<span class="w"> </span>install
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Frontend</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nb">cd</span><span class="w"> </span>frontend<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>install
+</code></pre></div>
+<h3 id="2-github-label-e2e">2. GitHub Label: <code>e2e</code><a class="headerlink" href="#2-github-label-e2e" title="Permanent link">&para;</a></h3>
+<p>Der E2E-Workflow (<code>e2e.yml</code>) läuft nur, wenn ein PR das Label <code>e2e</code> trägt.
+Das Label muss einmalig erstellt werden:</p>
+<p><strong>Settings → Issues → Labels → New label</strong> → Name: <code>e2e</code></p>
+<h3 id="3-github-secrets-nur-fur-deployment">3. GitHub Secrets (nur für Deployment)<a class="headerlink" href="#3-github-secrets-nur-fur-deployment" title="Permanent link">&para;</a></h3>
+<p>Der Deploy-Job in <code>cd.yml</code> verbindet sich per SSH mit dem Produktionsserver.
+Die Zugangsdaten werden als Repository Secrets konfiguriert:</p>
+<p><strong>Settings → Secrets and variables → Actions → New repository secret</strong></p>
+<table>
+<thead>
+<tr>
+<th>Secret</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEPLOY_HOST</code></td>
+<td>IP-Adresse oder Hostname des Swarm-Manager-Servers</td>
+</tr>
+<tr>
+<td><code>DEPLOY_USER</code></td>
+<td>SSH-Benutzername für den Deployment-Server</td>
+</tr>
+<tr>
+<td><code>DEPLOY_SSH_KEY</code></td>
+<td>Privater SSH-Schlüssel für den Deployment-Server</td>
+</tr>
+</tbody>
+</table>
+<p><code>GITHUB_TOKEN</code> wird automatisch von GitHub bereitgestellt und muss <strong>nicht</strong> manuell angelegt werden.</p>
+<p>Ohne diese Secrets laufen alle CI-Workflows (Linters, Tests, Security, etc.) trotzdem - nur der Deploy-Job schlägt fehl.</p>
+<h3 id="4-github-ruleset-importieren">4. GitHub Ruleset importieren<a class="headerlink" href="#4-github-ruleset-importieren" title="Permanent link">&para;</a></h3>
+<p>Die Branch-Protection-Konfiguration liegt als JSON im Repository und kann direkt importiert werden.
+Details: <a href="#branch-protection-github-rulesets">Branch Protection (GitHub Rulesets)</a></p>
+<h3 id="optional-5-server-vorbereiten-nur-fur-deployment">(Optional) 5. Server vorbereiten (nur für Deployment)<a class="headerlink" href="#optional-5-server-vorbereiten-nur-fur-deployment" title="Permanent link">&para;</a></h3>
+<p>Auf dem Zielserver muss einmalig Docker Swarm initialisiert und der GHCR-Zugriff eingerichtet werden:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>swarm<span class="w"> </span>init
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>login<span class="w"> </span>ghcr.io<span class="w"> </span>-u<span class="w"> </span>&lt;github-user&gt;<span class="w"> </span>-p<span class="w"> </span>&lt;personal-access-token&gt;
+</code></pre></div>
+<h3 id="checkliste">Checkliste<a class="headerlink" href="#checkliste" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Schritt</th>
+<th>Wo</th>
+<th>Pflicht?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>make install</code> + <code>cd frontend &amp;&amp; npm install</code></td>
+<td>Lokal</td>
+<td>Ja</td>
+</tr>
+<tr>
+<td>Label <code>e2e</code> erstellen</td>
+<td>GitHub → Labels</td>
+<td>Ja (sonst kein E2E-Trigger)</td>
+</tr>
+<tr>
+<td>Ruleset importieren (<code>.github/rulesets/</code>)</td>
+<td>GitHub → Settings → Rules → Rulesets</td>
+<td>Empfohlen</td>
+</tr>
+<tr>
+<td>Secrets (<code>DEPLOY_*</code>)</td>
+<td>GitHub → Settings → Secrets</td>
+<td>Nur für Deployment</td>
+</tr>
+<tr>
+<td><code>docker swarm init</code> + GHCR-Login</td>
+<td>Zielserver</td>
+<td>Nur für Deployment</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="vergleich-django-vs-demonstrator">Vergleich: Django vs. Demonstrator<a class="headerlink" href="#vergleich-django-vs-demonstrator" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspekt</th>
+<th>Django</th>
+<th>Demonstrator</th>
+<th>Warum der Unterschied?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Teamgröße</strong></td>
+<td>&gt;2.000 Contributors</td>
+<td>1-5 Contributors</td>
+<td>Kleineres Team braucht weniger Automatisierung</td>
+</tr>
+<tr>
+<td><strong>Workflows</strong></td>
+<td>17 GitHub Actions</td>
+<td>7 (Linters, Tests, E2E, PR Checks, Security, CD, Smoke-Test)</td>
+<td>Gleiche Trennung nach Concern, inkl. On-Demand-Pattern</td>
+</tr>
+<tr>
+<td><strong>Pre-Commit Hooks</strong></td>
+<td>6 (black, blacken-docs, isort, flake8, biome, zizmor)</td>
+<td>4 (Black, Ruff, oxlint, zizmor)</td>
+<td>Ruff ersetzt flake8 + isort; oxlint und zizmor kommen hinzu</td>
+</tr>
+<tr>
+<td><strong>Linting</strong></td>
+<td>flake8 + isort + biome + zizmor</td>
+<td>Ruff (Python) + oxlint (Frontend) + zizmor (Workflows)</td>
+<td>Ruff ersetzt flake8 + isort; oxlint ersetzt biome</td>
+</tr>
+<tr>
+<td><strong>Test-Strategie</strong></td>
+<td>Matrix (5+ Python, 3 OS, 3 DB)</td>
+<td>3 Jobs: SQLite + PostgreSQL + Frontend (Vitest) + E2E on-demand (Playwright)</td>
+<td>Keine Version-Matrix, aber Backend + Frontend + Browser-Tests</td>
+</tr>
+<tr>
+<td><strong>Coverage</strong></td>
+<td>On-Demand per Label (2 Workflows)</td>
+<td>Immer aktiv, integriert (fail_under=80%)</td>
+<td>Günstig genug um immer zu laufen</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>zizmor (CI-Workflow-Scan)</td>
+<td>zizmor + pip-audit (Dependency-Scan) + wöchentlicher Cron</td>
+<td>Supply-Chain-Security auf Workflows und Abhängigkeiten</td>
+</tr>
+<tr>
+<td><strong>CD</strong></td>
+<td>Read the Docs + Coverage-Kommentar</td>
+<td>Docker Build → GHCR → SSH Deploy → Docker Swarm (Rolling Update)</td>
+<td>Framework vs. deploybare App mit vollständiger CD-Kette</td>
+</tr>
+<tr>
+<td><strong>Paketmanagement</strong></td>
+<td>pip + virtualenv + pip-tools</td>
+<td>uv (Astral)</td>
+<td>10-100x schneller, Lockfile, <code>uv run</code> statt venv-Aktivierung</td>
+</tr>
+<tr>
+<td><strong>Konfiguration</strong></td>
+<td>Verteilt (<code>.flake8</code>, <code>tox.ini</code>, <code>pyproject.toml</code>)</td>
+<td>Zentralisiert in <code>pyproject.toml</code></td>
+<td>Eine Datei statt drei - einfacher zu pflegen</td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailanalysen">Detailanalysen<a class="headerlink" href="#detailanalysen" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="../lokale-tools/">Lokale Tools</a></strong> - EditorConfig, Pre-Commit Hooks, zentralisierte Konfiguration</li>
+<li><strong><a href="../pipeline/">CI/CD-Pipeline</a></strong> - GitHub Actions Workflows für Tests, Linting und Deployment</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Zurück zum Seitenanfang
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.path", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
